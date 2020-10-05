@@ -8,7 +8,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import bca.Hapepedia.entity.Admin;
 
 public interface AdminRepo extends PagingAndSortingRepository<Admin, Long> {
-    public List<Admin> findByUsername(String username);
+    public List<Admin> findByEmail(String email);
 
     public Optional<Admin> findById(Long id);
 }

@@ -1,35 +1,19 @@
 package bca.Hapepedia.dto;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class AdminForm {
-    private Long id;
-    private String fullname;
-    private String username;
-    private String password;
-    private String address;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getFullname() {
-        return fullname;
-    }
-
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    @NotEmpty(message="Code is required")
+	@Size(min = 8, message="Password required 8 character")
+	private String password;
+	
+	@NotEmpty(message = "Title is required")
+	private String email;
+	
+	@NotEmpty(message = "Description is required")
+	private String name;
 
     public String getPassword() {
         return password;
@@ -39,13 +23,22 @@ public class AdminForm {
         this.password = password;
     }
 
-    public String getAddress() {
-        return address;
+    public String getEmail() {
+        return email;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+	
+    
     
 }
