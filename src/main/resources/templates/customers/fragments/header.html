@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zxx">
+    <head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="description" content="Ashion Template">
+    <meta name="keywords" content="Ashion, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hapepedia</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/elegant-icons.css}">
+    <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}">
+    <link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/css/slicknav.min.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+	<div th:fragment="customersHeader">
+		<!-- Page Preloder -->
+        <div id="preloder">
+            <div class="loader"></div>
+        </div>
+    
+        <!-- Offcanvas Menu Begin -->
+        <div class="offcanvas-menu-overlay"></div>
+        <div class="offcanvas-menu-wrapper">
+            <div class="offcanvas__close">+</div>
+            <ul class="offcanvas__widget">
+                <li><span class="icon_search search-switch"></span></li>
+                <li><a href="#"><span class="icon_heart_alt"></span>
+                    <div class="tip">2</div>
+                </a></li>
+                <li><a href="#"><span class="icon_bag_alt"></span>
+                    <div class="tip">2</div>
+                </a></li>
+                <li><a href="#"><span class="icon_archive_alt"></span>
+                    <div class="tip">2</div>
+                </a></li>
+            </ul>
+            <div class="offcanvas__logo">
+                <a href="./"><img th:src="@{/img/logo.png}" alt=""></a>
+            </div>
+            <div id="mobile-menu-wrap"></div>
+            <div class="offcanvas__auth">
+                <a href="#">Login</a>
+                <a href="#">Register</a>
+            </div>
+        </div>
+        <!-- Offcanvas Menu End -->
+    
+        <!-- Header Section Begin -->
+        <header class="header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-3 col-lg-2 col-sm-12">
+                        <div class="header__logo">
+                            <a href="./"><img th:src="@{/img/logo.png}" alt="" style="width: 70%;"></a>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-7 ">
+                        
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="header__right">
+                            <div class="header__right__auth">
+                                <a href="#">Login</a>
+                                <a href="#">Register</a>
+                            </div>
+                            <ul class="header__right__widget">
+                                <li><span class="icon_search search-switch"></span></li>
+                                <li><a href="./wishlist"><span class="icon_heart_alt"></span>
+                                    <div class="tip">2</div>
+                                </a></li>
+                                <li><a href="./cart"><span class="icon_bag_alt"></span>
+                                    <div class="tip">2</div>
+                                </a></li>
+                                <li>
+                                    <div class="dropdown">
+                                        <a href="#" class="dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span class="icon_profile"></span>
+                                        </a>
+                                        <div class="dropdown-menu " aria-labelledby="dropdownMenuLink" style="margin-left: -200px;">
+                                            <a class="dropdown-item" href="./order">Order</a>
+                                            <a class="dropdown-item" href="./transaction">Transaction</a>
+                                            <a class="dropdown-item" href="./setting">Setting</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Logout</a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="canvas__open">
+                    <i class="fa fa-bars"></i>
+                </div>
+            </div>
+        </header>
+        <!-- Header Section End -->
+        
+        <!-- Search Begin -->
+        <div class="search-model">
+            <div class="h-100 d-flex align-items-center justify-content-center">
+                <div class="search-close-switch">+</div>
+                <form class="search-model-form">
+                    <input type="text" id="search-input" placeholder="Search product here.....">
+                </form>
+            </div>
+        </div>
+        <!-- Search End -->
+
+        <!-- Js Plugins -->
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.0.4/popper.js"></script>
+        <script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+        <script th:src="@{/js/jquery-ui.min.js}"></script>
+        <script th:src="@{/js/mixitup.min.js}"></script>
+        <script th:src="@{/js/jquery.countdown.min.js}"></script>
+        <script th:src="@{/js/jquery.slicknav.js}"></script>
+        <script th:src="@{/js/owl.carousel.min.js}"></script>
+        <script th:src="@{/js/jquery.nicescroll.min.js}"></script>
+        <script th:src="@{/js/main.js}"></script>
+        
+    </div>
+
+</body>
+</html>   

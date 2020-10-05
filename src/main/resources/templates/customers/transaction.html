@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ashion Template">
+    <meta name="keywords" content="Ashion, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hapepedia</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+
+<body>
+    <div th:replace="customers/fragments/header::customersHeader"></div>
+
+ 
+    <!-- Modal -->
+    <div class="modal fade" id="newTransaction" role="dialog">
+        <div class="modal-dialog">
+        
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Transfer</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="anReceiverForm">Account number receiver</label>
+                        <input type="text" class="form-control" id="anReceiverForm" placeholder="123456789">
+                    </div>
+                    <div class="form-group">
+                        <label for="debitForm">Debit</label>
+                        <input type="text" class="form-control" id="debitForm" placeholder="Rp 0.00">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="noteForm">Note</label>
+                        <textarea class="form-control" id="noteForm" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button button type="button" class="btn btn-primary">Send</button>
+                
+            </div>
+        </div>
+        
+        </div>
+    </div>
+  
+
+
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__links">
+                        <a href="./"><i class="fa fa-home"></i> Home</a>
+                        <span>Transaction</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+    <!-- Shop Cart Section Begin -->
+    <section class="shop-cart spad">
+        <div class="container">
+            <button class="btn btn-primary" aria-hidden="true" data-toggle="modal" data-target="#newTransaction"> <i class="fa fa-paper-plane"></i> Transfer</button>
+            <button class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Topup</button>
+            <div class="row" style="margin-top: 30px;">
+                <div class="col-lg-12">
+                    <table class="col-lg-12 table">
+                        <thead>
+                            <tr>
+                                <th>Transaction Number</th>
+                                <th>Dates</th>
+                                <th>Sender</th>
+                                <th>Receiver</th>
+                                <th>Debit</th>
+                                <th>Note</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>01384316573</td>
+                                <td>27/09/2020</td>
+                                <td>Dandi Wibowo</td>
+                                <td>Dinda Wibianti</td>
+                                <td><b>$ 123.00</b></td>
+                                <td>Paid A</td>
+                                <td><span class="btn btn-danger">Delete</span> </td>
+                            </tr>
+                            <tr>
+                                <td>01384316573</td>
+                                <td>27/09/2020</td>
+                                <td>Dandi Wibowo</td>
+                                <td>Dinda Wibianti</td>
+                                <td><b>$ 123.00</b></td>
+                                <td>Transaction Out</td>
+                                <td><span class="btn btn-danger">Delete</span> </td>
+                            </tr>
+                            <tr>
+                                <td>01384316573</td>
+                                <td>27/09/2020</td>
+                                <td>Dandi Wibowo</td>
+                                <td>Dinda Wibianti</td>
+                                <td><b>$ 123.00</b></td>
+                                <td>Transaction Out</td>
+                                <td><span class="btn btn-danger">Delete</span> </td>
+                            </tr>
+                            <tr>
+                                <td>01384316573</td>
+                                <td>27/09/2020</td>
+                                <td>Dandi Wibowo</td>
+                                <td>Dinda Wibianti</td>
+                                <td><b>$ 123.00</b></td>
+                                <td>Transaction Out</td>
+                                <td><span class="btn btn-danger">Delete</span> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="col-lg-12 text-center">
+                        <div class="pagination__option">
+                            <a href="#">1</a>
+                            <a href="#">2</a>
+                            <a href="#">3</a>
+                            <a href="#"><i class="fa fa-angle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+    </section>
+    <!-- Shop Cart Section End -->
+
+    <div th:replace="customers/fragments/footer::customersFooter"></div>
+
+    <!-- Js Plugins -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/mixitup.min.js"></script>
+    <script src="js/jquery.countdown.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.nicescroll.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
