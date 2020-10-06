@@ -17,9 +17,6 @@ public class City {
     @Column(length = 30, nullable = false, unique = true)
     private String name;
 
-    /**
-     * 
-     */
     public City() {
     }
 
