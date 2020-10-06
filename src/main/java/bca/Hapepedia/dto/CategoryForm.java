@@ -1,7 +1,7 @@
 package bca.Hapepedia.dto;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+
 
 public class CategoryForm {
 
