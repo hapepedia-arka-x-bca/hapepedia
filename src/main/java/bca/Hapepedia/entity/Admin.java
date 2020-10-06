@@ -8,18 +8,18 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_admin")
+@Table(name = "tb_admins")
 public class Admin {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(length = 50, nullable = false, unique = true)
-    private String email;
-    @Column(length = 50, nullable = false)
-    private String password;
-    @Column(length = 50, nullable = false)
-    private String name;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	@Column(length = 50, nullable = false, unique = true)
+	private String email;
+	@Column(length = 50, nullable = false)
+	private String password;
+	@Column(length = 50, nullable = false)
+	private String name;
 
 	public Long getId() {
 		return id;
@@ -53,6 +53,4 @@ public class Admin {
 		this.name = name;
 	}
 
-    
-    
 }
