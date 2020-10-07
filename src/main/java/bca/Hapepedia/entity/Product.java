@@ -15,21 +15,21 @@ public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column(nullable = false)
 	private String name;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "brand_id", referencedColumnName = "id")
 	private Brand brand;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "category_id", referencedColumnName = "id")
 	private Category category;
-	
+
 	@Column(length = 500, nullable = false)
 	private String specification;
-	
+
 	@Column(nullable = false)
 	private double weight;
 
@@ -80,5 +80,5 @@ public class Product {
 	public void setWeight(double weight) {
 		this.weight = weight;
 	}
-	
+
 }
