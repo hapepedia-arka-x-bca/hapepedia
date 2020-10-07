@@ -28,7 +28,9 @@ public class Customer {
 	private Long phone_number;
 	@Column(length = 255)
 	private String profile_picture;
+	@Column()
 	private Date birth_date;
+	@Column()
 	private Boolean status;
 
 
