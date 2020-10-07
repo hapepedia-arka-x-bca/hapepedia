@@ -35,4 +35,9 @@ public class VarianService {
         Pageable pageable = PageRequest.of(pageNumber, 10);
         return varianRepo.findAll(pageable).getContent();
     }
+
+    public Iterable<Varian> findAllByCategory (long categoryId)
+    {
+        return varianRepo.findByCategoryId(categoryId);
+    }
 }
