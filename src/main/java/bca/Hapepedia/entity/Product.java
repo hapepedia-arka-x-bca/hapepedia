@@ -1,5 +1,7 @@
 package bca.Hapepedia.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -32,6 +35,9 @@ public class Product {
 	
 	@Column(nullable = false)
 	private double weight;
+	
+	@OneToMany
+	private List<ProductImage> productImage;
 
 	public Long getId() {
 		return id;
