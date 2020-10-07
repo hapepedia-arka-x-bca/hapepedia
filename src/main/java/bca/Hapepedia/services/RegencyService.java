@@ -20,7 +20,12 @@ public class RegencyService {
     @Autowired
     RegencyRepo regencyRepo;
 
-    public Regency save(Regency regency) {
+    public Regency save(Regency regency) //untuk add & update
+    {
+        return regencyRepo.save(regency);
+    }
+
+    public Regency update(Regency regency) {
         return regencyRepo.save(regency);
     }
 

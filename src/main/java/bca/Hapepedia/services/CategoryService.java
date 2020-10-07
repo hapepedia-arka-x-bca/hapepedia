@@ -24,6 +24,10 @@ public class CategoryService {
         return categoryRepo.save(category);
     }
 
+    public Category update(Category category) {
+        return categoryRepo.save(category);
+    }
+
     public Iterable<Category> findAll() {
         return categoryRepo.findAll();
     }

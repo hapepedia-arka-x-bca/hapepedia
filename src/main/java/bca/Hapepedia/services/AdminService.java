@@ -24,6 +24,10 @@ public class AdminService {
         return adminRepo.save(admin);
     }
 
+    public Admin update(Admin admin) {
+        return adminRepo.save(admin);
+    }
+
     public Iterable<Admin> findAll() {
         return adminRepo.findAll();
     }
