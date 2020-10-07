@@ -15,14 +15,14 @@ public class OrderStatus {
     private int id;
 
     @Column(length = 20, nullable = false, unique = true)
-    private String statusOrder;
+    private String orderstatus;
 
     public OrderStatus() {
     }
 
-    public OrderStatus(int id, String statusOrder) {
+    public OrderStatus(int id, String orderstatus) {
         this.id = id;
-        this.statusOrder = statusOrder;
+        this.orderstatus = orderstatus;
     }
 
     public int getId() {
@@ -33,11 +33,11 @@ public class OrderStatus {
         this.id = id;
     }
 
-    public String getStatusOrder() {
-        return statusOrder;
+    public String getOrderstatus() {
+        return orderstatus;
     }
 
-    public void setStatusOrder(String statusOrder) {
-        this.statusOrder = statusOrder;
+    public void setOrderstatus(String orderstatus) {
+        this.orderstatus = orderstatus;
     }
 }
