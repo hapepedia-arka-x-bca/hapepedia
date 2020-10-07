@@ -1,5 +1,7 @@
 package bca.Hapepedia.services;
 
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +22,8 @@ public class CardAccountService {
 		return cardAccountRepo.findAllByCustomer(customer);
 	}
 	
-	public CardAccount findById(Long id) {
-		return cardAccountRepo.findById(id).get();
+	public Optional<CardAccount> findById(Long id) {
+		return cardAccountRepo.findById(id);
 	}
 	
 	public CardAccount save(CardAccount cardAccount) {
