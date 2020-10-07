@@ -1,10 +1,13 @@
 package bca.Hapepedia.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -15,7 +18,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(length = 50, nullable = false, unique = true)
-    private String name;
+	private String name;
 
 	public Long getId() {
 		return id;
@@ -32,6 +35,4 @@ public class Category {
 	public void setName(String name) {
 		this.name = name;
 	}
-    
-    
 }
