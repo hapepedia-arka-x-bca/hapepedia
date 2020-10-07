@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import bca.Hapepedia.entity.City;
 
-public interface CityRepo extends CrudRepository<City, Integer>{
+public interface CityRepo extends CrudRepository<City, String>{
     
 }
