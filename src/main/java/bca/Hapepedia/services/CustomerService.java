@@ -24,6 +24,10 @@ public class CustomerService {
         return customerRepo.save(customer);
     }
 
+    public Customer update(Customer customer) {
+        return customerRepo.save(customer);
+    }
+
     public Iterable<Customer> findAll() {
         return customerRepo.findAll();
     }
