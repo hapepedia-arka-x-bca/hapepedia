@@ -17,7 +17,7 @@ import bca.Hapepedia.repo.VarianRepo;
 public class VarianService {
     
     @Autowired
-    VarianRepo varianRepo;
+    private VarianRepo varianRepo;
 
     public Varian save(Varian varian)
     {
