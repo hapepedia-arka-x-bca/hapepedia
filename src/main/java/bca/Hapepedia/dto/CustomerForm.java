@@ -7,6 +7,8 @@ import javax.validation.constraints.Size;
 
 public class CustomerForm {
 
+    private Long id;
+    
     @NotEmpty(message="Code is required")
 	@Size(min = 8, message="Password required 8 character")
 	private String password;
@@ -70,6 +72,14 @@ public class CustomerForm {
 
     public void setBirth_date(Date birth_date) {
         this.birth_date = birth_date;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 	
     
