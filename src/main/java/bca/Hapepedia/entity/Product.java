@@ -1,7 +1,5 @@
 package bca.Hapepedia.entity;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,26 +15,23 @@ public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column(nullable = false)
 	private String name;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "brand_id", referencedColumnName = "id")
 	private Brand brand;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "category_id", referencedColumnName = "id")
 	private Category category;
-	
+
 	@Column(length = 500, nullable = false)
 	private String specification;
-	
+
 	@Column(nullable = false)
 	private double weight;
-	
-	@OneToMany
-	private List<ProductImage> productImage;
 
 	public Long getId() {
 		return id;
@@ -86,5 +80,5 @@ public class Product {
 	public void setWeight(double weight) {
 		this.weight = weight;
 	}
-	
+
 }
