@@ -11,17 +11,6 @@ import org.springframework.stereotype.Service;
 import bca.Hapepedia.entity.City;
 import bca.Hapepedia.repo.CityRepo;
 
-@Service("cityService")
-@Transactional
-public class CityService {
-    @Autowired
-    private CityRepo cityRepo;
-
-
-import bca.Hapepedia.repo.CityRepo;
-
-import bca.Hapepedia.entity.City;
-
 @Service("CityService")
 @Transactional
 public class CityService {
