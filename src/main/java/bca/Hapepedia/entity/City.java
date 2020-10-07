@@ -2,8 +2,6 @@ package bca.Hapepedia.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -11,8 +9,7 @@ import javax.persistence.Table;
 @Table(name = "tb_city")
 public class City {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //auto increment
-    private int id;
+    private String id;//string mengikuti dokumentasi raja ongkir
 
     @Column(length = 30, nullable = false, unique = true)
     private String name;
@@ -23,14 +20,14 @@ public class City {
     /**
      * return the id
      */
-    public int getId() {
+    public String getId() {
         return id;
     }
 
     /**
      * param id the id to set
      */
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
