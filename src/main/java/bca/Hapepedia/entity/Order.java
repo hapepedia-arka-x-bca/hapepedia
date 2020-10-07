@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,7 +17,7 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(length = 10, nullable = false)
+    @OneToOne
 	private Customer customer;
 	@Column(nullable = false)
 	private Timestamp dateOrder;
@@ -28,11 +29,11 @@ public class Order {
 	private Double totalWeight;
 	@Column(length = 50, nullable = false)
 	private Double shippingFee;
-	@Column(length = 10, nullable = false)
+	@OneToOne
 	private PaymentMethod paymentMethod;
 	@Column(length = 50, nullable = false)
 	private Double totalPayment;
-	@Column(length = 10, nullable = false)
+	@OneToOne
 	private OrderStatus orderStatus;
 
 	public Long getId() {
