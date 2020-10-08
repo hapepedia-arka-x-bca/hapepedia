@@ -2,6 +2,7 @@ package bca.Hapepedia.controller.api;
 
 import java.util.Base64;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,33 +14,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 import bca.Hapepedia.dto.LoginForm;
 import bca.Hapepedia.dto.ResponseData;
-import bca.Hapepedia.entity.Admin;
-import bca.Hapepedia.entity.Category;
 import bca.Hapepedia.entity.Customer;
-import bca.Hapepedia.entity.Product;
-import bca.Hapepedia.services.AdminService;
-import bca.Hapepedia.services.CategoryService;
 import bca.Hapepedia.services.CustomerService;
-import bca.Hapepedia.services.ProductService;
 
 @RestController
-@RequestMapping("/api/admin")
-public class AdminApiController {
+@RequestMapping("/api/customer")
+public class CustomerApiController {
     @Autowired
-    private AdminService adminService;
-
-    @Autowired
-    private ProductService customerService;
+    private CustomerService customerService;
 
     @PostMapping("/login")
     public ResponseEntity<ResponseData> login(@RequestBody LoginForm loginForm){
         ResponseData response = new ResponseData();
 		try {
-            Admin admin = adminService.findByEmail(loginForm.getEmail());
+            Customer customer = customerService.findByEmail(loginForm.getEmail());
 
-            if(admin != null) {
-                if(admin.getPassword().equals(loginForm.getPassword())){
-                    String baseStr = admin.getEmail() + ":" + admin.getPassword();
+            if(customer != null) {
+                if(customer.getPassword().equals(loginForm.getPassword())){
+                    String baseStr = customer.getEmail() + ":" + customer.getPassword();
                     String token = Base64.getEncoder().encodeToString(baseStr.getBytes());
                     response.setPayload(token);				
                     response.setStatus(true);
@@ -67,24 +59,22 @@ public class AdminApiController {
     }
     
     @GetMapping
-    public ResponseEntity<ResponseData> findAllAdmin(){
+    public ResponseEntity<ResponseData> findAllCustomer(){
         ResponseData response = new ResponseData();
 		try {
 			response.setStatus(true);
-			response.getMessages().add("Admin loaded");
-			response.setPayload(adminService.findAll());
+			response.getMessages().add("Customer loaded");
+			response.setPayload(customerService.findAll());
 			return ResponseEntity.ok(response);
 		}catch(Exception ex) {
 			response.setStatus(false);
-			response.getMessages().add("Could not load admin: "+ ex.getMessage());
+			response.getMessages().add("Could not load customer: "+ ex.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 		}
     }
 
-    @GetMapping("/showAllAdmin")
-    public Iterable<Product> showAllAdmin(){
-        return customerService.findAll();        
-    }
+    
+    
     
 
 }

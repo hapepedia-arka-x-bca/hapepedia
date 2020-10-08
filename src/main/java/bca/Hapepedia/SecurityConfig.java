@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 
 import bca.Hapepedia.services.AdminService;
+import bca.Hapepedia.services.CustomerService;
 
 
 @EnableWebSecurity
@@ -20,10 +21,14 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 
 	@Autowired
 	private AdminService adminService;
+
+	@Autowired
+	private CustomerService customerService;
 	
 	@Autowired
 	public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception{
 		auth.userDetailsService(adminService);
+		auth.userDetailsService(customerService);
 	}
 	
 	@Override
@@ -33,6 +38,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 		http.authorizeRequests()
 			// .antMatchers("/**").permitAll()
 			.antMatchers(HttpMethod.POST, "/api/admin/login").permitAll()
+			.antMatchers(HttpMethod.POST, "/api/customer/login").permitAll()
 			.antMatchers(HttpMethod.GET, "/api/**").authenticated()
 			.antMatchers(HttpMethod.POST, "/api/**").authenticated()
 			.antMatchers("/actuator/**").permitAll()
