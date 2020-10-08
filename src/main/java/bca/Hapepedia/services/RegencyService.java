@@ -25,6 +25,10 @@ public class RegencyService {
         return regencyRepo.save(regency);
     }
 
+    public Regency update(Regency regency) {
+        return regencyRepo.save(regency);
+    }
+
     public Iterable<Regency> findAll() {
         return regencyRepo.findAll();
     }

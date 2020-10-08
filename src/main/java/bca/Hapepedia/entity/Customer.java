@@ -1,6 +1,8 @@
 package bca.Hapepedia.entity;
 
-import java.util.Date;
+import java.sql.Date;
+import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,19 +10,28 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "tb_customer")
-public class Customer {
+public class Customer implements UserDetails {
+	public Customer() {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(length = 50, nullable = false, unique = true)
-    private String email;
-    @Column(length = 50, nullable = false)
-    private String password;
-    @Column(length = 50, nullable = false)
+	}
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	@Column(length = 50, nullable = false, unique = true)
+	private String email;
+	@Column(length = 50, nullable = false)
+	private String password;
+	@Column(length = 50, nullable = false)
 	private String name;
 	@Column(length = 10)
 	private String gender;
@@ -28,10 +39,12 @@ public class Customer {
 	private Long phone_number;
 	@Column(length = 255)
 	private String profile_picture;
+	@Column()
 	private Date birth_date;
+	@Column(length = 1)
 	private Boolean status;
-
-
+	@Column(length = 10)
+	private String roles = "USER";
 
 	public Long getId() {
 		return id;
@@ -47,10 +60,6 @@ public class Customer {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
 	}
 
 	public void setPassword(String password) {
@@ -105,6 +114,69 @@ public class Customer {
 		this.status = status;
 	}
 
-    
-    
+	public String getRoles() {
+		return roles;
+	}
+
+	public void setRoles(String roles) {
+		this.roles = roles;
+	}
+
+	
+	public Customer(Customer customer, List<String> userRoles) {
+		this.id = customer.getId();
+		this.name = customer.getName();
+		this.email = customer.getEmail();
+		this.password = customer.getPassword();
+		this.roles = userRoles.get(0);
+		this.gender = customer.getGender();
+		this.phone_number = customer.getPhone_number();
+		this.profile_picture = customer.getProfile_picture();
+		this.birth_date = customer.getBirth_date();
+		this.status = customer.getStatus();
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		
+		return AuthorityUtils.commaSeparatedStringToAuthorityList(this.roles);
+	}
+
+	@Override
+	public String getPassword() {
+		
+		return this.password;
+	}
+
+	@Override
+	public String getUsername() {
+		
+		return this.email;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		
+		return true;
+	}
+
+	
 }
