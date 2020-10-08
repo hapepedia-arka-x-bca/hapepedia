@@ -14,12 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import bca.Hapepedia.dto.LoginForm;
 import bca.Hapepedia.dto.ResponseData;
 import bca.Hapepedia.entity.Admin;
-import bca.Hapepedia.entity.Category;
-import bca.Hapepedia.entity.Customer;
 import bca.Hapepedia.entity.Product;
 import bca.Hapepedia.services.AdminService;
-import bca.Hapepedia.services.CategoryService;
-import bca.Hapepedia.services.CustomerService;
 import bca.Hapepedia.services.ProductService;
 
 @RestController
