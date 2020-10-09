@@ -73,8 +73,16 @@
                                                     <td><strong th:text="${category.name}">Category</strong></td>
                                                     <td>Date Created</td>
                                                     <td>
-                                                        <a href="" class="btn btn-warning btn-sm">Edit</a>
-                                                        <a href="" class="btn btn-danger btn-sm">Delete</a>
+                                                        <div class="btn-group btn-group-sm">
+                                                            <a href="" class="btn btn-warning" data-toggle="modal"
+                                                                data-target="#editCategoryModal"
+                                                                th:onclick="'javascript:getCategoryById(' + ${category.id} + ');'"><i
+                                                                    class="fas fa-edit"></i></a>
+                                                            <a href="" class="btn btn-danger" data-toggle="modal"
+                                                                data-target="#deleteCategoryModal"
+                                                                th:onclick="'javascript:setDeleteId(' + ${category.id} + ');'"><i
+                                                                    class="fas fa-trash"></i></a>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -103,7 +111,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <input id="categoryId" type="hidden" name="id">
+                    <input type="hidden" id="deleteId" name="id">
                     <p>Are you sure want to delete this category?</p>
                 </div>
                 <div class="modal-footer justify-content-between">
@@ -130,12 +138,12 @@
                 <div class="modal-body">
                     <!-- /.modal form body -->
                     <form role="form" id="editCategoryForm">
-                        <input type="hidden" name="id" id="edit_id">
+                        <input type="hidden" name="editId" id="editId">
                         <div class="card-body">
                             <div class="form-group row">
                                 <div class="col-md-6">
-                                    <label for="categoryName">Category Name</label>
-                                    <input type="text" class="form-control" id="categoryName" name="categoryName">
+                                    <label for="editName">Category Name</label>
+                                    <input type="text" class="form-control" id="editName" name="editName">
                                 </div>
                             </div>
                         </div>
@@ -143,8 +151,8 @@
                     </form>
                 </div>
                 <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-                    <button id="updateCategory" type="button" class="btn btn-primary">Simpan</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button id="updateCategory" type="button" class="btn btn-primary">Update</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -173,66 +181,77 @@
                     }
                 },
                 error: function () {
-                    console.log('Anda Gagal Menambahkan Data. Mohon Cobakurr Kembali!');
+                    console.log('Anda Gagal Menambahkan Data. Mohon Coba Kembali!');
                 }
             });
         });
 
-        function setIdHapus(id) {
-            $('#account_id').val(id);
+        function setDeleteId(id) {
+            $('#deleteId').val(id);
         }
 
-        $('#deleteBankAccount').on('click', function () {
+        $('#deleteCategory').on('click', function () {
+            var id = $('#deleteId').val();
+            var category = new Object();
+            category.id = id;
             $.ajax({
-                url: "",
-                method: "POST",
-                data: { id: $('#account_id').val() },
+                url: "http://127.0.0.1:8081/api/category",
+                method: "DELETE",
+                data: JSON.stringify(category),
+                contentType: "application/json",
                 success: function (response) {
-                    if (response.success == true) {
-                        $('#deleteBankAccountModal').modal('toggle');
-                        table.ajax.reload();
+                    if (response.status == true) {
+                        $('#deleteCategoryModal').modal('toggle');
+                        alert("Hapus sukses!");
                     } else {
+                        console.log('Anda Gagal Menambahkan Data. Mohon Coba Kembali!');
                     }
                 },
                 error: function () {
+                    console.log('Anda Gagal Menambahkan Data. Mohon Cobassss Kembali!');
                 }
             });
         });
 
-        function getBankAccountData(id) {
+        function getCategoryById(id) {
             $.ajax({
-                url: "",
-                method: "POST",
+                url: "http://127.0.0.1:8081/api/category/get",
+                method: "GET",
                 data: { id: id },
                 success: function (response) {
-                    $('#edit_id').val(null);
-                    $('#bank_id_edit').val(null);
-                    $('#acc_holder_edit').val(null);
-                    $('#acc_number_edit').val(null);
+                    $('#editId').val(null);
+                    $('#editName').val(null);
 
-                    $('#edit_id').val(response.data.id);
-                    $('#bank_id_edit').val(response.data.bank_id);
-                    $('#acc_holder_edit').val(response.data.acc_holder);
-                    $('#acc_number_edit').val(response.data.acc_number);
+                    $('#editId').val(response.payload.id);
+                    $('#editName').val(response.payload.name);
                 },
                 error: function () {
+                    console.log("Error");
                 }
             });
         }
 
-        $('#updateBankAccount').on('click', function () {
+        $('#updateCategory').on('click', function () {
+            var id = $("#editId").val();
+            var name = $("#editName").val();
+            var category = new Object();
+            category.id = id;
+            category.name = name;
             $.ajax({
-                url: "",
+                url: "http://127.0.0.1:8081/api/category",
                 method: "POST",
-                data: $('#editBankAccountForm').serialize(),
+                data: JSON.stringify(category),
+                contentType: "application/json",
                 success: function (response) {
-                    if (response.success == true) {
-                        $('#editBankAccountModal').modal('toggle');
+                    if (response.status == true) {
+                        $('#editCategoryModal').modal('toggle');
                         table.ajax.reload();
                     } else {
+                        console.log("Error1");
                     }
                 },
                 error: function () {
+                    console.log("Error");
                 }
             });
         });

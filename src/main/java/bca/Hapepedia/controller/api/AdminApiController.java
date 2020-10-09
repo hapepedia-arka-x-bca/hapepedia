@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import bca.Hapepedia.dto.LoginForm;
 import bca.Hapepedia.dto.ResponseData;
+import bca.Hapepedia.dto.ResponseLogin;
 import bca.Hapepedia.entity.Admin;
 import bca.Hapepedia.entity.Product;
 import bca.Hapepedia.services.AdminService;
@@ -35,9 +36,15 @@ public class AdminApiController {
 
             if(admin != null) {
                 if(admin.getPassword().equals(loginForm.getPassword())){
+                    ResponseLogin responseLogin = new ResponseLogin();
                     String baseStr = admin.getEmail() + ":" + admin.getPassword();
                     String token = Base64.getEncoder().encodeToString(baseStr.getBytes());
-                    response.setPayload(token);				
+
+                    responseLogin.setRole("ADMIN");
+                    responseLogin.setData(admin);
+                    responseLogin.setToken(token);
+                    
+                    response.setPayload(responseLogin);				
                     response.setStatus(true);
                     response.getMessages().add("Login success");
                     return ResponseEntity.ok(response);
