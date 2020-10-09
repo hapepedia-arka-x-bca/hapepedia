@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import bca.Hapepedia.dto.CategoryForm;
@@ -25,24 +26,39 @@ import bca.Hapepedia.services.CategoryService;
 public class CategoryApiController {
 	@Autowired
 	private CategoryService categoryService;
-	
+
 	@GetMapping
-	public ResponseEntity<ResponseData> findAllCategory(){
+	public ResponseEntity<ResponseData> findAllCategory() {
 		ResponseData response = new ResponseData();
 		try {
 			response.setStatus(true);
 			response.getMessages().add("Categories found");
 			response.setPayload(categoryService.findAll());
 			return ResponseEntity.ok(response);
-		}catch(Exception ex) {
+		} catch (Exception ex) {
 			response.setStatus(false);
 			response.getMessages().add("Could not load categories: " + ex.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 		}
 	}
-	
+
+	@GetMapping("/get")
+	public ResponseEntity<ResponseData> findByIdCategory(@RequestParam("id") Long id) {
+		ResponseData response = new ResponseData();
+		try {
+			response.setStatus(true);
+			response.getMessages().add("Category found");
+			response.setPayload(categoryService.findById(id));
+			return ResponseEntity.ok(response);
+		} catch (Exception ex) {
+			response.setStatus(false);
+			response.getMessages().add("Could not load category: " + ex.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+		}
+	}
+
 	@PostMapping
-	public ResponseEntity<ResponseData> saveCategory(@Valid @RequestBody CategoryForm form, Errors errors){
+	public ResponseEntity<ResponseData> saveCategory(@Valid @RequestBody CategoryForm form, Errors errors) {
 		ResponseData response = new ResponseData();
 		if (!errors.hasErrors()) {
 			Category category = new Category();
@@ -55,15 +71,15 @@ public class CategoryApiController {
 			return ResponseEntity.ok(response);
 		} else {
 			response.setStatus(false);
-			for (ObjectError err: errors.getAllErrors()) {
+			for (ObjectError err : errors.getAllErrors()) {
 				response.getMessages().add(err.getDefaultMessage());
 			}
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 		}
 	}
-	
+
 	@DeleteMapping
-	public ResponseEntity<ResponseData> deleteCategory(@Valid @RequestBody DeleteForm form, Errors errors){
+	public ResponseEntity<ResponseData> deleteCategory(@Valid @RequestBody DeleteForm form, Errors errors) {
 		ResponseData response = new ResponseData();
 		if (!errors.hasErrors()) {
 			response = new ResponseData();
@@ -73,7 +89,7 @@ public class CategoryApiController {
 			return ResponseEntity.ok(response);
 		} else {
 			response.setStatus(false);
-			for (ObjectError err: errors.getAllErrors()) {
+			for (ObjectError err : errors.getAllErrors()) {
 				response.getMessages().add(err.getDefaultMessage());
 			}
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
