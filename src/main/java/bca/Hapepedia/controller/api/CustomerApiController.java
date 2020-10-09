@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import bca.Hapepedia.dto.LoginForm;
 import bca.Hapepedia.dto.ResponseData;
+import bca.Hapepedia.dto.ResponseLogin;
 import bca.Hapepedia.entity.Customer;
 import bca.Hapepedia.services.CustomerService;
 
@@ -31,9 +32,14 @@ public class CustomerApiController {
 
             if(customer != null) {
                 if(customer.getPassword().equals(loginForm.getPassword())){
+                    ResponseLogin responseLogin = new ResponseLogin();
                     String baseStr = customer.getEmail() + ":" + customer.getPassword();
                     String token = Base64.getEncoder().encodeToString(baseStr.getBytes());
-                    response.setPayload(token);				
+                    responseLogin.setRole("USER");
+                    responseLogin.setData(customer);
+                    responseLogin.setToken(token);
+
+                    response.setPayload(responseLogin);				
                     response.setStatus(true);
                     response.getMessages().add("Login success");
                     return ResponseEntity.ok(response);
