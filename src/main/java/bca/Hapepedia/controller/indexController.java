@@ -55,7 +55,7 @@ public class indexController {
 
 	@RequestMapping("/login")
 	public String login(Model model) {
-		return "admins/login";
+		return "customers/login";
 	}
 
 	@RequestMapping("/forgotPassword")
