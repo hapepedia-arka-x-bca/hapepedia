@@ -48,10 +48,10 @@
             </div>
             <div onclick="login()" class="btn btn-primary">Sign in</div>
           </form>
-          <div class="col" style="background-color: coral; color: white; display: none;" id="wrongAlert"></div>
-          <div class="col" style="background-color: rgb(135, 255, 80); color: white;  display: none;" id="successAlert"></div>
+          <div class="alert alert-danger" role="alert" style="display: none;" id="wrongAlert"></div>
+          <div class="alert alert-success" role="alert" style="display: none;" id="successAlert"></div>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">New around here? Sign up</a>
+          <a class="dropdown-item" href="/registration">New around here? Sign up</a>
           <a class="dropdown-item" href="#">Forgot password?</a>
       </div>
     </div>
@@ -74,7 +74,7 @@
     var email = document.getElementById("formEmail").value;
     var password = document.getElementById("formPassword").value;
 
-    console.log(email+" "+password);
+    // console.log(email+" "+password);
     fetch("http://localhost:8081/api/customer/login",{
        // Adding method type 
       method: "POST", 
