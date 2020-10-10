@@ -53,7 +53,7 @@
                 <a href="./"><img th:src="@{/img/logo.png}" alt=""></a>
             </div>
             <div id="mobile-menu-wrap"></div>
-            <div class="offcanvas__auth">
+            <div class="offcanvas__auth" id="loginBtn">
                 <a href="#">Login</a>
                 <a href="#">Register</a>
             </div>
@@ -75,16 +75,18 @@
                     <div class="col-lg-3">
                         <div class="header__right">
                             <div class="header__right__auth">
-                                <a href="#">Login</a>
-                                <a href="#">Register</a>
+                                <span  id="loginBtnSide">
+                                    <a href="#">Login</a>
+                                    <a href="#">Register</a>
+                                </span>
                             </div>
                             <ul class="header__right__widget">
                                 <li><span class="icon_search search-switch"></span></li>
                                 <li><a href="./wishlist"><span class="icon_heart_alt"></span>
-                                    <div class="tip">2</div>
+                                    <div class="tip" id="wishlistTip">2</div>
                                 </a></li>
                                 <li><a href="./cart"><span class="icon_bag_alt"></span>
-                                    <div class="tip">2</div>
+                                    <div class="tip" id="cartTip">2</div>
                                 </a></li>
                                 <li>
                                     <div class="dropdown">
@@ -96,7 +98,7 @@
                                             <a class="dropdown-item" href="./transaction">Transaction</a>
                                             <a class="dropdown-item" href="./setting">Setting</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Logout</a>
+                                            <a class="dropdown-item" href="#" onclick="logout()" id="logoutBtn">Logout</a>
                                         </div>
                                     </div>
                                 </li>
@@ -135,6 +137,29 @@
         <script th:src="@{/js/owl.carousel.min.js}"></script>
         <script th:src="@{/js/jquery.nicescroll.min.js}"></script>
         <script th:src="@{/js/main.js}"></script>
+        <script>
+            var token = localStorage.getItem('token');
+            if (token !== null) {
+                document.getElementById("loginBtn").style.display="none";
+                document.getElementById("loginBtnSide").style.display="none";
+                document.getElementById("logoutBtn").style.display="block";
+            } else {
+                document.getElementById("loginBtn").style.display="block";
+                document.getElementById("loginBtnSide").style.display="block";
+                document.getElementById("logoutBtn").style.display="none";
+            }
+
+
+
+            function logout(){
+                localStorage.removeItem("token");
+                localStorage.removeItem("iduser");
+                localStorage.removeItem("name");
+                localStorage.removeItem("email");
+                localStorage.removeItem("roles");
+                window.location.href = "./";
+            }
+        </script>
         
     </div>
 
