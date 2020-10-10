@@ -7,12 +7,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import bca.Hapepedia.dto.DeleteForm;
 import bca.Hapepedia.dto.ProductForm;
 import bca.Hapepedia.dto.ResponseData;
 import bca.Hapepedia.entity.Product;
@@ -85,6 +87,31 @@ public class ProductApiController {
             }
 
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+    }
+
+    @DeleteMapping
+    public ResponseEntity<ResponseData> deleteProduct(@Valid @RequestBody DeleteForm form, Errors errors)
+    {
+        ResponseData response = new ResponseData();
+        if(!errors.hasErrors())
+        {
+            response = new ResponseData();
+			response.setStatus(true);
+            response.getMessages().add("Product deleted");
+            
+            response.setPayload(productService.delete(form.getId()));
+
+            return ResponseEntity.ok(response);
+        }
+
+        else
+        {
+            response.setStatus(false);
+			for (ObjectError err : errors.getAllErrors()) {
+				response.getMessages().add(err.getDefaultMessage());
+			}
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
     }
 }
