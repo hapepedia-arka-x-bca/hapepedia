@@ -25,7 +25,11 @@ import bca.Hapepedia.services.ProductService;
 public class ProductApiController {
     @Autowired
     private ProductService productService;
+
+    @Autowired
     private CategoryService categoryService;
+
+    @Autowired
     private BrandService brandService;
 
     @GetMapping
@@ -57,7 +61,7 @@ public class ProductApiController {
         {
             Product product = new Product();
             product.setId(productForm.getId());
-            product.setBrand(brandService.findById(productForm.getId_brand()).get());
+            product.setBrand(brandService.findById(productForm.getBrand_id()).get());
             product.setCategory(categoryService.findById(productForm.getId_category()).get());//long
             product.setName(productForm.getName());
             product.setSpecification(productForm.getSpecification());
