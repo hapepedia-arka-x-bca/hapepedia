@@ -1,6 +1,7 @@
 package bca.Hapepedia.dto;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 public class ProductForm {
 	private Long id;
@@ -8,16 +9,16 @@ public class ProductForm {
 	@NotEmpty(message = "Product Name is required.")
 	private String name;
 	
-	@NotEmpty(message = "Brand is required.")
+	@NotNull(message = "Brand is required.")
 	private Long id_brand;
 	
-	@NotEmpty(message = "Category is required.")
+	@NotNull(message = "Category is required.")
 	private Long id_category;
 	
 	@NotEmpty(message = "Specification is required.")
 	private String specification;
 	
-	@NotEmpty(message = "Weight is required.")
+	@NotNull(message = "Weight is required.")
 	private double weight;
 
 	public Long getId() {
