@@ -47,6 +47,16 @@
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
             crossorigin="anonymous"></script>
         <script th:src="@{/admins/assets/demo/datatables-demo.js}"></script>
+        <script>
+            function logout() {
+                localStorage.removeItem("token");
+                localStorage.removeItem("iduser");
+                localStorage.removeItem("name");
+                localStorage.removeItem("email");
+                localStorage.removeItem("roles");
+                window.location.href = "./";
+            }
+        </script>
     </div>
 </body>
 
