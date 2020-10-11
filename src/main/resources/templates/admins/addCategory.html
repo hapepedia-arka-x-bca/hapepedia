@@ -57,10 +57,10 @@
                                     <h4 class="card-title">Category List</h4>
                                 </div>
                                 <div class="card-body">
-                                    <div>    <a href="" class="btn btn-dark" data-toggle="modal"
+                                    <div> <a href="" class="btn btn-dark" data-toggle="modal"
                                             data-target="#addCategoryModal">Add Category</a>
-                                        </div>
-                                            <br>
+                                    </div>
+                                    <br>
                                     <div class="table-responsive">
                                         <table id="dataTable" class="table table-hover table-bordered">
                                             <thead>
@@ -206,40 +206,38 @@
     <div th:include="admins/fragments/footer::templateScript"></div>
 
     <script>
-        $('#createCategory').on('click', function ()
-        {
+        var token = localStorage.getItem('token');
+
+        $('#createCategory').on('click', function () {
             var name = $("#name").val();
             var category = new Object();
             category.name = name;
             $.ajax({
-                url: "http://127.0.0.1:8081/api/category",
+                url: "http://127.0.0.1:8081/api/category/save",
                 method: "POST",
                 data: JSON.stringify(category),
                 contentType: "application/json;odata=verbose",
-                success: function (response)
-                {
-                    if (response.status == true)
-                    {
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Basic " + token);
+                },
+                success: function (response) {
+                    if (response.status == true) {
                         alert("data success!");
-                    } else
-                    {
+                    } else {
                         console.log('Anda Gagal Menambahkan Data. Mohon Coba Kembali!');
                     }
                 },
-                error: function ()
-                {
-                    console.log('Anda Gagal Menambahkan Data. Mohon Coba Kembali!');
+                error: function () {
+                    console.log('Anda Gagal Menambahkan Data. Mohon Cobaaaa Kembali!');
                 }
             });
         });
 
-        function setDeleteId(id)
-        {
+        function setDeleteId(id) {
             $('#deleteId').val(id);
         }
 
-        $('#deleteCategory').on('click', function ()
-        {
+        $('#deleteCategory').on('click', function () {
             var id = $('#deleteId').val();
             var category = new Object();
             category.id = id;
@@ -248,47 +246,39 @@
                 method: "DELETE",
                 data: JSON.stringify(category),
                 contentType: "application/json",
-                success: function (response)
-                {
-                    if (response.status == true)
-                    {
+                success: function (response) {
+                    if (response.status == true) {
                         $('#deleteCategoryModal').modal('toggle');
                         alert("Hapus sukses!");
-                    } else
-                    {
+                    } else {
                         console.log('Anda Gagal Menambahkan Data. Mohon Coba Kembali!');
                     }
                 },
-                error: function ()
-                {
+                error: function () {
                     console.log('Anda Gagal Menambahkan Data. Mohon Cobassss Kembali!');
                 }
             });
         });
 
-        function getCategoryById(id)
-        {
+        function getCategoryById(id) {
             $.ajax({
                 url: "http://127.0.0.1:8081/api/category/get",
                 method: "GET",
                 data: { id: id },
-                success: function (response)
-                {
+                success: function (response) {
                     $('#editId').val(null);
                     $('#editName').val(null);
 
                     $('#editId').val(response.payload.id);
                     $('#editName').val(response.payload.name);
                 },
-                error: function ()
-                {
+                error: function () {
                     console.log("Error");
                 }
             });
         }
 
-        $('#updateCategory').on('click', function ()
-        {
+        $('#updateCategory').on('click', function () {
             var id = $("#editId").val();
             var name = $("#editName").val();
             var category = new Object();
@@ -299,19 +289,15 @@
                 method: "POST",
                 data: JSON.stringify(category),
                 contentType: "application/json",
-                success: function (response)
-                {
-                    if (response.status == true)
-                    {
+                success: function (response) {
+                    if (response.status == true) {
                         $('#editCategoryModal').modal('toggle');
                         table.ajax.reload();
-                    } else
-                    {
+                    } else {
                         console.log("Error1");
                     }
                 },
-                error: function ()
-                {
+                error: function () {
                     console.log("Error");
                 }
             });
