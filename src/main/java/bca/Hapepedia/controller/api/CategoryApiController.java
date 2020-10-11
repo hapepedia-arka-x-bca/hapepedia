@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -57,7 +56,7 @@ public class CategoryApiController {
 		}
 	}
 
-	@PostMapping
+	@PostMapping("/save")
 	public ResponseEntity<ResponseData> saveCategory(@Valid @RequestBody CategoryForm form, Errors errors) {
 		ResponseData response = new ResponseData();
 		if (!errors.hasErrors()) {
@@ -78,7 +77,7 @@ public class CategoryApiController {
 		}
 	}
 
-	@DeleteMapping
+	@PostMapping("/delete")
 	public ResponseEntity<ResponseData> deleteCategory(@Valid @RequestBody DeleteForm form, Errors errors) {
 		ResponseData response = new ResponseData();
 		if (!errors.hasErrors()) {
