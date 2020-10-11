@@ -25,10 +25,6 @@ public class adminController {
 	@Autowired
 	private CategoryService categoryService;
 
-
-	@Autowired
-	private CategoryService categoryService;
-
 	@Autowired
 	private BrandService brandService;
 
@@ -93,6 +89,7 @@ public class adminController {
 		model.addAttribute("listOfCategory", categoryService.findAll());
 		model.addAttribute("categoryForm", new CategoryForm());
 		return "admins/order";
+	}
 
 	@GetMapping("/brand")
 	public String brand(Model model) {
