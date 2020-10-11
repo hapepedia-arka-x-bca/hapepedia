@@ -15,9 +15,9 @@ public class ProductDetailService {
 	@Autowired
 	private ProductDetailRepo productDetailRepo;
 
-	public ProductDetail findByProduct(Product product) {
-		return productDetailRepo.findByProduct(product);
-	}
+	// public ProductDetail findByProduct(Product product) {
+	// 	return productDetailRepo.findByProduct(product);
+	// }
 
 
 	public ProductDetail save(ProductDetail productDetail) {
