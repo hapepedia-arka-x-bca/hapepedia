@@ -28,6 +28,11 @@ public class adminController {
 	public String index(Model model) {
 		return "admins/index";
 	}
+	
+	@GetMapping("/login")
+	public String login() {
+		return "admins/login";
+	}
 
 	@RequestMapping("/detailTransaction")
 	public String detailTransaction(Model model) {
