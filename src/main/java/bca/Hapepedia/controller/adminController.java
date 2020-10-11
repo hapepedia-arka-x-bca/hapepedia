@@ -6,14 +6,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import bca.Hapepedia.dto.CategoryForm;
 import bca.Hapepedia.services.AdminService;
+import bca.Hapepedia.services.CategoryService;
 
 @Controller
 @RequestMapping("/admin")
 public class adminController {
-	   
+
 	@Autowired
 	private AdminService adminService;
+
+	@Autowired
+	private CategoryService categoryService;
 
 	@GetMapping
 	public String index(Model model) {
@@ -54,5 +59,12 @@ public class adminController {
 	public String setting(Model model) {
 		model.addAttribute("admin list", adminService);
 		return "admins/setting";
+	}
+
+	@GetMapping("/category")
+	public String category(Model model) {
+		model.addAttribute("listOfCategory", categoryService.findAll());
+		model.addAttribute("categoryForm", new CategoryForm());
+		return "admins/addCategory";
 	}
 }
