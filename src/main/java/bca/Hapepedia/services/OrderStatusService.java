@@ -31,6 +31,6 @@ public class OrderStatusService {
 
     public OrderStatus findByOrderStatus(OrderStatus orderStatus)
     {
-        return orderStatusRepo.findByOrderStatus(orderStatus);
+        return orderStatusRepo.findByOrderstatus(orderStatus);
     }
 }
