@@ -15,9 +15,9 @@ import bca.Hapepedia.dto.LoginForm;
 import bca.Hapepedia.dto.ResponseData;
 import bca.Hapepedia.dto.ResponseLogin;
 import bca.Hapepedia.entity.Admin;
-import bca.Hapepedia.entity.Product;
+import bca.Hapepedia.entity.Customer;
 import bca.Hapepedia.services.AdminService;
-import bca.Hapepedia.services.ProductService;
+import bca.Hapepedia.services.CustomerService;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -26,7 +26,7 @@ public class AdminApiController {
     private AdminService adminService;
 
     @Autowired
-    private ProductService customerService;
+    private CustomerService customerService;
 
     @PostMapping("/login")
     public ResponseEntity<ResponseData> login(@RequestBody LoginForm loginForm){
@@ -85,7 +85,7 @@ public class AdminApiController {
     }
 
     @GetMapping("/showAllAdmin")
-    public Iterable<Product> showAllAdmin(){
+    public Iterable<Customer> showAllAdmin(){
         return customerService.findAll();        
     }
     
