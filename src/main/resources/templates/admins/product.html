@@ -52,48 +52,86 @@
                                             </thead>
                                             <tbody>
                                                 <div th:each="product: ${listOfProduct}">
-                                                    <tr >
-                                                            <td th:text="${product.id}">1</td>
-                                                            <td><strong th:text="${product.name}">Category</strong></td>
-                                                            <td>Brand/td>
-                                                            <td>Category</td>
-                                                            <td>
-                                                                <div class="btn-toolbar btn-toolbar-sm btn-block">
-                                                                    <span>
-                                                                        <a href="" class="btn btn-warning mr-2"
-                                                                            data-toggle="modal"
-                                                                            data-target="#editProductModal"
-                                                                            th:onclick="'javascript:getCategoryById(' + ${product.id} + ');'"><i
-                                                                                class="fas fa-edit"></i></a>
-                                                                    </span>
-                                                                    <span>
-                                                                        <a href="" class="btn btn-danger mr-2"
-                                                                            data-toggle="modal"
-                                                                            data-target="#deleteProductModal"
-                                                                            th:onclick="'javascript:setDeleteId(' + ${product.id} + ');'"><i
-                                                                                class="fas fa-trash"></i></a>
-                                                                    </span>
-                                                                    <span>
-                                                                        <a href=""
-                                                                            class="btn btn-info mr-2 accordion-toggle"
-                                                                            data-toggle="collapse"
-                                                                            th:data-target="'#demo-spec-'+ ${product.id}"><i
-                                                                                class="fas fa-cog"></i></a>
-                                                                    </span>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
+                                                    <tr>
+                                                        <td th:text="${product.id}">1</td>
+                                                        <td><strong th:text="${product.name}">Category</strong></td>
+                                                        <td>Brand</td>
+                                                        <td>Category</td>
+                                                        <td>
+                                                            <div class="btn-toolbar btn-toolbar-sm btn-block">
+                                                                <span>
+                                                                    <a href="" class="btn btn-warning mr-2"
+                                                                        data-toggle="modal"
+                                                                        data-target="#editProductModal"
+                                                                        th:onclick="'javascript:getCategoryById(' + ${product.id} + ');'"><i
+                                                                            class="fas fa-edit"></i></a>
+                                                                </span>
+                                                                <span>
+                                                                    <a href="" class="btn btn-danger mr-2"
+                                                                        data-toggle="modal"
+                                                                        data-target="#deleteProductModal"
+                                                                        th:onclick="'javascript:setDeleteId(' + ${product.id} + ');'"><i
+                                                                            class="fas fa-trash"></i></a>
+                                                                </span>
+                                                                <span>
+                                                                    <a href=""
+                                                                        class="btn btn-info mr-2 accordion-toggle"
+                                                                        data-toggle="collapse"
+                                                                        th:data-target="'#demo-spec-'+ ${product.id}"><i
+                                                                            class="fas fa-cog"></i></a>
+                                                                </span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
 
-                                                        <tr>
-                                                            <td colspan="5" class="hiddenRow">
-                                                                <div class="accordian-body collapse p-3"
-                                                                    th:id="'demo-spec-'+ ${product.id}">
-                                                                    <b>Title Spec</b>
-                                                                    <p> Ini spec</p>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
+                                                    <tr>
+                                                        <td class="p-0 border-right-0"></td>
+                                                        <td colspan="5" class="hiddenRow p-0 border-left-0">
+                                                            <div class="accordian-body collapse p-3 pr-5" th:id="'demo-spec-'+ ${product.id}">
+                                                                <b>Title Spec</b>
+                                                                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Enim, sunt? Quo, similique maiores! Quo praesentium reiciendis illum, odio quis accusamus veritatis corrupti iusto nesciunt atque fugit repellendus doloremque blanditiis nihil?</p>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </div>
+
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>Product</strong></td>
+                                                    <td>Brand</td>
+                                                    <td>Category</td>
+                                                    <td>
+                                                        <div class="btn-toolbar btn-toolbar-sm btn-block">
+                                                            <span>
+                                                                <a href="" class="btn btn-warning mr-2"
+                                                                    data-toggle="modal"
+                                                                    data-target="#editProductModal"><i
+                                                                        class="fas fa-edit"></i></a>
+                                                            </span>
+                                                            <span>
+                                                                <a href="" class="btn btn-danger mr-2"
+                                                                    data-toggle="modal"
+                                                                    data-target="#deleteProductModal"><i
+                                                                        class="fas fa-trash"></i></a>
+                                                            </span>
+                                                            <span>
+                                                                <a href="" class="btn btn-info mr-2 accordion-toggle"
+                                                                    data-toggle="collapse"
+                                                                    data-target="#demo-spec-x"><i
+                                                                        class="fas fa-cog"></i></a>
+                                                            </span>
                                                         </div>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td colspan="5" class="hiddenRow p-0">
+                                                        <div class="accordion-body collapse p-3" id="demo-spec-x">
+                                                            <b>Title Spec</b>
+                                                            <p> Ini spec</p>
+                                                        </div>
+                                                    </td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -206,12 +244,11 @@
     <div th:include="admins/fragments/footer::templateScript"></div>
 
     <script>
-
-        $('.accordion-toggle').click(function ()
-        {
-            $('.hiddenRow').hide();
-            $(this).next('tr').find('.hiddenRow').show();
-        });
+        // $(document).ready(function(){$('.hiddenRow').hide();})
+        // $('.accordion-toggle').click(function ()
+        // {
+        //     $(this).next('tr').find('.hiddenRow').addClass('tes');
+        // });
 
         $('#createProduct').on('click', function ()
         {
