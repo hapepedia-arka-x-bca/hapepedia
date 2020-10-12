@@ -5,7 +5,6 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import bca.Hapepedia.entity.Product;
 import bca.Hapepedia.entity.ProductDetail;
 import bca.Hapepedia.repo.ProductDetailRepo;
 

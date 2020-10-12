@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import bca.Hapepedia.dto.OrderForm;
 import bca.Hapepedia.dto.ResponseData;
 import bca.Hapepedia.entity.Order;
+import bca.Hapepedia.services.CustomerService;
 import bca.Hapepedia.services.OrderService;
 import bca.Hapepedia.services.OrderStatusService;
 
@@ -21,7 +22,9 @@ public class OrderApiController {
     @Autowired
     private OrderService orderService;
     @Autowired
-    private OrderStatusService orderStatusService;
+	private OrderStatusService orderStatusService;
+    @Autowired
+    private CustomerService customerService;
 
     @GetMapping
     public ResponseEntity<ResponseData> findAllOrder(){
@@ -50,7 +53,8 @@ public class OrderApiController {
             newOrder.setTotalWeight(orderForm.getTotalWeight());
             newOrder.setShippingFee(orderForm.getShippingFee());
             newOrder.setTotalPayment(orderForm.getTotalPayment());
-            newOrder.setOrderStatus(orderStatusService.findByOrderStatus(orderForm.getOrderStatus()));
+            newOrder.setOrderStatus(orderStatusService.findById(orderForm.getOrderStatus()).get());
+            newOrder.setCustomer(customerService.findById(orderForm.getCustomer()).get());
             
 			response.setStatus(true);
 			response.getMessages().add("Order saved");
@@ -75,8 +79,9 @@ public class OrderApiController {
             newOrder.setTotalWeight(orderForm.getTotalWeight());
             newOrder.setShippingFee(orderForm.getShippingFee());
             newOrder.setTotalPayment(orderForm.getTotalPayment());
-            newOrder.setOrderStatus(orderStatusService.findByOrderStatus(orderForm.getOrderStatus()));
-            
+            newOrder.setOrderStatus(orderStatusService.findById(orderForm.getOrderStatus()).get());
+            newOrder.setCustomer(customerService.findById(orderForm.getCustomer()).get());
+                        
 			response.setStatus(true);
 			response.getMessages().add("Order updated");
 			response.setPayload(orderService.save(newOrder));

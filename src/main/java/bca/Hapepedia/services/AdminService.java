@@ -72,7 +72,7 @@ public class AdminService implements UserDetailsService{
     }
 
 
-    public boolean delete (Long id){
+    public boolean delete(Long id){
         adminRepo.deleteById(id);
         return true;
     }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -99,7 +100,21 @@ public class CustomerApiController {
         
     }
     
-
+    @GetMapping("/delete/{id}")
+    public ResponseEntity<ResponseData> deletePaymentMethod(@PathVariable("id") Long id){
+        ResponseData response = new ResponseData();
+		try {
+			response.setStatus(true);
+			response.getMessages().add("Payment method deleted");
+			response.setPayload(customerService.delete(id));
+			return ResponseEntity.ok(response);
+		}catch(Exception ex) {
+			response.setStatus(false);
+			response.getMessages().add("Could not load order status: "+ ex.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+		}
+    }
+    
     @GetMapping
     public ResponseEntity<ResponseData> findAllCustomer(){
         ResponseData response = new ResponseData();
