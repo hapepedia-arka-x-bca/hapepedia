@@ -8,10 +8,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import bca.Hapepedia.dto.CategoryForm;
-
+import bca.Hapepedia.dto.ProductForm;
 import bca.Hapepedia.entity.Category;
 import bca.Hapepedia.services.AdminService;
 import bca.Hapepedia.services.CategoryService;
+import bca.Hapepedia.services.ProductService;
 import bca.Hapepedia.services.BrandService;
 
 
@@ -28,6 +29,9 @@ public class adminController {
 	@Autowired
 	private BrandService brandService;
 
+	@Autowired
+	private ProductService productService;
+
 	@GetMapping
 	public String index(Model model) {
 		return "admins/index";
@@ -41,11 +45,6 @@ public class adminController {
 	@GetMapping("/detailTransaction")
 	public String detailTransaction(Model model) {
 		return "admins/detailTransaction";
-	}
-
-	@GetMapping("/product")
-	public String product(Model model) {
-		return "admins/product";
 	}
 
 	@GetMapping("/detailProduct")
@@ -79,6 +78,13 @@ public class adminController {
 		model.addAttribute("listOfCategory", categoryService.findAll());
 		model.addAttribute("categoryForm", new CategoryForm());
 		return "admins/addCategory";
+	}
+
+	@GetMapping("/product")
+	public String product(Model model) {
+		model.addAttribute("listOfProduct", productService.findAll());
+		model.addAttribute("productForm", new ProductForm());
+		return "admins/product";
 	}
 
 	@PostMapping("/category/save")
