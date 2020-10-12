@@ -23,4 +23,9 @@ public class OrderDetailService {
     {
         return orderDetailRepo.findAllByOrder(orderId);
     }
+
+    public boolean delete(int id) {
+      orderDetailRepo.deleteById(id);
+      return true;
+    }
 }

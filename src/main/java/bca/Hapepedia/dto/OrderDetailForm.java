@@ -2,7 +2,7 @@ package bca.Hapepedia.dto;
 
 public class OrderDetailForm {
     private int id;
-    private int orderId;
+    private Long orderId;
     private int productId;
     private int quantity;
 
@@ -14,11 +14,11 @@ public class OrderDetailForm {
         this.id = id;
     }
 
-    public int getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(int orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 
