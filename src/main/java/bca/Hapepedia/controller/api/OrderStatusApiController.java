@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -70,16 +71,13 @@ public class OrderStatusApiController {
 		}
     }
 
-	@PostMapping("/delete")
-    public ResponseEntity<ResponseData> deleteOrderStatus(@RequestBody OrderStatusForm orderStatusForm){
+	@GetMapping("/delete/{id}")
+    public ResponseEntity<ResponseData> deletePaymentMethod(@PathVariable("id") int id){
         ResponseData response = new ResponseData();
 		try {
-			OrderStatus newOrderStatus = new OrderStatus();
-			newOrderStatus.setOrderstatus(orderStatusForm.getOrderstatus());
-			newOrderStatus.setId(orderStatusForm.getId());
 			response.setStatus(true);
-			response.getMessages().add("Order status deleted");
-			response.setPayload(orderStatusService.delete(newOrderStatus.getId()));
+			response.getMessages().add("Payment method deleted");
+			response.setPayload(orderStatusService.delete(id));
 			return ResponseEntity.ok(response);
 		}catch(Exception ex) {
 			response.setStatus(false);
