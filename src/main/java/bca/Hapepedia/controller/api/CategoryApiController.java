@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,8 +42,8 @@ public class CategoryApiController {
 		}
 	}
 
-	@GetMapping("/get")
-	public ResponseEntity<ResponseData> findByIdCategory(@RequestParam("id") Long id) {
+	@GetMapping("/get/{id}")
+	public ResponseEntity<ResponseData> findByIdCategory(@PathVariable("id") Long id) {
 		ResponseData response = new ResponseData();
 		try {
 			response.setStatus(true);
@@ -63,7 +64,7 @@ public class CategoryApiController {
 			Category category = new Category();
 			category.setId(form.getId());
 			category.setName(form.getName());
-			response = new ResponseData();
+
 			response.setStatus(true);
 			response.getMessages().add("Category saved");
 			response.setPayload(categoryService.save(category));
@@ -77,21 +78,18 @@ public class CategoryApiController {
 		}
 	}
 
-	@PostMapping("/delete")
-	public ResponseEntity<ResponseData> deleteCategory(@Valid @RequestBody DeleteForm form, Errors errors) {
+	@PostMapping("/delete/{id}")
+	public ResponseEntity<ResponseData> deleteCategory(@PathVariable("id") Long id) {
 		ResponseData response = new ResponseData();
-		if (!errors.hasErrors()) {
-			response = new ResponseData();
+		try {
 			response.setStatus(true);
 			response.getMessages().add("Category deleted");
-			response.setPayload(categoryService.delete(form.getId()));
+			response.setPayload(categoryService.delete(id));
 			return ResponseEntity.ok(response);
-		} else {
+		} catch (Exception ex) {
 			response.setStatus(false);
-			for (ObjectError err : errors.getAllErrors()) {
-				response.getMessages().add(err.getDefaultMessage());
-			}
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+			response.getMessages().add("Could not delete category: " + ex.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 		}
 	}
 }
