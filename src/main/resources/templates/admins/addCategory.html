@@ -57,43 +57,21 @@
                                     <h4 class="card-title">Category List</h4>
                                 </div>
                                 <div class="card-body">
-                                    <div>    <a href="" class="btn btn-dark" data-toggle="modal"
+                                    <div> <a href="" class="btn btn-dark" data-toggle="modal"
                                             data-target="#addCategoryModal">Add Category</a>
-                                        </div>
-                                            <br>
+                                    </div>
+                                    <br>
                                     <div class="table-responsive">
                                         <table id="dataTable" class="table table-hover table-bordered">
                                             <thead>
                                                 <tr>
-                                                    <th>#</th>
+                                                    <th>id</th>
                                                     <th>Category</th>
                                                     <th>Created At</th>
-                                                    <th>Aksi</th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr th:each="category: ${listOfCategory}">
-                                                    <td th:text="${category.id}">1</td>
-                                                    <td><strong th:text="${category.name}">Category</strong></td>
-                                                    <td>Date Created</td>
-                                                    <td>
-                                                        <div class="btn-toolbar btn-toolbar-sm btn-block">
-                                                            <span>
-                                                                <a href="" class="btn btn-warning mr-2"
-                                                                    data-toggle="modal" data-target="#editCategoryModal"
-                                                                    th:onclick="'javascript:getCategoryById(' + ${category.id} + ');'"><i
-                                                                        class="fas fa-edit"></i></a>
-                                                            </span>
-                                                            <span>
-                                                                <a href="" class="btn btn-danger mr-2"
-                                                                    data-toggle="modal"
-                                                                    data-target="#deleteCategoryModal"
-                                                                    th:onclick="'javascript:setDeleteId(' + ${category.id} + ');'"><i
-                                                                        class="fas fa-trash"></i></a>
-                                                            </span>
-                                                        </div>
-                                                    </td>
-                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -109,7 +87,7 @@
         </div>
     </div>
 
-    <!-- modal edit -->
+    <!-- modal add new -->
     <div class="modal fade" id="addCategoryModal">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -126,7 +104,7 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="name">Category Title</label>
-                                <input type="text" id="name" class="form-control" name="name" required>
+                                <input type="text" id="name" class="form-control" name="name">
                             </div>
                         </div>
                         <!-- /.card-body -->
@@ -142,6 +120,7 @@
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
+
     <!-- Modal For Deleting Category -->
     <div class="modal fade" id="deleteCategoryModal">
         <div class="modal-dialog modal-sm">
@@ -206,112 +185,154 @@
     <div th:include="admins/fragments/footer::templateScript"></div>
 
     <script>
-        $('#createCategory').on('click', function ()
-        {
+        var table;
+        var token = localStorage.getItem('token');
+
+        $(document).ready(function () {
+            table = $('#dataTable').DataTable({
+                "processing": false,
+                "serverSide": false,
+                ajax: {
+                    dataSrc: "payload",
+                    url: 'http://127.0.0.1:8081/api/category',
+                    type: "GET",
+                    dataType: 'json',
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Authorization", "Basic " + token);
+                    },
+                },
+                columns: [
+                    { data: 'id', title: 'ID' },
+                    { data: 'name' },
+                    {
+                        data: 'datetime',
+                        render: function (data, type, row) {
+                            return `Datetime`;
+                        },
+                    },
+                    {
+                        data: 'id',
+                        render: function (data, type, row) {
+                            return `<div class="btn-toolbar btn-toolbar-sm btn-block">
+                            <span>
+                                <a href="" class="btn btn-warning mr-2"
+                                    data-toggle="modal" data-target="#editCategoryModal" onclick="getCategoryById('` + data + `');"><i
+                                        class="fas fa-edit"></i></a>
+                            </span>
+                            <span>
+                                <a href="" class="btn btn-danger mr-2"
+                                    data-toggle="modal"
+                                    data-target="#deleteCategoryModal"
+                                    onclick="setDeleteId('` + data + `');"><i
+                                        class="fas fa-trash"></i></a>
+                            </span>
+                        </div>`;
+                        }
+                    }
+                ]
+            })
+        });
+
+        $('#createCategory').on('click', function () {
             var name = $("#name").val();
             var category = new Object();
             category.name = name;
             $.ajax({
-                url: "http://127.0.0.1:8081/api/category",
+                url: "http://127.0.0.1:8081/api/category/save",
                 method: "POST",
                 data: JSON.stringify(category),
-                contentType: "application/json;odata=verbose",
-                success: function (response)
-                {
-                    if (response.status == true)
-                    {
-                        alert("data success!");
-                    } else
-                    {
+                contentType: "application/json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Basic " + token);
+                },
+                success: function (response) {
+                    if (response.status == true) {
+                        $('#addCategoryModal').modal('toggle');
+                        $('#name').val(null);
+                        alert("Insert data success!");
+                        table.ajax.reload();
+                    } else {
                         console.log('Anda Gagal Menambahkan Data. Mohon Coba Kembali!');
                     }
                 },
-                error: function ()
-                {
-                    console.log('Anda Gagal Menambahkan Data. Mohon Coba Kembali!');
+                error: function () {
+                    console.log('Anda Gagal Menambahkan Data. Mohon Cobaaaa Kembali!');
                 }
             });
         });
 
-        function setDeleteId(id)
-        {
+        function setDeleteId(id) {
             $('#deleteId').val(id);
         }
 
-        $('#deleteCategory').on('click', function ()
-        {
+        $('#deleteCategory').on('click', function () {
             var id = $('#deleteId').val();
-            var category = new Object();
-            category.id = id;
             $.ajax({
-                url: "http://127.0.0.1:8081/api/category",
-                method: "DELETE",
-                data: JSON.stringify(category),
+                url: "http://127.0.0.1:8081/api/category/delete/" + id,
+                method: "POST",
                 contentType: "application/json",
-                success: function (response)
-                {
-                    if (response.status == true)
-                    {
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Basic " + token);
+                },
+                success: function (response) {
+                    if (response.status == true) {
                         $('#deleteCategoryModal').modal('toggle');
+                        table.ajax.reload();
                         alert("Hapus sukses!");
-                    } else
-                    {
+                    } else {
                         console.log('Anda Gagal Menambahkan Data. Mohon Coba Kembali!');
                     }
                 },
-                error: function ()
-                {
+                error: function () {
                     console.log('Anda Gagal Menambahkan Data. Mohon Cobassss Kembali!');
                 }
             });
         });
 
-        function getCategoryById(id)
-        {
+        function getCategoryById(id) {
             $.ajax({
-                url: "http://127.0.0.1:8081/api/category/get",
+                url: "http://127.0.0.1:8081/api/category/get/" + id,
                 method: "GET",
                 data: { id: id },
-                success: function (response)
-                {
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Basic " + token);
+                },
+                success: function (response) {
                     $('#editId').val(null);
                     $('#editName').val(null);
 
                     $('#editId').val(response.payload.id);
                     $('#editName').val(response.payload.name);
                 },
-                error: function ()
-                {
+                error: function () {
                     console.log("Error");
                 }
             });
         }
 
-        $('#updateCategory').on('click', function ()
-        {
+        $('#updateCategory').on('click', function () {
             var id = $("#editId").val();
             var name = $("#editName").val();
             var category = new Object();
             category.id = id;
             category.name = name;
             $.ajax({
-                url: "http://127.0.0.1:8081/api/category",
+                url: "http://127.0.0.1:8081/api/category/save",
                 method: "POST",
                 data: JSON.stringify(category),
                 contentType: "application/json",
-                success: function (response)
-                {
-                    if (response.status == true)
-                    {
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Basic " + token);
+                },
+                success: function (response) {
+                    if (response.status == true) {
                         $('#editCategoryModal').modal('toggle');
                         table.ajax.reload();
-                    } else
-                    {
+                    } else {
                         console.log("Error1");
                     }
                 },
-                error: function ()
-                {
+                error: function () {
                     console.log("Error");
                 }
             });
