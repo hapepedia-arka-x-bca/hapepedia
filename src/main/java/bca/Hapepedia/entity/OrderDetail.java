@@ -14,10 +14,10 @@ import javax.persistence.Table;
 public class OrderDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @OneToOne
-    Product product;
+    ProductDetail productDetail;
 
     @ManyToOne
     Order order;
@@ -28,20 +28,20 @@ public class OrderDetail {
     public OrderDetail() {
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Product getProduct() {
-        return product;
+    public ProductDetail getProductDetail() {
+        return productDetail;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProductDetail(ProductDetail productDetail) {
+        this.productDetail = productDetail;
     }
 
     public Order getOrder() {
