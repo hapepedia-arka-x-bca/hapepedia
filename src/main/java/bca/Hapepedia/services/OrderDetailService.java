@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,11 @@ public class OrderDetailService {
     public List<OrderDetail> findAllByOrder(Order order)
     {
         return orderDetailRepo.findAllByOrder(order);
+    }
+
+    public Optional<OrderDetail> findById(Long idOrder)
+    {
+        return orderDetailRepo.findById(idOrder);
     }
 
     public boolean delete(Long id) {

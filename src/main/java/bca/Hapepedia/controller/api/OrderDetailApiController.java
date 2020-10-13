@@ -95,6 +95,7 @@ public class OrderDetailApiController {
 			response.setStatus(true);
 			response.getMessages().add("Order detail loaded");
 			response.setPayload(orderDetailService.findAllByOrder(orderService.findById(idOrder).get()));
+			
 			return ResponseEntity.ok(response);
 		}catch(Exception ex) {
 			response.setStatus(false);

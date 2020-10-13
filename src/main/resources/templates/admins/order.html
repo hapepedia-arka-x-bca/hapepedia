@@ -43,7 +43,7 @@
                                         <th scope="col">Total Price</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="listProduct">
                                                                                 
                                     </tbody>
                                 </table>
@@ -72,7 +72,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
+                                <button type="button" class="btn btn-primary" onclick="saveStatus()" data-dismiss="modal">Save changes</button>
                             </div>
                         </div>
                     </div>
@@ -126,41 +126,45 @@
         <script>
             var orderStatusAll;
             var orderAll;
+            var choosenData;
             var token = localStorage.getItem('token');
-            fetch("http://localhost:8081/api/order",{
-                // Adding method type 
-                method: "GET", 
-                                
-                // Adding headers to the request 
-                headers: { 
-                    "Content-type" : "application/json; charset=UTF-8",
-                    "Authorization" : "Basic "+token
-                } 
-            })
-            .then(response => response.json())
-            .then(result => {
-                orderAll = result.payload;
-                var displayData = "";
-                
-                orderAll.forEach((element,i) => {
-                    // console.log(element.customer.name);
-                    displayData += `<tr>
-                        <td>`+element.customer.name+`</td>
-                        <td>`+element.dateOrder+`</td>
-                        <td>`+element.totalPrice+`</td>
-                        <td>`+element.orderStatus.orderstatus+`</td>
-                        <td>
-                            <span class="btn btn-primary" onclick="showModalDetail(`+i+`)" data-toggle="modal" data-target="#orderDetailModal">view <i class="fa fa-edit"></i></span>
-                            <span class="btn btn-danger">Cancel <i class="fa fa-times"></i></span>
-                        </td>
-                    </tr>`;
+
+            function showData(){
+                fetch("http://localhost:8081/api/order",{
+                    // Adding method type 
+                    method: "GET", 
+                                    
+                    // Adding headers to the request 
+                    headers: { 
+                        "Content-type" : "application/json; charset=UTF-8",
+                        "Authorization" : "Basic "+token
+                    } 
+                })
+                .then(response => response.json())
+                .then(result => {
+                    orderAll = result.payload;
+                    var displayData = "";
+                    
+                    orderAll.forEach((element,i) => {
+                        // console.log(element.customer.name);
+                        displayData += `<tr>
+                            <td>`+element.customer.name+`</td>
+                            <td>`+element.dateOrder.split('T')[0]+`</td>
+                            <td>`+element.totalPrice+`</td>
+                            <td>`+element.orderStatus.orderstatus+`</td>
+                            <td>
+                                <span class="btn btn-primary" onclick="showModalDetail(`+i+`)" data-toggle="modal" data-target="#orderDetailModal">view <i class="fa fa-edit"></i></span>
+                                <span class="btn btn-danger">Cancel <i class="fa fa-times"></i></span>
+                            </td>
+                        </tr>`;
+                    });
+                    
+                    document.getElementById("listData").innerHTML= displayData;
+                    
+                }).catch(err => {
+                    errorStat = err.name === 'AbortError'? 1 : 2;
                 });
-                
-                document.getElementById("listData").innerHTML= displayData;
-                
-            }).catch(err => {
-                errorStat = err.name === 'AbortError'? 1 : 2;
-            });
+            }
 
             fetch("http://localhost:8081/api/orderStatus",{
                 // Adding method type 
@@ -181,9 +185,10 @@
             });
 
             function showModalDetail(idOrder){
+                choosenData=idOrder;
                 // console.log(orderAll)
                 document.getElementById("orderForm").innerHTML=orderAll[idOrder].id;
-                document.getElementById("dateForm").innerHTML=orderAll[idOrder].dateOrder;
+                document.getElementById("dateForm").innerHTML=orderAll[idOrder].dateOrder.split('T')[0];
                 document.getElementById("customerForm").innerHTML=orderAll[idOrder].customer.name;
 
                 document.getElementById("productPriceForm").innerHTML=orderAll[idOrder].totalPrice;
@@ -196,9 +201,9 @@
                 orderStatusAll.forEach((element,i) => {
                     // console.log(element.customer.name);
                     if(orderAll[idOrder].orderStatus.orderstatus==element.orderstatus)
-                        statusData += `<option value="`+element.id+`" selected>`+element.orderstatus+`</option>`;
+                        statusData += `<option value="`+i+`" selected>`+element.orderstatus+`</option>`;
                     else
-                        statusData += `<option value="`+element.id+`">`+element.orderstatus+`</option>`;
+                        statusData += `<option value="`+i+`">`+element.orderstatus+`</option>`;
                 });
                 document.getElementById("statusForm").innerHTML=statusData;
             
@@ -216,24 +221,73 @@
                 .then(response => response.json())
                 .then(result => {
                     var listDetailOrder =``; 
-                    console.log(result.payload);
-                    // orderAll.forEach((element,i) => {
+                    // console.log(result.payload);
+                    var dataDetailOrder = result.payload;
+                    dataDetailOrder.forEach((element,i) => {
                         
-                    //     displayData += `
-                    //     <tr>
-                    //         <th scope='row'>1</th>
-                    //         <td>Mark</td>
-                    //         <td>3</td>
-                    //         <td>12.000</td>
-                    //         <td>36.000</td>
-                    //     </tr>`;
-                    // });                             
+                        listDetailOrder += `
+                        <tr>
+                            <th scope='row'>`+(i+1)+`</th>
+                            <td>`+element.productDetail.product.name+`</td>
+                            <td>`+element.quantity+`</td>
+                            <td>`+element.productDetail.price+`</td>
+                            <td>`+(element.quantity*element.productDetail.price)+`</td>
+                        </tr>`;
+                    });    
+                    document.getElementById("listProduct").innerHTML= listDetailOrder;                         
                 }).catch(err => {
                     errorStat = err.name === 'AbortError'? 1 : 2;
                 });
 
 
             }
+        
+            function saveStatus(){
+                var statusId = document.getElementById("statusForm").value;
+                console.log(
+                    JSON.stringify({ 
+                        id: orderAll[choosenData].id, 
+                        customer: orderAll[choosenData].customer.id,
+                        dateOrder: orderAll[choosenData].dateOrder.split('T')[0],
+                        deliveryAddress: orderAll[choosenData].deliveryAddress,
+                        totalPrice: orderAll[choosenData].totalPrice,
+                        totalWeight: orderAll[choosenData].totalWeight,
+                        shippingFee: orderAll[choosenData].shippingFee,
+                        paymentMethod: orderAll[choosenData].paymentMethod.id,
+                        totalPayment: orderAll[choosenData].totalPayment,
+                        orderStatus: orderStatusAll[statusId].id
+                    })
+                );
+                fetch("http://localhost:8081/api/order/update",{
+                    // Adding method type 
+                    method: "POST", 
+                    body: JSON.stringify({ 
+                        id: orderAll[choosenData].id, 
+                        customer: orderAll[choosenData].customer.id,
+                        dateOrder: orderAll[choosenData].dateOrder.split('T')[0],
+                        deliveryAddress: orderAll[choosenData].deliveryAddress,
+                        totalPrice: orderAll[choosenData].totalPrice,
+                        totalWeight: orderAll[choosenData].totalWeight,
+                        shippingFee: orderAll[choosenData].shippingFee,
+                        paymentMethod: orderAll[choosenData].paymentMethod.id,
+                        totalPayment: orderAll[choosenData].totalPayment,
+                        orderStatus: orderStatusAll[statusId].id
+                    }),              
+                    // Adding headers to the request 
+                    headers: { 
+                        "Content-type" : "application/json; charset=UTF-8",
+                        "Authorization" : "Basic "+token
+                    } 
+                })
+                .then(response => response.json())
+                .then(result => {
+                    showData();   
+                }).catch(err => {
+                    errorStat = err.name === 'AbortError'? 1 : 2;
+                });
+            }
+
+            showData();
         </script>
         <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
