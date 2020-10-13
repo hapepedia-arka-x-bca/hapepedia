@@ -17,6 +17,7 @@ import bca.Hapepedia.entity.Order;
 import bca.Hapepedia.services.CustomerService;
 import bca.Hapepedia.services.OrderService;
 import bca.Hapepedia.services.OrderStatusService;
+import bca.Hapepedia.services.PaymentMethodService;
 
 @RestController
 @RequestMapping("/api/order")
@@ -27,6 +28,8 @@ public class OrderApiController {
 	private OrderStatusService orderStatusService;
     @Autowired
     private CustomerService customerService;
+    @Autowired
+    private PaymentMethodService paymentMethodService;
 
     @GetMapping
     public ResponseEntity<ResponseData> findAllOrder(){
@@ -57,6 +60,7 @@ public class OrderApiController {
             newOrder.setTotalPayment(orderForm.getTotalPayment());
             newOrder.setOrderStatus(orderStatusService.findById(orderForm.getOrderStatus()).get());
             newOrder.setCustomer(customerService.findById(orderForm.getCustomer()).get());
+            newOrder.setPaymentMethod(paymentMethodService.findById(orderForm.getPaymentMethod()).get());
             
 			response.setStatus(true);
 			response.getMessages().add("Order saved");

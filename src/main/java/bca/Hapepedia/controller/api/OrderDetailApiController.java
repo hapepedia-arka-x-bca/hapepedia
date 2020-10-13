@@ -16,7 +16,7 @@ import bca.Hapepedia.dto.ResponseData;
 import bca.Hapepedia.entity.OrderDetail;
 import bca.Hapepedia.services.OrderDetailService;
 import bca.Hapepedia.services.OrderService;
-import bca.Hapepedia.services.ProductService;
+import bca.Hapepedia.services.ProductDetailService;
 
 @RestController
 @RequestMapping("/api/orderDetail")
@@ -26,22 +26,7 @@ public class OrderDetailApiController {
     @Autowired
 	private OrderService orderService;
     @Autowired
-    private ProductService productService;
-
-    @GetMapping(value = "/show/{idOrder}")
-    public ResponseEntity<ResponseData> findAllOrder(@PathVariable("idOrder") int idOrder){
-        ResponseData response = new ResponseData();
-		try {
-			response.setStatus(true);
-			response.getMessages().add("Order detail loaded");
-			response.setPayload(orderDetailService.findAllByOrder(idOrder));
-			return ResponseEntity.ok(response);
-		}catch(Exception ex) {
-			response.setStatus(false);
-			response.getMessages().add("Could not load order detail: "+ ex.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
-		}
-    }
+    private ProductDetailService productDetailService;
 
     @PostMapping("/add")
     public ResponseEntity<ResponseData> addOrder(@RequestBody OrderDetailForm orderDetailForm){
@@ -50,7 +35,7 @@ public class OrderDetailApiController {
             OrderDetail newOrderDetail = new OrderDetail();
             
             newOrderDetail.setOrder(orderService.findById(orderDetailForm.getOrderId()).get());
-            newOrderDetail.setProduct(productService.findById(orderDetailForm.getOrderId()).get());
+            newOrderDetail.setProductDetail(productDetailService.findById(orderDetailForm.getProductDetailId()).get());
             newOrderDetail.setQuantity(orderDetailForm.getQuantity());
             
 			response.setStatus(true);
@@ -70,8 +55,8 @@ public class OrderDetailApiController {
 		try {
             OrderDetail newOrderDetail = new OrderDetail();
             
-            newOrderDetail.setOrder(orderService.findById(orderDetailForm.getOrderId()).get());
-            newOrderDetail.setProduct(productService.findById(orderDetailForm.getOrderId()).get());
+			newOrderDetail.setOrder(orderService.findById(orderDetailForm.getOrderId()).get());
+            newOrderDetail.setProductDetail(productDetailService.findById(orderDetailForm.getProductDetailId()).get());
             newOrderDetail.setQuantity(orderDetailForm.getQuantity());
             
                         
@@ -87,7 +72,7 @@ public class OrderDetailApiController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<ResponseData> deleteOrder(@PathVariable("id") int idOrder){
+    public ResponseEntity<ResponseData> deleteOrder(@PathVariable("id") Long idOrder){
         ResponseData response = new ResponseData();
 		try {
             
@@ -102,4 +87,19 @@ public class OrderDetailApiController {
 		}
     }
 
+	@GetMapping("/show/{id}")
+    public ResponseEntity<ResponseData> findAllOrder(@PathVariable("id") Long idOrder){
+        ResponseData response = new ResponseData();
+		try {
+			
+			response.setStatus(true);
+			response.getMessages().add("Order detail loaded");
+			response.setPayload(orderDetailService.findAllByOrder(orderService.findById(idOrder).get()));
+			return ResponseEntity.ok(response);
+		}catch(Exception ex) {
+			response.setStatus(false);
+			response.getMessages().add("Could not load order detail: "+ ex.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+		}
+    }
 }
