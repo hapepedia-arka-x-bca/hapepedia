@@ -79,6 +79,7 @@ public class OrderApiController {
 		try {
             Order newOrder = new Order();
             
+            newOrder.setId(orderForm.getId());
             newOrder.setDateOrder(orderForm.getDateOrder());
             newOrder.setDeliveryAddress(orderForm.getDeliveryAddress());
             newOrder.setTotalPrice(orderForm.getTotalPrice());

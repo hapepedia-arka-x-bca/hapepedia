@@ -1,6 +1,7 @@
 package bca.Hapepedia.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -34,6 +35,12 @@ public class VarianService {
     {
         Pageable pageable = PageRequest.of(pageNumber, 10);
         return varianRepo.findAll(pageable).getContent();
+    }
+
+    public Optional<Varian> findById(Integer id)
+    {
+        
+        return varianRepo.findById(id);
     }
 
     public Iterable<Varian> findAllByCategory (long categoryId)
