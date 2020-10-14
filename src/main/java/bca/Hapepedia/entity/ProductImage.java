@@ -24,7 +24,7 @@ public class ProductImage {
 	private Product product;
 
 	@Column(nullable = false)
-	private boolean isPrimary;
+	private boolean main;
 
 	public Long getId() {
 		return id;
@@ -51,11 +51,11 @@ public class ProductImage {
 	}
 
 	public boolean isPrimary() {
-		return isPrimary;
+		return main;
 	}
 
 	public void setPrimary(boolean isPrimary) {
-		this.isPrimary = isPrimary;
+		this.main = isPrimary;
 	}
 
 }
