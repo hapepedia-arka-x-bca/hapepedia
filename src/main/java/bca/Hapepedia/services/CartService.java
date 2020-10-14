@@ -1,5 +1,7 @@
 package bca.Hapepedia.services;
 
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +18,8 @@ public class CartService {
 	@Autowired
 	private CartRepo cartRepo;
 	
-	public Iterable<Cart> findAllByCustomer (Long customerId) {
-		return cartRepo.findAllByCustomer(customerId);
+	public Iterable<Cart> findAllByCustomer (Optional<Customer> optional) {
+		return cartRepo.findAllByCustomer(optional);
 	}
 	
 	public Cart save(Cart cart) {

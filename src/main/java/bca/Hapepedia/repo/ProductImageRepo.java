@@ -3,7 +3,6 @@ package bca.Hapepedia.repo;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-import bca.Hapepedia.dto.ShowcaseDto;
 import bca.Hapepedia.entity.ProductImage;
 
 public interface ProductImageRepo extends PagingAndSortingRepository<ProductImage, Long>{
