@@ -1,10 +1,15 @@
 package bca.Hapepedia.services;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
+
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import bca.Hapepedia.entity.Order;
 import bca.Hapepedia.entity.OrderDetail;
 import bca.Hapepedia.repo.OrderDetailRepo;
 
@@ -19,12 +24,17 @@ public class OrderDetailService {
       return orderDetailRepo.save(orderdetail);
     }
 
-    public Iterable<OrderDetail> findAllByOrder(int orderId)
+    public List<OrderDetail> findAllByOrder(Order order)
     {
-        return orderDetailRepo.findAllByOrder(orderId);
+        return orderDetailRepo.findAllByOrder(order);
     }
 
-    public boolean delete(int id) {
+    public Optional<OrderDetail> findById(Long idOrder)
+    {
+        return orderDetailRepo.findById(idOrder);
+    }
+
+    public boolean delete(Long id) {
       orderDetailRepo.deleteById(id);
       return true;
     }

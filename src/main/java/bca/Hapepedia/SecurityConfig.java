@@ -36,15 +36,19 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 		http.addFilterBefore(new CorsConfig(), ChannelProcessingFilter.class);
 		
 		http.authorizeRequests()
-
-			//  .antMatchers("/**").permitAll()
+			//.antMatchers("/**").permitAll()
 			.antMatchers(HttpMethod.POST, "/api/admin/login").permitAll()
 			.antMatchers(HttpMethod.POST, "/api/customer/login").permitAll()
 			.antMatchers(HttpMethod.POST, "/api/customer/registration").permitAll()
 			
-			.antMatchers(HttpMethod.GET, "/api/product").permitAll()
-			
 			// .antMatchers(HttpMethod.GET, "/api/**").authenticated()
+			.antMatchers(HttpMethod.GET, "/api/product/show/**").permitAll()
+			.antMatchers(HttpMethod.GET, "/api/productDetail/product/**").permitAll()
+			.antMatchers(HttpMethod.GET, "/api/product/**").permitAll()
+			.antMatchers(HttpMethod.GET, "/api/customer/").hasAnyAuthority("USER", "ADMIN")
+			.antMatchers(HttpMethod.GET, "/api/cart/*").permitAll()
+			.antMatchers(HttpMethod.GET, "/api/**").authenticated()
+
 			.antMatchers(HttpMethod.POST, "/api/**").authenticated()
 			.antMatchers("/actuator/**").permitAll()
 			.anyRequest().permitAll()

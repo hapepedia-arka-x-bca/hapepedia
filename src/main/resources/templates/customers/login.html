@@ -2,27 +2,27 @@
 <html lang="zxx">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Ashion Template">
-    <meta name="keywords" content="Ashion, unica, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Hapepedia</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Ashion Template">
+  <meta name="keywords" content="Ashion, unica, creative, html">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Hapepedia</title>
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
     rel="stylesheet">
 
-    <!-- Css Styles -->
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
-    <link rel="stylesheet" th:href="@{/css/elegant-icons.css}">
-    <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}">
-    <link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
-    <link rel="stylesheet" th:href="@{/css/slicknav.min.css}">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+  <!-- Css Styles -->
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+  <link rel="stylesheet" th:href="@{/css/elegant-icons.css}">
+  <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}">
+  <link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
+  <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+  <link rel="stylesheet" th:href="@{/css/slicknav.min.css}">
+  <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body style="width: 100%; background: linear-gradient(to right, rgb(94, 145, 253),rgb(0, 98, 226)); padding-top: 10%;">
@@ -30,99 +30,99 @@
   <div class="container">
     <div class="row">
       <div class="lg-4 md-6 sm-12" style="background: white; border-radius: 5px; padding: 10px;">
-          <form class="px-4 py-3">
-            <h4 style="padding: 30px; text-align: center;">Login</h4>
-            <div class="form-group">
-              <label for="formEmail">Email address</label>
-              <input type="email" class="form-control" id="formEmail" placeholder="email@example.com">
-            </div>
-            <div class="form-group">
-              <label for="formPassword">Password</label>
-              <input type="password" class="form-control" id="formPassword" placeholder="Password">
-            </div>
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="dropdownCheck">
-              <label class="form-check-label" for="dropdownCheck">
-                Remember me
-              </label>
-            </div>
-            <div onclick="login()" class="btn btn-primary">Sign in</div>
-          </form>
-          <div class="alert alert-danger" role="alert" style="display: none;" id="wrongAlert"></div>
-          <div class="alert alert-success" role="alert" style="display: none;" id="successAlert"></div>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="/registration">New around here? Sign up</a>
-          <a class="dropdown-item" href="#">Forgot password?</a>
+        <form class="px-4 py-3">
+          <h4 style="padding: 30px; text-align: center;">Login</h4>
+          <div class="form-group">
+            <label for="formEmail">Email address</label>
+            <input type="email" class="form-control" id="formEmail" placeholder="email@example.com">
+          </div>
+          <div class="form-group">
+            <label for="formPassword">Password</label>
+            <input type="password" class="form-control" id="formPassword" placeholder="Password">
+          </div>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="dropdownCheck">
+            <label class="form-check-label" for="dropdownCheck">
+              Remember me
+            </label>
+          </div>
+          <div onclick="login()" class="btn btn-primary">Sign in</div>
+        </form>
+        <div class="alert alert-danger" role="alert" style="display: none;" id="wrongAlert"></div>
+        <div class="alert alert-success" role="alert" style="display: none;" id="successAlert"></div>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/registration">New around here? Sign up</a>
+        <a class="dropdown-item" href="#">Forgot password?</a>
       </div>
     </div>
   </div>
-    
-<!-- Js Plugins -->
-<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
-<script th:src="@{/js/bootstrap.min.js}"></script>
-<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
-<script th:src="@{/js/jquery-ui.min.js}"></script>
-<script th:src="@{/js/mixitup.min.js}"></script>
-<script th:src="@{/js/jquery.countdown.min.js}"></script>
-<script th:src="@{/js/jquery.slicknav.js}"></script>
-<script th:src="@{/js/owl.carousel.min.js}"></script>
-<script th:src="@{/js/jquery.nicescroll.min.js}"></script>
-<script th:src="@{/js/main.js}"></script>
 
-<script>
-  function login (){
-    var email = document.getElementById("formEmail").value;
-    var password = document.getElementById("formPassword").value;
+  <!-- Js Plugins -->
+  <script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+  <script th:src="@{/js/bootstrap.min.js}"></script>
+  <script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+  <script th:src="@{/js/jquery-ui.min.js}"></script>
+  <script th:src="@{/js/mixitup.min.js}"></script>
+  <script th:src="@{/js/jquery.countdown.min.js}"></script>
+  <script th:src="@{/js/jquery.slicknav.js}"></script>
+  <script th:src="@{/js/owl.carousel.min.js}"></script>
+  <script th:src="@{/js/jquery.nicescroll.min.js}"></script>
+  <script th:src="@{/js/main.js}"></script>
 
-    // console.log(email+" "+password);
-    fetch("http://localhost:8081/api/customer/login",{
-       // Adding method type 
-      method: "POST", 
-      
-      // Adding body or contents to send 
-      body: JSON.stringify({ 
-          email: email, 
+  <script>
+    function login() {
+      var email = document.getElementById("formEmail").value;
+      var password = document.getElementById("formPassword").value;
+
+      // console.log(email+" "+password);
+      fetch("http://localhost:8081/api/customer/login", {
+        // Adding method type 
+        method: "POST",
+
+        // Adding body or contents to send 
+        body: JSON.stringify({
+          email: email,
           password: password
-      }), 
-        
-      // Adding headers to the request 
-      headers: { 
+        }),
+
+        // Adding headers to the request 
+        headers: {
           "Content-type": "application/json; charset=UTF-8"
-      } 
-    })
-    .then(response => response.json())
-    .then(result => {
-        console.log(result);
-        if(result.status===true){
-          document.getElementById("successAlert").innerHTML="Login Succes";
-          document.getElementById("wrongAlert").style.display="none";
-          document.getElementById("successAlert").style.display="block";
-          var userData = result.payload.data;
-          localStorage.setItem("token", userData.token);
-          localStorage.setItem("iduser", userData.id);
-          localStorage.setItem("name", userData.name);
-          localStorage.setItem("email", userData.email);
-          localStorage.setItem("roles", userData.roles);
-          window.location.href = "./";
-          // console.log(localStorage.getItem('email'));
         }
-        else{
-          document.getElementById("wrongAlert").innerHTML=result.messages;
-          document.getElementById("successAlert").style.display="none";
-          document.getElementById("wrongAlert").style.display="block";
-          
-          // console.log(localStorage.getItem('email'));
-        }
+      })
+        .then(response => response.json())
+        .then(result => {
+          console.log(result);
+          if (result.status === true) {
+            document.getElementById("successAlert").innerHTML = "Login Succes";
+            document.getElementById("wrongAlert").style.display = "none";
+            document.getElementById("successAlert").style.display = "block";
+            var userData = result.payload;
+            localStorage.setItem("token", userData.token);
+            localStorage.setItem("iduser", userData.data.id);
+            localStorage.setItem("name", userData.data.name);
+            localStorage.setItem("email", userData.data.email);
+            localStorage.setItem("roles", userData.data.roles);
+            window.location.href = "./";
+            // console.log(localStorage.getItem('email'));
+          }
+          else {
+            document.getElementById("wrongAlert").innerHTML = result.messages;
+            document.getElementById("successAlert").style.display = "none";
+            document.getElementById("wrongAlert").style.display = "block";
 
-    }).catch(err => {
-        errorStat = err.name === 'AbortError'? 1 : 2;
-    });
+            // console.log(localStorage.getItem('email'));
+          }
 
-    
-    
-  }
+        }).catch(err => {
+          errorStat = err.name === 'AbortError' ? 1 : 2;
+        });
 
-</script>
+
+
+    }
+
+  </script>
 </body>
 
 </html>

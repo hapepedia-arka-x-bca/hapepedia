@@ -1,6 +1,7 @@
 package bca.Hapepedia.repo;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -16,6 +17,8 @@ public interface ProductRepo extends PagingAndSortingRepository<Product, Long>{
 	public List<Product> findAllByName(@Param("name") String name, Pageable pageable);
 	
 	public Iterable<Product> findAllByCategory(Category category);
+
+	public Optional<Product> findById(Long id);
 	
 	public Iterable<Product> findAllByBrand(Brand brand);
 }

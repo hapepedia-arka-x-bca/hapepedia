@@ -9,6 +9,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,10 +60,46 @@ public class ProductApiController {
         }
     }
 
-    // @GetMapping("/showcase")
-    // {
 
-    // }
+    @GetMapping("show/{id}")
+    public ResponseEntity<ResponseData> findById(@PathVariable("id") Long id)
+    {
+        ResponseData response = new ResponseData();
+        try
+        {
+            response.setStatus(true);
+            response.getMessages().add("Products found");
+            response.setPayload(productService.findById(id));
+            return ResponseEntity.ok(response);
+        }
+
+        catch(Exception ex)
+        {
+            response.setStatus(false);
+            response.getMessages().add("Could not load products: " + ex.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
+    }
+
+    @GetMapping("category/{id}")
+    public ResponseEntity<ResponseData> findByCategory(@PathVariable("id") Long id)
+    {
+        ResponseData response = new ResponseData();
+        try
+        {
+            response.setStatus(true);
+            response.getMessages().add("Products found");
+            response.setPayload(productService.findAllByCategory(categoryService.findById(id).get()));
+            return ResponseEntity.ok(response);
+        }
+
+        catch(Exception ex)
+        {
+            response.setStatus(false);
+            response.getMessages().add("Could not load products: " + ex.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
+    }
 
     @PostMapping
     public ResponseEntity<ResponseData> save(@Valid @RequestBody ProductForm productForm, Errors errors)

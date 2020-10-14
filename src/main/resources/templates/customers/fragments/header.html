@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="zxx">
-    <head>
+
+<head th:fragment="head">
     <meta charset="UTF-8">
     <meta charset="UTF-8">
     <meta name="description" content="Ashion Template">
@@ -11,7 +12,8 @@
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
 
     <!-- Css Styles -->
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
@@ -22,16 +24,20 @@
     <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
     <link rel="stylesheet" th:href="@{/css/slicknav.min.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
+        crossorigin="anonymous" />
 </head>
+
 <body>
-	<div th:fragment="customersHeader">
-		<!-- Page Preloder -->
+    <div th:fragment="customersHeader">
+        <!-- Page Preloder -->
         <div id="preloder">
             <div class="loader"></div>
         </div>
-    
-        
+
+
 
         <!-- Offcanvas Menu Begin -->
         <div class="offcanvas-menu-overlay"></div>
@@ -40,14 +46,14 @@
             <ul class="offcanvas__widget">
                 <li><span class="icon_search search-switch"></span></li>
                 <li><a href="#"><span class="icon_heart_alt"></span>
-                    <div class="tip">2</div>
-                </a></li>
+                        <div class="tip">2</div>
+                    </a></li>
                 <li><a href="#"><span class="icon_bag_alt"></span>
-                    <div class="tip">2</div>
-                </a></li>
+                        <div class="tip">2</div>
+                    </a></li>
                 <li><a href="#"><span class="icon_archive_alt"></span>
-                    <div class="tip">2</div>
-                </a></li>
+                        <div class="tip">2</div>
+                    </a></li>
             </ul>
             <div class="offcanvas__logo">
                 <a href="./"><img th:src="@{/img/logo.png}" alt=""></a>
@@ -59,7 +65,7 @@
             </div>
         </div>
         <!-- Offcanvas Menu End -->
-    
+
         <!-- Header Section Begin -->
         <header class="header">
             <div class="container-fluid">
@@ -70,35 +76,38 @@
                         </div>
                     </div>
                     <div class="col-xl-6 col-lg-7 ">
-                        
+
                     </div>
                     <div class="col-lg-3">
                         <div class="header__right">
                             <div class="header__right__auth">
                                 <span  id="loginBtnSide">
-                                    <a href="#">Login</a>
-                                    <a href="#">Register</a>
+                                    <a href="./login">Login</a>
+                                    <a href="./registration">Register</a>
                                 </span>
                             </div>
                             <ul class="header__right__widget">
                                 <li><span class="icon_search search-switch"></span></li>
                                 <li><a href="./wishlist"><span class="icon_heart_alt"></span>
-                                    <div class="tip" id="wishlistTip">2</div>
-                                </a></li>
-                                <li><a href="./cart"><span class="icon_bag_alt"></span>
-                                    <div class="tip" id="cartTip">2</div>
-                                </a></li>
+                                        <div class="tip" id="wishlistTip">2</div>
+                                    </a></li>
+                                <li><a id="cart" href=""><span class="icon_bag_alt"></span>
+                                        <div class="tip" id="cartTip">2</div>
+                                    </a></li>
                                 <li>
                                     <div class="dropdown">
-                                        <a href="#" class="dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <a href="#" class="dropdown-toggle" role="button" id="dropdownMenuLink"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <span class="icon_profile"></span>
                                         </a>
-                                        <div class="dropdown-menu " aria-labelledby="dropdownMenuLink" style="margin-left: -200px;">
+                                        <div class="dropdown-menu " aria-labelledby="dropdownMenuLink"
+                                            style="margin-left: -200px;">
                                             <a class="dropdown-item" href="./order">Order</a>
                                             <a class="dropdown-item" href="./transaction">Transaction</a>
                                             <a class="dropdown-item" href="./setting">Setting</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#" onclick="logout()" id="logoutBtn">Logout</a>
+                                            <a class="dropdown-item" href="#" onclick="logout()"
+                                                id="logoutBtn">Logout</a>
                                         </div>
                                     </div>
                                 </li>
@@ -112,7 +121,7 @@
             </div>
         </header>
         <!-- Header Section End -->
-        
+
         <!-- Search Begin -->
         <div class="search-model">
             <div class="h-100 d-flex align-items-center justify-content-center">
@@ -125,7 +134,7 @@
         <!-- Search End -->
 
         <!-- Js Plugins -->
-        
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.0.4/popper.js"></script>
@@ -139,19 +148,24 @@
         <script th:src="@{/js/main.js}"></script>
         <script>
             var token = localStorage.getItem('token');
+            var id = localStorage.getItem('iduser');
             if (token !== null) {
-                document.getElementById("loginBtn").style.display="none";
-                document.getElementById("loginBtnSide").style.display="none";
-                document.getElementById("logoutBtn").style.display="block";
+                document.getElementById("loginBtn").style.display = "none";
+                document.getElementById("loginBtnSide").style.display = "none";
+                document.getElementById("logoutBtn").style.display = "block";
+                var cartButton = document.getElementById("cart");
+                cartButton.setAttribute("href", `./cart`);
+                
             } else {
-                document.getElementById("loginBtn").style.display="block";
-                document.getElementById("loginBtnSide").style.display="block";
-                document.getElementById("logoutBtn").style.display="none";
+                document.getElementById("loginBtn").style.display = "block";
+                document.getElementById("loginBtnSide").style.display = "block";
+                document.getElementById("logoutBtn").style.display = "none";
+                var cartButton = document.getElementById("cart");
+                cartButton.setAttribute("href", "./login");
             }
 
 
-
-            function logout(){
+            function logout() {
                 localStorage.removeItem("token");
                 localStorage.removeItem("iduser");
                 localStorage.removeItem("name");
@@ -160,8 +174,9 @@
                 window.location.href = "./";
             }
         </script>
-        
+
     </div>
 
 </body>
-</html>   
+
+</html>
