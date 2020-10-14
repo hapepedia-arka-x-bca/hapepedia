@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,7 +47,7 @@ public class CustomerApiController {
                 if (customer.getPassword().equals(MD5Generator.generate(loginForm.getPassword()))) {
                     customer.getPassword();
                     ResponseLogin responseLogin = new ResponseLogin();
-                    String baseStr = customer.getEmail() + ":" + customer.getPassword();
+                    String baseStr = customer.getEmail() + ":" + MD5Generator.generate(customer.getPassword());
                     String token = Base64.getEncoder().encodeToString(baseStr.getBytes());
                     responseLogin.setRole("USER");
                     responseLogin.setData(customer);
@@ -109,7 +110,7 @@ public class CustomerApiController {
         }
 
     }
-
+  
     @GetMapping("/get/{id}")
     public ResponseEntity<ResponseData> findByIdCustomer(@PathVariable("id") Long id) {
         ResponseData response = new ResponseData();
@@ -166,9 +167,8 @@ public class CustomerApiController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
     }
-
-    @GetMapping("/delete/{id}")
-    public ResponseEntity<ResponseData> deletePaymentMethod(@PathVariable("id") Long id) {
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<ResponseData> deletePaymentMethod(@PathVariable("id") Long id){
         ResponseData response = new ResponseData();
         try {
             response.setStatus(true);

@@ -12,11 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import bca.Hapepedia.dto.CategoryForm;
-import bca.Hapepedia.dto.DeleteForm;
 import bca.Hapepedia.dto.ResponseData;
 import bca.Hapepedia.entity.Category;
 import bca.Hapepedia.services.CategoryService;

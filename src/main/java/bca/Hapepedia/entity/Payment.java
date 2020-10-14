@@ -1,32 +1,30 @@
 package bca.Hapepedia.entity;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_orderdetail")
-public class OrderDetail {
+@Table(name="tb_payment")
+public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne
-    ProductDetail productDetail;
-
-    @ManyToOne
     Order order;
 
-    @Column(length = 2)
-    int quantity;
+    @Column
+    private Timestamp paymentDate;
 
-    public OrderDetail() {
-    }
+    @Column
+    private String status;
 
     public Long getId() {
         return id;
@@ -34,14 +32,6 @@ public class OrderDetail {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public ProductDetail getProductDetail() {
-        return productDetail;
-    }
-
-    public void setProductDetail(ProductDetail productDetail) {
-        this.productDetail = productDetail;
     }
 
     public Order getOrder() {
@@ -52,11 +42,11 @@ public class OrderDetail {
         this.order = order;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public String getStatus() {
+        return status;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
