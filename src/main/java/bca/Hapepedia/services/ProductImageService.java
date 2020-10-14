@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import bca.Hapepedia.dto.ShowcaseDto;
 import bca.Hapepedia.entity.ProductImage;
 import bca.Hapepedia.repo.ProductImageRepo;
 
@@ -18,6 +19,11 @@ public class ProductImageService {
 	
 	public Iterable<ProductImage> findAllByProductId(Long productId) {
 		return productImageRepo.findAllByProductId(productId);
+	}
+
+	public Iterable<ProductImage> productShowcase()
+	{
+		return productImageRepo.productShowcase();
 	}
 	
 	public Optional<ProductImage> findById(Long id) {
