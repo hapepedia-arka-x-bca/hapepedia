@@ -16,7 +16,7 @@ public class CartService {
 	@Autowired
 	private CartRepo cartRepo;
 	
-	public Iterable<Cart> findAllByCustomer (Customer customer) {
+	public Iterable<Cart> findAllByCustomer (Long customer) {
 		return cartRepo.findAllByCustomer(customer);
 	}
 	
