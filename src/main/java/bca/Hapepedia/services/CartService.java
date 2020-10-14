@@ -19,8 +19,7 @@ public class CartService {
 	private CartRepo cartRepo;
 
 	public Iterable<Cart> findAllByCustomer (Optional<Customer> optional) {
-		return cartRepo.findAllByCustomer(optional);
-	}
+		return cartRepo.findAllByCustomer(optional);}
 	
 	public Cart save(Cart cart) {
 		return cartRepo.save(cart);
