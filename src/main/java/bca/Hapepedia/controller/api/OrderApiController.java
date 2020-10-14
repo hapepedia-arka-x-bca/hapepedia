@@ -46,6 +46,21 @@ public class OrderApiController {
 		}
     }
 
+    @GetMapping("show/{id}")
+    public ResponseEntity<ResponseData> findById(@PathVariable("id") Long id){
+        ResponseData response = new ResponseData();
+		try {
+			response.setStatus(true);
+			response.getMessages().add("Order loaded");
+			response.setPayload(orderService.findById(id));
+			return ResponseEntity.ok(response);
+		}catch(Exception ex) {
+			response.setStatus(false);
+			response.getMessages().add("Could not load order: "+ ex.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+		}
+    }
+
     @PostMapping("/add")
     public ResponseEntity<ResponseData> addOrder(@RequestBody OrderForm orderForm){
         ResponseData response = new ResponseData();
