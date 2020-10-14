@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - Hapepedia</title>
+</head>
+<body>
+    <script>
+        var url = window.location.href.split("?");
+        var responData = url[url.length-1];
+        var responCode = responData.split("status_code=")[1].split("&")[0];
+        var dataOrder;
+        console.log(responCode);
+        // fetch("http://localhost:8081/api/order/show/"+idOrder,{
+        //     // Adding method type 
+        //     method: "GET", 
+                            
+        //     // Adding headers to the request 
+        //     headers: { 
+        //         "Content-type" : "application/json; charset=UTF-8",
+        //         // "Authorization" : "Basic "+token
+        //     } 
+        // })
+        // .then(response => response.json())
+        // .then(result => {
+            
+        //     dataRespon = result.payload;
+        //     dataOrder = JSON.stringify({ 
+        //         payment_type: "bank_transfer",
+        //         transaction_details: {
+        //             order_id: idOrder,
+        //             gross_amount: dataRespon.totalPayment,
+        //             date_order : dataRespon.dateOrder,
+        //             customer : dataRespon.customer.name
+        //         }
+        //     });
+        //     console.log(dataOrder);
+        //     gotoMidtrans();
+        // }).catch(err => {
+        //     errorStat = err.name === 'AbortError'? 1 : 2;
+        // });
+
+        
+    </script>
+</body>
+</html>

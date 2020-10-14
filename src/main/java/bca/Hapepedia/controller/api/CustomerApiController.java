@@ -47,7 +47,7 @@ public class CustomerApiController {
                 if (customer.getPassword().equals(MD5Generator.generate(loginForm.getPassword()))) {
                     customer.getPassword();
                     ResponseLogin responseLogin = new ResponseLogin();
-                    String baseStr = customer.getEmail() + ":" + MD5Generator.generate(customer.getPassword());
+                    String baseStr = customer.getEmail() + ":" + MD5Generator.generate(loginForm.getPassword());
                     String token = Base64.getEncoder().encodeToString(baseStr.getBytes());
                     responseLogin.setRole("USER");
                     responseLogin.setData(customer);
