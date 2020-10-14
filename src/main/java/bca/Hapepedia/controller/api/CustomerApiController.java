@@ -202,7 +202,7 @@ public class CustomerApiController {
 	{
 	    final String uri = "https://api.rajaongkir.com/starter/province";
 	 
-	    //TODO: Autowire the RestTemplate in all the examples
+	    
 	    RestTemplate restTemplate = new RestTemplate();
 	    HttpHeaders headers = new HttpHeaders();
 	    //headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));

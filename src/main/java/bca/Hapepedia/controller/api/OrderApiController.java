@@ -113,6 +113,25 @@ public class OrderApiController {
 			response.getMessages().add("Could not load order: "+ ex.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 		}
+	}
+	
+	@GetMapping("/paymentSuccess/{id}")
+    public ResponseEntity<ResponseData> updateStatus(@PathVariable("id") Long id){
+        ResponseData response = new ResponseData();
+		try {
+			Order newOrder = new Order();
+			newOrder = orderService.findById(id).get();
+			newOrder.setOrderStatus(orderStatusService.findById(1).get());
+
+			response.setStatus(true);
+			response.getMessages().add("Order Success");
+			response.setPayload(orderService.save(newOrder));
+			return ResponseEntity.ok(response);
+		}catch(Exception ex) {
+			response.setStatus(false);
+			response.getMessages().add("Could not load order: "+ ex.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+		}
     }
 
     @DeleteMapping("/delete/{id}")

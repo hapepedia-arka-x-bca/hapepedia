@@ -6,6 +6,8 @@
     <title>Payment - Hapepedia</title>
 </head>
 <body>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>
         var url = window.location.href.split("?");
         var idOrder = url[url.length-1];
@@ -17,7 +19,7 @@
                             
             // Adding headers to the request 
             headers: { 
-                "Content-type" : "application/json; charset=UTF-8",
+                "Content-Type" : "application/json",
                 // "Authorization" : "Basic "+token
             } 
         })
@@ -40,27 +42,7 @@
             errorStat = err.name === 'AbortError'? 1 : 2;
         });
 
-        function gotoMidtrans(){
-            fetch("https://app.sandbox.midtrans.com/snap/v1/transactions",{
-                // Adding method type 
-                method: "POST", 
-                // Adding body or contents to send 
-                body: dataOrder,              
-                // Adding headers to the request 
-                mode: 'no-cors', // 'cors' by default
-                headers: { 
-                    "Content-Type" : "application/json",
-                    "Accept" : "application/json",
-                    "Authorization" : "Basic U0ItTWlkLXNlcnZlci1fS2tUa0RZQWVtUU5QMzR5Rk9STkxiblo6"
-                } 
-            })
-            .then(response => response.json())
-            .then(result => {
-                console.log(result);
-            }).catch(err => {
-                errorStat = err.name === 'AbortError'? 1 : 2;
-            });
-        }
+        
     </script>
 </body>
 </html>
