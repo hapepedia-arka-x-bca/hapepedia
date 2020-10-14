@@ -19,6 +19,7 @@ import bca.Hapepedia.dto.ProductDetailForm;
 import bca.Hapepedia.dto.ResponseData;
 import bca.Hapepedia.entity.ProductDetail;
 import bca.Hapepedia.services.ColorService;
+import bca.Hapepedia.services.OrderService;
 import bca.Hapepedia.services.ProductDetailService;
 import bca.Hapepedia.services.ProductService;
 import bca.Hapepedia.services.VarianService;
@@ -37,6 +38,9 @@ public class ProductDetailApiController {
     
     @Autowired
     private VarianService varianService;
+    
+    @Autowired
+    private OrderService orderService;
 
     
 
@@ -49,6 +53,27 @@ public class ProductDetailApiController {
             response.setStatus(true);
             response.getMessages().add("Product Details found");
             response.setPayload(productDetailService.findById(id));
+
+            return ResponseEntity.ok(response);
+        }
+
+        catch(Exception ex)
+        {
+            response.setStatus(false);
+            response.getMessages().add("Could not load product Details: " + ex.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
+    }
+
+    @GetMapping("/product/{id}")
+    public ResponseEntity<ResponseData> findByProduct(@PathVariable("id") Long id)
+    {
+        ResponseData response = new ResponseData();
+        try
+        {
+            response.setStatus(true);
+            response.getMessages().add("Product Details found");
+            response.setPayload(productDetailService.findByProduct(productService.findById(id).get()));
 
             return ResponseEntity.ok(response);
         }
