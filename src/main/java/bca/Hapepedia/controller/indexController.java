@@ -1,12 +1,19 @@
 package bca.Hapepedia.controller;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import bca.Hapepedia.services.CustomerService;
+
 @Controller
 @RequestMapping("/")
 public class indexController {
+
+	@Autowired
+	private CustomerService customerService;
    	
 	@GetMapping
 	public String index(Model model) {
@@ -68,4 +75,10 @@ public class indexController {
 		return "admins/register";
 	}	
 	
+	@GetMapping("/profile")
+	public String category(Model model, Authentication authentication) {
+//		model.addAttribute("customerForm", customerService.);
+		System.out.println(authentication);
+		return "customers/profile";
+	}
 }

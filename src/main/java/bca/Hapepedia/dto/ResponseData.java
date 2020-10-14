@@ -6,7 +6,9 @@ import java.util.List;
 public class ResponseData {
 
 	private boolean status;
+	
 	private List<String> messages = new ArrayList<String>();
+	
 	private Object payload;
 	
 	public boolean isStatus() {
