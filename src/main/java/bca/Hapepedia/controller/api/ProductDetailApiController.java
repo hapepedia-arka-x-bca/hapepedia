@@ -39,8 +39,6 @@ public class ProductDetailApiController {
     @Autowired
     private VarianService varianService;
     
-    @Autowired
-    private OrderService orderService;
 
     
 
