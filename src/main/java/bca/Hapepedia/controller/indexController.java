@@ -1,15 +1,34 @@
 package bca.Hapepedia.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
+import bca.Hapepedia.services.ProductImageService;
+import bca.Hapepedia.services.ProductService;
+
+import bca.Hapepedia.services.CustomerService;
+
+
+
 @Controller
 @RequestMapping("/")
 public class indexController {
-   	
+
+	@Autowired
+	private ProductService productService;
+
+	@Autowired
+	private ProductImageService productImageService;
+
+	@Autowired
+	private CustomerService customerService;
+
 	@GetMapping
 	public String index(Model model) {
 		return "customers/index";
@@ -17,6 +36,7 @@ public class indexController {
 
 	@RequestMapping("/shop")
 	public String shop(Model model) {
+		model.addAttribute("listOfProduct", productImageService.findByMainTrue());
 		return "customers/shop";
 	}
 

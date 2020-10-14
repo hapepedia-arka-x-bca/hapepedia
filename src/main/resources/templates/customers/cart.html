@@ -55,63 +55,12 @@
                                     <th>Product</th>
                                     <th>Price</th>
                                     <th>Quantity</th>
-                                    <th>Total</th>
-                                    <th></th>
+                                    <!-- <th>Total</th> -->
+                                    <!-- <th></th> -->
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="cart__product__item">
-                                        <img src="img/shop-cart/cp-1.jpg" alt="">
-                                        <div class="cart__product__item__title">
-                                            <h6>Chain bucket bag</h6>
-                                            
-                                        </div>
-                                    </td>
-                                    <td class="cart__price">$ 150.0</td>
-                                    <td class="cart__quantity">
-                                        <div class="pro-qty">
-                                            <input type="text" value="1">
-                                        </div>
-                                    </td>
-                                    <td class="cart__total">$ 300.0</td>
-                                    <td class="cart__close"><span class="icon_close"></span></td>
-                                </tr>
-                                <tr>
-                                    <td class="cart__product__item">
-                                        <img src="img/shop-cart/cp-2.jpg" alt="">
-                                        <div class="cart__product__item__title">
-                                            <h6>Zip-pockets pebbled tote briefcase</h6>
-                                            
-                                        </div>
-                                    </td>
-                                    <td class="cart__price">$ 170.0</td>
-                                    <td class="cart__quantity">
-                                        <div class="pro-qty">
-                                            <input type="text" value="1">
-                                        </div>
-                                    </td>
-                                    <td class="cart__total">$ 170.0</td>
-                                    <td class="cart__close"><span class="icon_close"></span></td>
-                                </tr>
-                                <tr>
-                                    <td class="cart__product__item">
-                                        <img src="img/shop-cart/cp-3.jpg" alt="">
-                                        <div class="cart__product__item__title">
-                                            <h6>Black jean</h6>
-                                            
-                                        </div>
-                                    </td>
-                                    <td class="cart__price">$ 85.0</td>
-                                    <td class="cart__quantity">
-                                        <div class="pro-qty">
-                                            <input type="text" value="1">
-                                        </div>
-                                    </td>
-                                    <td class="cart__total">$ 170.0</td>
-                                    <td class="cart__close"><span class="icon_close"></span></td>
-                                </tr>
-                                <tr>
+                            <tbody id="cartContainer">
+                                <!-- <tr>
                                     <td class="cart__product__item">
                                         <img src="img/shop-cart/cp-4.jpg" alt="">
                                         <div class="cart__product__item__title">
@@ -119,7 +68,7 @@
                                             
                                         </div>
                                     </td>
-                                    <td class="cart__price">$ 55.0</td>
+                                    <td class="cart__price" id="cartPrice"></td>
                                     <td class="cart__quantity">
                                         <div class="pro-qty">
                                             <input type="text" value="1">
@@ -127,7 +76,7 @@
                                     </td>
                                     <td class="cart__total">$ 110.0</td>
                                     <td class="cart__close"><span class="icon_close"></span></td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         </table>
                     </div>
@@ -159,6 +108,55 @@
 
     <div th:replace="customers/fragments/footer::customersFooter"></div>
 
+    <script>
+        var id = localStorage.getItem('iduser');
+  
+        function getCart()
+        {          
+         fetch("http://localhost:8081/api/cart/"+id,{
+                // Adding method type 
+                method: "GET", 
+                                
+                // Adding headers to the request 
+                headers: { 
+                    "Content-type" : "application/json; charset=UTF-8",
+                    // "Authorization" : "Basic "+token
+                } 
+            })
+            .then(response => response.json())
+            .then(result => {
+                console.log(result.payload);
+                var dataCart = result.payload;
+                var container = document.getElementById("cartContainer");
+                var item = "";
+                dataCart.forEach(product => {
+                  
+                 item = item + `
+                   <tr>
+                                    <td class="cart__product__item">
+                                        <div class="cart__product__item__title">
+                                            <h6>${product.productDetail.product.name}</h6>
+                                            ${product.productDetail.varian.name}, ${product.productDetail.color.name}
+                                        </div>
+                                    </td>
+                                    <td class="cart__price" id="cartPrice">Rp${product.productDetail.price}</td>
+                                    <td class="cart__quantity">
+                                        ${product.quantity}
+                                    </td>
+                                    
+                                </tr>
+                                `;
+                                
+                });
+                container.innerHTML = item;
+            }).catch(err => {
+                // errorStat = err.name === 'AbortError'? 1 : 2;
+                alert("error fetching data");
+            });
+        }
+
+        getCart();
+    </script>
     <!-- Js Plugins -->
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -170,6 +168,8 @@
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/jquery.nicescroll.min.js"></script>
     <script src="js/main.js"></script>
+
+   
 </body>
 
 </html>
