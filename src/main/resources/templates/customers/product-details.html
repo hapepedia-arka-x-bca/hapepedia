@@ -87,10 +87,10 @@
                             <div class="quantity">
                                 <span>Quantity:</span>
                                 <div class="pro-qty">
-                                    <input type="text" value="1">
+                                    <input id="quantityForm" type="text" value="1">
                                 </div>
                             </div>
-                            <a href="./cart" class="cart-btn"><span class="icon_bag_alt"></span> Add to cart</a>
+                            <div onclick="addCart()" class="cart-btn"><span class="icon_bag_alt"></span> Add to cart</div>
                             <ul>
                                 <li><a href="./wishlist"><span class="icon_heart_alt"></span></a></li>
                             </ul>
@@ -131,6 +131,7 @@
         var url = window.location.href.split("?");
         var idProduct = url[url.length-1];
         var detailData;
+        var choosenData;
         // console.log(idProduct);
 
         function showData(){
@@ -146,7 +147,7 @@
             })
             .then(response => response.json())
             .then(result => {
-                console.log(result.payload);
+                // console.log(result.payload);
                 var dataProduct = result.payload;
                 document.getElementById("navNameForm").innerHTML=dataProduct.name;
                 document.getElementById("nameForm").innerHTML=dataProduct.name;
@@ -207,6 +208,7 @@
         }
 
         function showDetail(id){
+            choosenData=id;
             var detailText=`
                 <ul>
                     <li> color : `+detailData[id].color.name+` </li>
@@ -218,6 +220,61 @@
             `;
 
             document.getElementById("deskripsiForm").innerHTML=detailText;
+        }
+
+        function addCart(){
+            var idDetail = detailData[choosenData].id;
+            
+            var token = localStorage.getItem('token');
+            
+            if (token !== null) {
+                var iduser = localStorage.getItem('iduser');
+                var quantity = document.getElementById("quantityForm").value;
+                console.log(iduser+" "+token+" "+quantity);
+                // console.log(email+" "+password);
+                fetch("http://localhost:8081/api/cart/add", {
+                    // Adding method type 
+                    method: "POST",
+                    headers: { 
+                        "Content-type" : "application/json; charset=UTF-8",
+                        "Authorization" : "Basic "+token
+                    },
+                    // Adding body or contents to send 
+                    body: JSON.stringify({
+                        customerId: iduser,
+                        productDetailId: idDetail,
+                        quantity: quantity,
+                    }),
+
+                    // Adding headers to the request 
+                    headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                    }
+                })
+                .then(response => response.json())
+                .then(result => {
+                    console.log(result);
+                if (result.status === true) {
+                    window.location.href = "./cart";
+                    // console.log(localStorage.getItem('email'));
+                }
+                else {
+                    document.getElementById("wrongAlert").innerHTML = result.messages;
+                    document.getElementById("successAlert").style.display = "none";
+                    document.getElementById("wrongAlert").style.display = "block";
+
+                    // console.log(localStorage.getItem('email'));
+                }
+
+                }).catch(err => {
+                    errorStat = err.name === 'AbortError' ? 1 : 2;
+                });
+            }
+            else{
+                window.location.href = "./login";
+            }
+
+
         }
 
         function showRecomendation(id){
@@ -233,7 +290,7 @@
             })
             .then(response => response.json())
             .then(result => {
-                console.log(result.payload);
+                // console.log(result.payload);
                 var recomData = result.payload;
                 var recomField="";
 
