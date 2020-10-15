@@ -28,7 +28,7 @@
             .then(response => response.json())
             .then(result => {
                 console.log("finish");
-                // window.location.href="http://localhost:8081/transaction"
+                window.location.href="http://localhost:8081/transaction"
             }).catch(err => {
                 errorStat = err.name === 'AbortError'? 1 : 2;
             });
