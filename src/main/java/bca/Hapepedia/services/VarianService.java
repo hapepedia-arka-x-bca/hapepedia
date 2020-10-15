@@ -25,7 +25,7 @@ public class VarianService {
         return varianRepo.save(varian);
     }
 
-    public boolean delete(int id)
+    public boolean delete(Long id)
     {
         varianRepo.deleteById(id);
         return true;
@@ -37,7 +37,7 @@ public class VarianService {
         return varianRepo.findAll(pageable).getContent();
     }
 
-    public Optional<Varian> findById(Integer id)
+    public Optional<Varian> findById(Long id)
     {
         
         return varianRepo.findById(id);
@@ -46,5 +46,9 @@ public class VarianService {
     public Iterable<Varian> findAllByCategory (long categoryId)
     {
         return varianRepo.findByCategoryId(categoryId);
+    }
+    
+    public Iterable<Varian> findAll(){
+    	return varianRepo.findAll();
     }
 }

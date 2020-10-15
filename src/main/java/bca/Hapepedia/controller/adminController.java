@@ -84,6 +84,11 @@ public class adminController {
 	public String color(Model model) {
 		return "admins/addColor";
 	}
+	
+	@GetMapping("/varian")
+	public String varian(Model model) {
+		return "admins/addVarian";
+	}
 
 	@GetMapping("/product")
 	public String product(Model model) {
