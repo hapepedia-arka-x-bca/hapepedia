@@ -1,23 +1,24 @@
 package bca.Hapepedia.dto;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 public class ProductDetailForm {
 	private Long id;
 
-	@NotEmpty(message = "Product is required.")
+	// @NotEmpty(message = "Product is required.")
 	private Long product;
 
-	@NotEmpty(message = "Product Color is required.")
+	// @NotEmpty(message = "Product Color is required.")
 	private Long color;
 
-	@NotEmpty(message = "Product Varian is required.")
+	// @NotEmpty(message = "Product Varian is required.")
 	private Integer varian;
-	
-	@NotEmpty(message = "Product Stock is required.")
+
+	// @NotEmpty(message = "Product Stock is required.")
 	private Long Stock;
-	
-	@NotEmpty(message = "Product Price is required.")
+
+	// @NotNull(message = "Product Price is required.")
 	private Double price;
 
 	public Long getId() {
@@ -68,7 +69,4 @@ public class ProductDetailForm {
 		this.price = price;
 	}
 
-
-	
-	
 }

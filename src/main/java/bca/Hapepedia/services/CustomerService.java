@@ -60,16 +60,6 @@ public class CustomerService implements UserDetailsService{
 			return new Customer(customer, roles);
 		}
     }
-
-//    public Customer login(String email,String password){
-//        Customer customer = customerRepo.findByEmail(email);
-//
-//        if(customer.getPassword().equals(password))
-//            return customer;
-//        
-//        else
-//            return null;
-//    }
     
     public Customer login(String email, String password) {
 		Customer customer = customerRepo.findByEmail(email);

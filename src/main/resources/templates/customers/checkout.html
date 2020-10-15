@@ -1,28 +1,7 @@
 <!DOCTYPE html>
 <html lang="zxx">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Ashion Template">
-    <meta name="keywords" content="Ashion, unica, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Hapepedia</title>
-
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
-
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+<head th:replace="customers/fragments/header::head">
 </head>
 
 <body>
@@ -46,150 +25,249 @@
     <!-- Checkout Section Begin -->
     <section class="checkout spad">
         <div class="container">
-            
+
             <form action="#" class="checkout__form">
                 <div class="row">
                     <div class="col-lg-8">
                         <h5>Billing detail</h5>
                         <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="checkout__form__input">
-                                    <p>First Name <span>*</span></p>
-                                    <input type="text">
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="checkout__form__input">
-                                    <p>Last Name <span>*</span></p>
-                                    <input type="text">
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="checkout__form__input">
-                                    <p>Country <span>*</span></p>
-                                    <input type="text">
-                                </div>
-                                <div class="checkout__form__input">
-                                    <p>Address <span>*</span></p>
-                                    <input type="text" placeholder="Street Address">
-                                    <input type="text" placeholder="Apartment. suite, unite ect ( optinal )">
-                                </div>
-                                <div class="checkout__form__input">
-                                    <p>Town/City <span>*</span></p>
-                                    <input type="text">
-                                </div>
-                                <div class="checkout__form__input">
-                                    <p>Country/State <span>*</span></p>
-                                    <input type="text">
-                                </div>
-                                <div class="checkout__form__input">
-                                    <p>Postcode/Zip <span>*</span></p>
-                                    <input type="text">
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="checkout__form__input">
-                                    <p>Phone <span>*</span></p>
-                                    <input type="text">
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="checkout__form__input">
-                                    <p>Email <span>*</span></p>
-                                    <input type="text">
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="checkout__form__checkbox">
-                                    <label for="acc">
-                                        Create an acount?
-                                        <input type="checkbox" id="acc">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <p>Create am acount by entering the information below. If you are a returing
-                                        customer login at the <br />top of the page</p>
+                            <div class="col-md-12 mb-3">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Please Choose Address</h4>
                                     </div>
-                                    <div class="checkout__form__input">
-                                        <p>Account Password <span>*</span></p>
-                                        <input type="text">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table id="dataTable" class="table table-hover table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Id</th>
+                                                        <th>Recipient</th>
+                                                        <th>Address Detail</th>
+                                                        <th>Postal Code</th>
+                                                        <th>City</th>
+                                                        <th>Province</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- /.table-responsive -->
                                     </div>
-                                    <div class="checkout__form__checkbox">
-                                        <label for="note">
-                                            Note about your order, e.g, special noe for delivery
-                                            <input type="checkbox" id="note">
-                                            <span class="checkmark"></span>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="col-md-12">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="receiverName">
+                                            Receiver Name
                                         </label>
+                                        <input type="text" class="form-control" name="receiverName" id="receiverName"
+                                            disabled>
                                     </div>
-                                    <div class="checkout__form__input">
-                                        <p>Oder notes <span>*</span></p>
-                                        <input type="text"
-                                        placeholder="Note about your order, e.g, special noe for delivery">
+                                    <div class="form-group col-md-6">
+                                        <label for="postalCode">
+                                            Postal Code
+                                        </label>
+                                        <input type="text" class="form-control" name="postalCode" id="postalCode"
+                                            disabled>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="checkout__order">
-                                <h5>Your order</h5>
-                                <div class="checkout__order__product">
-                                    <ul>
-                                        <li>
-                                            <span class="top__text">Product</span>
-                                            <span class="top__text__right">Total</span>
-                                        </li>
-                                        <li>01. Chain buck bag <span>$ 300.0</span></li>
-                                        <li>02. Zip-pockets pebbled<br /> tote briefcase <span>$ 170.0</span></li>
-                                        <li>03. Black jean <span>$ 170.0</span></li>
-                                        <li>04. Cotton shirt <span>$ 110.0</span></li>
-                                    </ul>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label for="addressDetail">
+                                            Address Detail
+                                        </label>
+                                        <input type="email" class="form-control" name="addressDetail" id="addressDetail"
+                                            disabled>
+                                    </div>
                                 </div>
-                                <div class="checkout__order__total">
-                                    <ul>
-                                        <li>Subtotal <span>$ 750.0</span></li>
-                                        <li>Total <span>$ 750.0</span></li>
-                                    </ul>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="shippingFee">Shipping Courier</label>
+                                        <select class="custom-select" id="shippingFee">
+                                            <option selected disabled>Shipping Fee</option>
+                                            <option value="10000">JNE Reguler - 100000</option>
+                                            <option value="15000">JNE Yes - 15000</option>
+                                            <option value="10000">JNT Reguler - 10000</option>
+                                            <option value="14000">JNT Super - 14000</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="checkout__order__widget">
-                                    <label for="o-acc">
-                                        Create an acount?
-                                        <input type="checkbox" id="o-acc">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <p>Create am acount by entering the information below. If you are a returing customer
-                                    login at the top of the page.</p>
-                                    <label for="check-payment">
-                                        Cheque payment
-                                        <input type="checkbox" id="check-payment">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <label for="paypal">
-                                        PayPal
-                                        <input type="checkbox" id="paypal">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                                <button type="submit" class="site-btn">Place oder</button>
                             </div>
                         </div>
                     </div>
-                </form>
-            </div>
-        </section>
-        <!-- Checkout Section End -->
+                    <div class="col-lg-4">
+                        <div class="checkout__order">
+                            <h5>Your order</h5>
+                            <div class="checkout__order__product">
+                                <ul id="cart-list">
+                                    <li>
+                                        <span class="top__text">Product</span>
+                                        <span class="top__text__right">Total</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="checkout__order__total">
+                                <ul>
+                                    <li>Subtotal <span id="totalPrice">0</span></li>
+                                    <li>Total (+Payment) <span id="totalPayment">0</span></li>
+                                </ul>
+                            </div>
+                            <!-- <div class="checkout__order__widget">
+                                <label for="o-acc">
+                                    Create an acount?
+                                    <input type="checkbox" id="o-acc">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <p>Create am acount by entering the information below. If you are a returing customer
+                                    login at the top of the page.</p>
+                                <label for="check-payment">
+                                    Cheque payment
+                                    <input type="checkbox" id="check-payment">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label for="paypal">
+                                    PayPal
+                                    <input type="checkbox" id="paypal">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div> -->
+                            <button type="button" id="checkoutButton" class="site-btn">Checkout</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    <!-- Checkout Section End -->
 
-        <div th:replace="customers/fragments/footer::customersFooter"></div>
+    <div th:replace="customers/fragments/footer::customersFooter"></div>
 
-        <!-- Js Plugins -->
-        <script src="js/jquery-3.3.1.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/jquery.magnific-popup.min.js"></script>
-        <script src="js/jquery-ui.min.js"></script>
-        <script src="js/mixitup.min.js"></script>
-        <script src="js/jquery.countdown.min.js"></script>
-        <script src="js/jquery.slicknav.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/jquery.nicescroll.min.js"></script>
-        <script src="js/main.js"></script>
-    </body>
+    <!-- Js Plugins -->
+    <div th:replace="customers/fragments/footer::templateScript"></div>
 
-    </html>
+    <script>
+        var table;
+        var token = localStorage.getItem('token');
+
+        $(document).ready(function () {
+            table = $('#dataTable').DataTable({
+                "processing": false,
+                "serverSide": false,
+                ajax: {
+                    dataSrc: "payload",
+                    url: 'http://127.0.0.1:8081/api/address/getbyloggedin',
+                    type: "GET",
+                    dataType: 'json',
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Authorization", "Basic " + token);
+                    },
+                },
+                columns: [
+                    { data: 'id', title: 'ID' },
+                    { data: 'receiverName' },
+                    { data: 'addressDetail' },
+                    { data: 'postalCode' },
+                    { data: 'city.name' },
+                    { data: 'province.name' },
+                    {
+                        data: 'id',
+                        render: function (data, type, row) {
+                            return `<div class="btn-toolbar btn-toolbar-sm btn-block">
+                                <span>
+                                    <a href="javascript:void(0)" class="btn btn-success mr-2" onclick="getAddressById('` + data + `');"><i class="fas fa-check"></i></a>
+                                </span>
+                            </div>`;
+                        }
+                    }
+                ]
+            })
+
+            $.ajax({
+                url: "http://127.0.0.1:8081/api/cart/getbyloggedin",
+                method: "GET",
+                contentType: "application/json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Basic " + token);
+                },
+                success: function (response) {
+                    if (response.status == true) {
+                        console.log(response.payload);
+                        var totalPrice = 0;
+                        $.each(response.payload, function (key, item) {
+                            $('#cart-list li:eq(0)').after('<li>' + item.productDetail.product.name + '<span>' + item.productDetail.price + '</span></li>');
+                            totalPrice = + item.productDetail.price * item.quantity;
+                        })
+                        $('#totalPrice').html(totalPrice);
+                    } else {
+                        console.log("Error1");
+                    }
+                },
+                error: function () {
+                    console.log("Error");
+                }
+            })
+        });
+
+        $('#shippingFee').on('change', function () {
+            var shippingFee = $(this).val();
+            var totalPrice = $('#totalPrice').text();
+            var totalPayment = parseInt(totalPrice) + parseInt(shippingFee);
+            $('#totalPayment').html(totalPayment);
+        })
+
+        function getAddressById(id) {
+            $.ajax({
+                url: "http://127.0.0.1:8081/api/address/get/" + id,
+                method: "GET",
+                data: { id: id },
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Basic " + token);
+                },
+                success: function (response) {
+                    $('#receiverName').val(null);
+                    $('#postalCode').val(null);
+                    $('#addressDetail').val(null);
+
+                    $('#receiverName').val(response.payload.receiverName);
+                    $('#postalCode').val(response.payload.postalCode);
+                    $('#addressDetail').val(response.payload.addressDetail);
+                },
+                error: function () {
+                    console.log("Error");
+                }
+            });
+        }
+
+        $('#checkoutButton').on('click', function () {
+            var shippingFee = $("#shippingFee").val();
+            var deliveryAddress = $("#addressDetail").val();
+            var address = {
+                shippingFee: shippingFee,
+                deliveryAddress: deliveryAddress
+            }
+            $.ajax({
+                url: "http://127.0.0.1:8081/api/order/checkout",
+                method: "POST",
+                data: JSON.stringify(address),
+                contentType: "application/json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Basic " + token);
+                },
+                success: function (response) {
+                    console.log(response);
+                    //MELAKUKAN SESUATU JIKA CHECKOUT BERHASIL
+                },
+                error: function () {
+                    console.log('Anda Gagal Melakukan Checkout!');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
