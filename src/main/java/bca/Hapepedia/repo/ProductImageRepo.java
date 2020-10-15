@@ -1,11 +1,6 @@
 package bca.Hapepedia.repo;
 
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import bca.Hapepedia.entity.ProductImage;
-
-public interface ProductImageRepo extends JpaRepository<ProductImage, Long>{
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import bca.Hapepedia.entity.Cart;
 import bca.Hapepedia.entity.Customer;
+import bca.Hapepedia.entity.ProductDetail;
 import bca.Hapepedia.repo.CartRepo;
 
 @Service("cartService")
@@ -20,6 +21,14 @@ public class CartService {
 
 	public Iterable<Cart> findAllByCustomer (Optional<Customer> optional) {
 		return cartRepo.findAllByCustomer(optional);}
+	
+	public Optional<Cart> findById (Long id) {
+		return cartRepo.findById(id);
+	}
+
+	public Optional<Cart> findByProductDetailandByCustomer (ProductDetail productDetail, Customer customer) {
+		return cartRepo.findByProductDetailAndCustomer(productDetail,customer);
+	}
 	
 	public Cart save(Cart cart) {
 		return cartRepo.save(cart);

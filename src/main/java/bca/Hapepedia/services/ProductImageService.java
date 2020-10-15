@@ -7,7 +7,6 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import bca.Hapepedia.dto.ShowcaseDto;
 import bca.Hapepedia.entity.ProductImage;
 import bca.Hapepedia.repo.ProductImageRepo;
 
