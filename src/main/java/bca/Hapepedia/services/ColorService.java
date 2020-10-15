@@ -32,13 +32,13 @@ public class ColorService {
         Pageable pageable = PageRequest.of(pageNumber, 10);
         return colorRepo.findAll(pageable).getContent();
     }
-    
-    public Iterable<Color> findAll(){
-    	return colorRepo.findAll();
+
+    public Iterable<Color> findAll() {
+        return colorRepo.findAll();
     }
-    
+
     public Optional<Color> findById(Long id) {
         return colorRepo.findById(id);
     }
-    
+
 }
