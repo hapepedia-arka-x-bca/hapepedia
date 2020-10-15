@@ -9,6 +9,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity
 @Table(name = "tb_product_image")
 public class ProductImage {
@@ -21,6 +24,7 @@ public class ProductImage {
 
 	@ManyToOne
 	@JoinColumn(name = "product_id", referencedColumnName = "id", nullable = false)
+	@Fetch(FetchMode.JOIN)
 	private Product product;
 
 	@Column(nullable = false)

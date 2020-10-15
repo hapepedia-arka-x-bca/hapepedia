@@ -24,10 +24,10 @@ public class ProductImageService {
 		return productImageRepo.findAllByProductId(productId);
 	}
 
-	public Iterable<ProductImage> productShowcase()
-	{
-		return productImageRepo.productShowcase();
-	}
+	// public Iterable<ShowcaseDto> productShowcase()
+	// {
+	// 	return productImageRepo.productShowcase();
+	// }
 	
 	public Optional<ProductImage> findById(Long id) {
 		return productImageRepo.findById(id);
