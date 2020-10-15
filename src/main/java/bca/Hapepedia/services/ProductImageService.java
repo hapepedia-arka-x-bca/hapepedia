@@ -16,8 +16,17 @@ public class ProductImageService {
 	@Autowired
 	private ProductImageRepo productImageRepo;
 	
+	public Iterable<ProductImage> findByMainTrue()
+	{
+		return productImageRepo.findByMainTrue();
+	}
 	public Iterable<ProductImage> findAllByProductId(Long productId) {
 		return productImageRepo.findAllByProductId(productId);
+	}
+
+	public Iterable<ProductImage> productShowcase()
+	{
+		return productImageRepo.productShowcase();
 	}
 	
 	public Optional<ProductImage> findById(Long id) {

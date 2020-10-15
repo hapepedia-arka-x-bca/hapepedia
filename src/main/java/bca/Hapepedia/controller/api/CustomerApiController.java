@@ -109,7 +109,7 @@ public class CustomerApiController {
         }
 
     }
-  
+
     @GetMapping("/get/{id}")
     public ResponseEntity<ResponseData> findByIdCustomer(@PathVariable("id") Long id) {
         ResponseData response = new ResponseData();
@@ -166,8 +166,9 @@ public class CustomerApiController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
     }
+
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<ResponseData> deletePaymentMethod(@PathVariable("id") Long id){
+    public ResponseEntity<ResponseData> deletePaymentMethod(@PathVariable("id") Long id) {
         ResponseData response = new ResponseData();
         try {
             response.setStatus(true);
@@ -195,24 +196,23 @@ public class CustomerApiController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
-    
+
     @GetMapping("/test")
-	private void getProvince()
-	{
-	    final String uri = "https://api.rajaongkir.com/starter/province";
-	 
-	    //TODO: Autowire the RestTemplate in all the examples
-	    RestTemplate restTemplate = new RestTemplate();
-	    HttpHeaders headers = new HttpHeaders();
-	    //headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-	    headers.add("key", "1ab8572578c4527ba67572631ff8dd05");
+    private void getProvince() {
+        final String uri = "https://api.rajaongkir.com/starter/province";
 
-	    HttpEntity<String> entity = new HttpEntity<>("body", headers);
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        // headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.add("key", "1ab8572578c4527ba67572631ff8dd05");
 
-	    ResponseEntity<String> result = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
-	 
-	    //String result = restTemplate..getForObject(uri, HttpMethod.GET, entity, String.class);
-	    System.out.println(result);
-	}
+        HttpEntity<String> entity = new HttpEntity<>("body", headers);
+
+        ResponseEntity<String> result = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
+
+        // String result = restTemplate..getForObject(uri, HttpMethod.GET, entity,
+        // String.class);
+        System.out.println(result);
+    }
 
 }

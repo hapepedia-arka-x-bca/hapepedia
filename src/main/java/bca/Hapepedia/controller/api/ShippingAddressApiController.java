@@ -14,12 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
-import bca.Hapepedia.dto.CategoryForm;
 import bca.Hapepedia.dto.ResponseData;
 import bca.Hapepedia.dto.ShippingAddressForm;
-import bca.Hapepedia.entity.Category;
 import bca.Hapepedia.entity.City;
 import bca.Hapepedia.entity.Customer;
 import bca.Hapepedia.entity.Province;
