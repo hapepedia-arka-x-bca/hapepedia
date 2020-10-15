@@ -92,7 +92,7 @@ public class OrderService {
     	orderTemp.setDeliveryAddress(orderForm.getDeliveryAddress());//orderform
     	orderTemp.setShippingFee(shippingFee);
 
-    	orderTemp.setOrderStatus(orderStatusRepo.findById(1).get());
+    	orderTemp.setOrderStatus(orderStatusRepo.findById(0).get());
     	orderTemp.setTotalPrice(totalPrice);
     	orderTemp.setTotalWeight(totalWeight);
     	

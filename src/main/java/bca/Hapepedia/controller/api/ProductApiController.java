@@ -47,6 +47,7 @@ public class ProductApiController {
         {
             response.setStatus(true);
             response.getMessages().add("Products found");
+
             response.setPayload(productImageService.findByMainTrue());
 
             return ResponseEntity.ok(response);

@@ -1,7 +1,5 @@
 package bca.Hapepedia.dto;
 
-import javax.validation.constraints.NotEmpty;
-
 public class WishlistForm {
 	private Long id;
 	
