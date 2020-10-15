@@ -8,23 +8,31 @@ public class OrderForm {
 
     private Long id;
     
-    @NotEmpty(message="Code is required")
+    //@NotEmpty(message="Code is required")
 	private Long customer;
-	@NotEmpty(message="Code is required")
+	
+	//@NotEmpty(message="Code is required")
 	private Timestamp dateOrder;
-	@NotEmpty(message="Code is required")
+	
+	//@NotEmpty(message="Code is required")
 	private String deliveryAddress;
-	@NotEmpty(message="Code is required")
+	
+	//@NotEmpty(message="Code is required")
 	private Double totalPrice;
-	@NotEmpty(message="Code is required")
+	
+	//@NotEmpty(message="Code is required")
 	private Double totalWeight;
-	@NotEmpty(message="Code is required")
+	
+	//@NotEmpty(message="Code is required")
 	private Double shippingFee;
-	@NotEmpty(message="Code is required")
+	
+	//@NotEmpty(message="Code is required")
 	private Long paymentMethod;
-	@NotEmpty(message="Code is required")
+	
+	//@NotEmpty(message="Code is required")
 	private Double totalPayment;
-	@NotEmpty(message="Code is required")
+	
+	//@NotEmpty(message="Code is required")
     private int orderStatus;
 
     public Long getId() {

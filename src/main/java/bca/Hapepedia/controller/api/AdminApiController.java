@@ -41,7 +41,7 @@ public class AdminApiController {
             Admin admin = adminService.findByEmail(loginForm.getEmail());
 
             if (admin != null) {
-                if (admin.getPassword().equals(loginForm.getPassword())) {
+                if (admin.getPassword().equals(MD5Generator.generate(loginForm.getPassword()))) {
                     ResponseLogin responseLogin = new ResponseLogin();
                     String baseStr = admin.getEmail() + ":" + admin.getPassword();
                     String token = Base64.getEncoder().encodeToString(baseStr.getBytes());
@@ -98,9 +98,9 @@ public class AdminApiController {
     public ResponseEntity<ResponseData> registraton(@Valid @RequestBody AdminForm adminForm) {
         ResponseData response = new ResponseData();
         try {
-            Admin customer = adminService.findByEmail(adminForm.getEmail());
+            Admin admin = adminService.findByEmail(adminForm.getEmail());
 
-            if (customer == null) {
+            if (admin == null) {
                 Admin newAdmin = new Admin();
 
                 newAdmin.setName(adminForm.getName());

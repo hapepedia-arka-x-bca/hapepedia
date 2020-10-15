@@ -22,6 +22,10 @@ public class CartService {
 	public Iterable<Cart> findAllByCustomer (Optional<Customer> optional) {
 		return cartRepo.findAllByCustomer(optional);}
 	
+	public Iterable<Cart> findAllByCustomer (Customer customer) {
+		return cartRepo.findAllByCustomer(customer);
+	}
+	
 	public Optional<Cart> findById (Long id) {
 		return cartRepo.findById(id);
 	}

@@ -41,6 +41,21 @@ public class ShippingAddressApiController {
 	@Autowired
 	private ProvinceService provinceService;
 	
+	@GetMapping("/get/{id}")
+	public ResponseEntity<ResponseData> findById(@PathVariable("id") Long id) {
+		ResponseData response = new ResponseData();
+		try {
+			response.setStatus(true);
+			response.getMessages().add("Address found");
+			response.setPayload(shippingAddressService.findById(id));
+			return ResponseEntity.ok(response);
+		} catch (Exception ex) {
+			response.setStatus(false);
+			response.getMessages().add("Could not load address: " + ex.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+		}
+	}
+	
 	@GetMapping("/getbyloggedin")
 	public ResponseEntity<ResponseData> findByLoggedInCustomer(Authentication authentication) {
 		ResponseData response = new ResponseData();
