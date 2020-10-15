@@ -1,4 +1,5 @@
 package bca.Hapepedia.dto;
+
 public class ProductDetailForm {
 	private Long id;
 
@@ -9,10 +10,10 @@ public class ProductDetailForm {
 	private Long color;
 
 	// @NotEmpty(message = "Product Varian is required.")
-	private Integer varian;
+	private Long varian;
 
 	// @NotEmpty(message = "Product Stock is required.")
-	private Long Stock;
+	private Long stock;
 
 	// @NotNull(message = "Product Price is required.")
 	private Double price;
@@ -41,20 +42,20 @@ public class ProductDetailForm {
 		this.color = color;
 	}
 
-	public Integer getVarian() {
+	public Long getVarian() {
 		return varian;
 	}
 
-	public void setVarian(Integer varian) {
+	public void setVarian(Long varian) {
 		this.varian = varian;
 	}
 
 	public Long getStock() {
-		return Stock;
+		return stock;
 	}
 
 	public void setStock(Long stock) {
-		Stock = stock;
+		this.stock = stock;
 	}
 
 	public Double getPrice() {

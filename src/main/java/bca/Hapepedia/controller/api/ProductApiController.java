@@ -110,8 +110,8 @@ public class ProductApiController {
         {
             Product product = new Product();
             product.setId(productForm.getId());
-            product.setBrand(brandService.findById(productForm.getBrand_id()).get());
-            product.setCategory(categoryService.findById(productForm.getId_category()).get());//long
+            product.setBrand(brandService.findById(productForm.getBrandId()).get());
+            product.setCategory(categoryService.findById(productForm.getCategoryId()).get());//long
             product.setName(productForm.getName());
             product.setSpecification(productForm.getSpecification());
             product.setWeight(productForm.getWeight());

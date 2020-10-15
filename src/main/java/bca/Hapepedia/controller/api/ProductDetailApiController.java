@@ -96,7 +96,6 @@ public class ProductDetailApiController {
             productDetail.setVarian(varianService.findById(productDetailForm.getVarian()).get());
             productDetail.setStock(productDetailForm.getStock());
             productDetail.setPrice(productDetailForm.getPrice());
-            
 
             response = new ResponseData();
 			response.setStatus(true);
@@ -108,9 +107,9 @@ public class ProductDetailApiController {
 
         else
         {
+        	response.setStatus(false);
             for(ObjectError err:errors.getAllErrors())
             {
-                response.setStatus(false);
                 response.getMessages().add(err.getDefaultMessage());
             }
 

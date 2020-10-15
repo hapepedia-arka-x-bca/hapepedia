@@ -19,25 +19,26 @@ public class ColorService {
     @Autowired
     ColorRepo colorRepo;
 
-    public Color save(Color color)
-    {
+    public Color save(Color color) {
         return colorRepo.save(color);
     }
 
-    public boolean delete(Long id)
-    {
+    public boolean delete(Long id) {
         colorRepo.deleteById(id);
         return true;
     }
 
-    public List<Color> findAll(int pageNumber)
-    {
+    public List<Color> findAll(int pageNumber) {
         Pageable pageable = PageRequest.of(pageNumber, 10);
         return colorRepo.findAll(pageable).getContent();
     }
-    
-    public Optional<Color> findById(Long id)
-    {
+
+    public Iterable<Color> findAll() {
+        return colorRepo.findAll();
+    }
+
+    public Optional<Color> findById(Long id) {
         return colorRepo.findById(id);
     }
+
 }

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="admins/fragments/header::head"></head>
+
+<body class="sb-nav-fixed">
+
+    <div th:replace="admins/fragments/header::adminsHeader"></div>
+
+    <div id="layoutSidenav">
+        <div th:replace="admins/fragments/sidenav::adminsSidenav"></div>
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container my-3">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h3>Varian Management</h3>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">Varian</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <!-- BAGIAN INI AKAN MENG-HANDLE TABLE LIST VARIAN  -->
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Varian List</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div> <a href="" class="btn btn-dark" data-toggle="modal"
+                                            data-target="#addVarianModal">Add Varian</a>
+                                    </div>
+                                    <br>
+                                    <div class="table-responsive">
+                                        <table id="dataTable" class="table table-hover table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>id</th>
+                                                    <th>Varian</th>
+                                                    <th>Category</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- /.table-responsive -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- BAGIAN INI AKAN MENG-HANDLE TABLE LIST VARIAN  -->
+                    </div>
+                </div>
+            </main>
+            <div th:replace="admins/fragments/footer::adminsFooter"></div>
+        </div>
+    </div>
+
+    <!-- modal add new -->
+    <div class="modal fade" id="addVarianModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Varian</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- /.modal form body -->
+                    <form role="form" id="createVarianForm">
+
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="name">Varian Name</label>
+                                    <input type="text" id="name" class="form-control" name="name">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="categoryId">Category</label>
+                                    <select class="form-control" id="categoryId" name="categoryId">
+                                        <option value="">Choose Category</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- /.form-row -->
+                        </div>
+                        <!-- /.card-body -->
+                    </form>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button id="createVarian" type="button" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <!-- Modal For Deleting Varian -->
+    <div class="modal fade" id="deleteVarianModal">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Delete Varian</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="deleteId" name="id">
+                    <p>Are you sure want to delete this varian?</p>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
+                    <button id="deleteVarian" type="button" class="btn btn-primary">Ya</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <!-- modal edit -->
+    <div class="modal fade" id="editVarianModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Varian</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- /.modal form body -->
+                    <form role="form" id="editVarianForm">
+                        <input type="hidden" name="editId" id="editId">
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="editName">Varian Name</label>
+                                    <input type="text" id="editName" class="form-control" name="editName">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="editCategoryId">Category</label>
+                                    <select class="form-control" id="editCategoryId" name="editCategoryId">
+                                        <option value="">Choose Category</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </form>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button id="updateVarian" type="button" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <div th:include="admins/fragments/footer::templateScript"></div>
+
+    <script>
+        var table;
+        var token = localStorage.getItem('token');
+        var categorySelect = $('[name="categoryId"]');
+
+        $(document).ready(function () {
+            table = $('#dataTable').DataTable({
+                "processing": false,
+                "serverSide": false,
+                ajax: {
+                    dataSrc: "payload",
+                    url: 'http://127.0.0.1:8081/api/varian',
+                    type: "GET",
+                    dataType: 'json',
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Authorization", "Basic " + token);
+                    },
+                },
+                columns: [
+                    { data: 'id', title: 'ID' },
+                    { data: 'name' },
+                    { data: 'category.name' },
+                    {
+                        data: 'id',
+                        render: function (data, type, row) {
+                            return `<div class="btn-toolbar btn-toolbar-sm btn-block">
+                            <span>
+                                <a href="" class="btn btn-warning mr-2"
+                                    data-toggle="modal" data-target="#editVarianModal" onclick="getVarianById('` + data + `');"><i
+                                        class="fas fa-edit"></i></a>
+                            </span>
+                            <span>
+                                <a href="" class="btn btn-danger mr-2"
+                                    data-toggle="modal"
+                                    data-target="#deleteVarianModal"
+                                    onclick="setDeleteId('` + data + `');"><i
+                                        class="fas fa-trash"></i></a>
+                            </span>
+                        </div>`;
+                        }
+                    }
+                ]
+            })
+
+            getAllCategory();
+        });
+
+        $('#createVarian').on('click', function () {
+            var name = $("#name").val();
+            var categoryId = $("#categoryId").val();
+            var varian = {
+                name: name,
+                categoryId: categoryId
+            };
+            $.ajax({
+                url: "http://127.0.0.1:8081/api/varian/save",
+                method: "POST",
+                data: JSON.stringify(varian),
+                contentType: "application/json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Basic " + token);
+                },
+                success: function (response) {
+                    if (response.status == true) {
+                        $('#addVarianModal').modal('toggle');
+                        $('#name').val(null);
+                        $('#categoryId').val(null);
+                        alert("Insert data success!");
+                        table.ajax.reload();
+                    } else {
+                        console.log('Anda Gagal Menambahkan Data. Mohon Coba Kembali!');
+                    }
+                },
+                error: function () {
+                    console.log('Anda Gagal Menambahkan Data. Mohon Cobaaaa Kembali!');
+                }
+            });
+        });
+
+        function setDeleteId(id) {
+            $('#deleteId').val(id);
+        }
+
+        $('#deleteVarian').on('click', function () {
+            var id = $('#deleteId').val();
+            $.ajax({
+                url: "http://127.0.0.1:8081/api/varian/delete/" + id,
+                method: "POST",
+                contentType: "application/json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Basic " + token);
+                },
+                success: function (response) {
+                    if (response.status == true) {
+                        $('#deleteVarianModal').modal('toggle');
+                        table.ajax.reload();
+                        alert("Hapus sukses!");
+                    } else {
+                        console.log('Anda Gagal Menambahkan Data. Mohon Coba Kembali!');
+                    }
+                },
+                error: function (response) {
+                    console.log(response.message);
+                }
+            });
+        });
+
+        function getVarianById(id) {
+            getAllCategory();
+            $.ajax({
+                url: "http://127.0.0.1:8081/api/varian/get/" + id,
+                method: "GET",
+                data: { id: id },
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Basic " + token);
+                },
+                success: function (response) {
+                    $('#editId').val(null);
+                    $('#editName').val(null);
+
+                    $('#editId').val(response.payload.id);
+                    $('#editName').val(response.payload.name);
+                    $('#editCategoryId').val(response.payload.category.id);
+                },
+                error: function (response) {
+                    console.log(response.message);
+                }
+            });
+        }
+
+        $('#updateVarian').on('click', function () {
+            var id = $("#editId").val();
+            var name = $("#editName").val();
+            var categoryId = $("#editCategoryId").val();
+            var varian = {
+                id: id,
+                name: name,
+                categoryId: categoryId
+            };
+            $.ajax({
+                url: "http://127.0.0.1:8081/api/varian/save",
+                method: "POST",
+                data: JSON.stringify(varian),
+                contentType: "application/json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Basic " + token);
+                },
+                success: function (response) {
+                    if (response.status == true) {
+                        $('#editVarianModal').modal('toggle');
+                        table.ajax.reload();
+                    } else {
+                        console.log("Error1");
+                    }
+                },
+                error: function (response) {
+                    console.log(response.message);
+                }
+            });
+        });
+
+        function getAllCategory() {
+            $.ajax({
+                url: "http://127.0.0.1:8081/api/category",
+                type: "GET",
+                beforeSend: function (xhr) {
+                    categorySelect.html("<option> Loading ... </option>");
+                    xhr.setRequestHeader("Authorization", "Basic " + token);
+                },
+                success: function (response) {
+                    $('#categoryId').empty()
+                    $('#categoryId').append('<option value="">Choose Category</option>')
+                    $.each(response.payload, function (key, item) {
+                        $('#categoryId').append('<option value="' + item.id + '">' + item.name + '</option>')
+                    })
+                    $('#editCategoryId').empty()
+                    $('#editCategoryId').append('<option value="">Choose Category</option>')
+                    $.each(response.payload, function (key, item) {
+                        $('#editCategoryId').append('<option value="' + item.id + '">' + item.name + '</option>')
+                    })
+                },
+                error: function (response) {
+                    console.log(response.message);
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>

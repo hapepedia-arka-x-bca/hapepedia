@@ -54,7 +54,7 @@ public class adminController {
 
 	@GetMapping("/addProduct")
 	public String addProduct(Model model) {
-		return "admins/detailProduct";
+		return "admins/addProduct";
 	}
 
 	@GetMapping("/listadmin")
@@ -78,6 +78,16 @@ public class adminController {
 		model.addAttribute("listOfCategory", categoryService.findAll());
 		model.addAttribute("categoryForm", new CategoryForm());
 		return "admins/addCategory";
+	}
+	
+	@GetMapping("/color")
+	public String color(Model model) {
+		return "admins/addColor";
+	}
+	
+	@GetMapping("/varian")
+	public String varian(Model model) {
+		return "admins/addVarian";
 	}
 
 	@GetMapping("/product")

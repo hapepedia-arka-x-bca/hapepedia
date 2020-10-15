@@ -6,6 +6,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import bca.Hapepedia.entity.Varian;
 
-public interface VarianRepo extends PagingAndSortingRepository<Varian, Integer>{
-    public List<Varian> findByCategoryId(long categoryId);
+public interface VarianRepo extends PagingAndSortingRepository<Varian, Long>{
+    public List<Varian> findByCategoryId(Long categoryId);
 }

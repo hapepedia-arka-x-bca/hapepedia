@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="admins/fragments/header::head"></head>
+
+<body class="sb-nav-fixed">
+
+    <div th:replace="admins/fragments/header::adminsHeader"></div>
+
+    <div id="layoutSidenav">
+        <div th:replace="admins/fragments/sidenav::adminsSidenav"></div>
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container my-3">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h3>Product Management</h3>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="#">Product</a></li>
+                                <li class="breadcrumb-item active">Add Product</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <!-- BAGIAN INI AKAN MENG-HANDLE TABLE LIST CATEGORY  -->
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Add New Product</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="productName">
+                                                Product Name
+                                            </label>
+                                            <input type="text" class="form-control" name="productName" id="productName">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="productWeight">
+                                                Product weight (in Kg)
+                                            </label>
+                                            <input type="text" class="form-control" name="productWeight"
+                                                id="productWeight">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="brandId">Brand</label>
+                                            <select class="form-control" id="brandId" name="brandId">
+                                                <option value="">Choose Brand</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group col-md-6">
+                                            <label for="categoryId">Category</label>
+                                            <select class="form-control" id="categoryId" name="categoryId">
+                                                <option value="">Choose Category</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label for="productSpec">
+                                                Product Specification
+                                            </label>
+                                            <textarea class="form-control" id="productSpec" name="productSpec"
+                                                rows="3"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="card border-primary mb-3">
+                                        <div class="card-header card">
+                                            Product Detail
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="productStock_1">
+                                                        Stock
+                                                    </label>
+                                                    <input type="number" class="form-control" name="productStock_1"
+                                                        id="productStock_1">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="productPrice_1">
+                                                        Price
+                                                    </label>
+                                                    <input type="text" class="form-control" name="productPrice_1"
+                                                        id="productPrice_1">
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="colorId_1">Color</label>
+                                                    <select class="form-control" id="colorId_1" name="colorId_1">
+                                                        <option value="">Choose Color</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="varianId_1">Variant</label>
+                                                    <select class="form-control" id="varianId_1" name="varianId_1">
+                                                        <option value="">Choose Variant</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <button type="button" name="addVariant" id="addVariant"
+                                                class="btn btn-sm btn-success">Add New Product Variant <i
+                                                    class="fas fa-plus"></i></button>
+                                        </div>
+                                    </div>
+
+                                    <div id="productdetail-input-group">
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button type="button" id="createProduct" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- BAGIAN INI AKAN MENG-HANDLE TABLE LIST CATEGORY  -->
+                    </div>
+                </div>
+            </main>
+            <div th:replace="admins/fragments/footer::adminsFooter"></div>
+        </div>
+    </div>
+
+    <div th:include="admins/fragments/footer::templateScript"></div>
+
+    <script>
+        var token = localStorage.getItem('token');
+        var i = 1;
+
+        $(document).ready(function () {
+            getAllBrand();
+            getAllCategory();
+            getAllColor(i);
+            getAllVarian(i);
+        });
+
+        $('#addVariant').click(function () {
+            i++;
+
+            var cardProductDetail =
+                `<div class="card border-primary mb-3" id="card-row_` + i + `">
+                    <div class="card-header">
+                        New Product Detail
+                        <div class="float-right">
+                            <button type="button" name="remove" id="` + i + `"
+                                class="btn btn-sm btn-danger btn_remove">X</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="productStock_`+ i + `">
+                                    Stock
+                                </label>
+                                <input type="number" class="form-control" name="productStock_`+ i + `"
+                                    id="productStock_`+ i + `">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="productPrice_`+ i + `">
+                                    Price
+                                </label>
+                                <input type="text" class="form-control" name="productPrice_`+ i + `"
+                                    id="productPrice_`+ i + `">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="colorId_`+ i + `">Color</label>
+                                <select class="form-control" id="colorId_`+ i + `" name="colorId_` + i + `">
+                                    <option value="">Choose Color</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="varianId_`+ i + `">Variant</label>
+                                <select class="form-control" id="varianId_`+ i + `" name="varianId_` + i + `">
+                                    <option value="">Choose Variant</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+
+            $('#productdetail-input-group').append(cardProductDetail);
+            getAllColor(i);
+            getAllVarian(i);
+        });
+
+        $(document).on('click', '.btn_remove', function () {
+            var button_id = $(this).attr("id");
+            $('#card-row_' + button_id + '').remove();
+        });
+
+        $('#createProduct').on('click', function () {
+            var name = $("#productName").val();
+            var weight = $("#productWeight").val();
+            var brandId = $("#brandId").val();
+            var categoryId = $("#categoryId").val();
+            var specification = $("#productSpec").val();
+            var product = {
+                name: name,
+                weight: weight,
+                brandId: brandId,
+                categoryId: categoryId,
+                specification: specification
+            };
+            product.name = name;
+            $.ajax({
+                url: "http://127.0.0.1:8081/api/product",
+                method: "POST",
+                data: JSON.stringify(product),
+                contentType: "application/json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Basic " + token);
+                },
+                success: function (response) {
+                    if (response.status == true) {
+                        console.log("Input product success!")
+                        var data = response.payload;
+                        console.log(data);
+                        addProductDetail(data.id);
+                    } else {
+                        console.log('Anda Gagal Menambahkan Data. Mohon Coba Kembali!');
+                    }
+                },
+                error: function () {
+                    console.log('Anda Gagal Menambahkan Data. Mohon Cobaaaa Kembali!');
+                }
+            });
+        });
+
+        function addProductDetail(productId) {
+            for (let index = 1; index <= i; index++) {
+                var stock = $("#productStock_" + index).val();
+                if (stock != null) {
+                    var price = $("#productPrice_" + index).val();
+                    var colorId = $("#colorId_" + index).val();
+                    var varianId = $("#varianId_" + index).val();
+                    var product = {
+                        product: productId,
+                        stock: stock,
+                        price: price,
+                        color: colorId,
+                        varian: varianId
+                    };
+                    $.ajax({
+                        url: "http://127.0.0.1:8081/api/productDetail",
+                        method: "POST",
+                        data: JSON.stringify(product),
+                        contentType: "application/json",
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("Authorization", "Basic " + token);
+                        },
+                        success: function (response) {
+                            if (response.status == true) {
+                                console.log(response.payload);
+                            } else {
+                                console.log('Anda Gagal Menambahkan Data. Mohon Coba Kembali!');
+                            }
+                        },
+                        error: function (response) {
+                            console.log(response);
+                        }
+                    });
+                }
+            }
+            window.location.href = './product';
+        }
+
+        function getAllColor(id) {
+            $.ajax({
+                url: "http://127.0.0.1:8081/api/color",
+                type: "GET",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Basic " + token);
+                },
+                success: function (response) {
+                    $('#colorId_' + id).empty()
+                    $('#colorId_' + id).append('<option value="">Choose Color</option>')
+                    $.each(response.payload, function (key, item) {
+                        $('#colorId_' + id).append('<option value="' + item.id + '">' + item.name + '</option>')
+                    })
+                },
+                error: function (response) {
+                    console.log(response.message);
+                }
+            });
+        }
+
+        function getAllVarian(id) {
+            $.ajax({
+                url: "http://127.0.0.1:8081/api/varian",
+                type: "GET",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Basic " + token);
+                },
+                success: function (response) {
+                    $('#varianId_' + id).empty()
+                    $('#varianId_' + id).append('<option value="">Choose Varian</option>')
+                    $.each(response.payload, function (key, item) {
+                        $('#varianId_' + id).append('<option value="' + item.id + '"> (' + item.category.name + ') ' + item.name + '</option>')
+                    })
+                },
+                error: function (response) {
+                    console.log(response.message);
+                }
+            });
+        }
+
+        function getAllBrand() {
+            $.ajax({
+                url: "http://127.0.0.1:8081/api/brand",
+                type: "GET",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Basic " + token);
+                },
+                success: function (response) {
+                    $('#brandId').empty()
+                    $('#brandId').append('<option value="">Choose Brand</option>')
+                    $.each(response.payload, function (key, item) {
+                        $('#brandId').append('<option value="' + item.id + '">' + item.name + '</option>')
+                    })
+                },
+                error: function (response) {
+                    console.log(response.message);
+                }
+            });
+        }
+
+        function getAllCategory(id) {
+            $.ajax({
+                url: "http://127.0.0.1:8081/api/category",
+                type: "GET",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Basic " + token);
+                },
+                success: function (response) {
+                    $('#categoryId').empty()
+                    $('#categoryId').append('<option value="">Choose Category</option>')
+                    $.each(response.payload, function (key, item) {
+                        $('#categoryId').append('<option value="' + item.id + '">' + item.name + '</option>')
+                    })
+                },
+                error: function (response) {
+                    console.log(response.message);
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>
