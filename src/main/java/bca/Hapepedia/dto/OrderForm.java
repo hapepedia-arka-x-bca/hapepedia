@@ -2,7 +2,6 @@ package bca.Hapepedia.dto;
 
 import java.sql.Timestamp;
 
-import javax.validation.constraints.NotEmpty;
 
 public class OrderForm {
 

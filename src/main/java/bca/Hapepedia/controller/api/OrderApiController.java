@@ -1,8 +1,5 @@
 package bca.Hapepedia.controller.api;
 
-import java.sql.Timestamp;
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,10 +17,8 @@ import bca.Hapepedia.dto.ResponseData;
 import bca.Hapepedia.entity.Cart;
 import bca.Hapepedia.entity.Customer;
 import bca.Hapepedia.entity.Order;
-import bca.Hapepedia.entity.OrderDetail;
 import bca.Hapepedia.services.CartService;
 import bca.Hapepedia.services.CustomerService;
-import bca.Hapepedia.services.OrderDetailService;
 import bca.Hapepedia.services.OrderService;
 import bca.Hapepedia.services.OrderStatusService;
 import bca.Hapepedia.services.PaymentMethodService;
@@ -33,8 +28,6 @@ import bca.Hapepedia.services.PaymentMethodService;
 public class OrderApiController {
     @Autowired
     private OrderService orderService;
-    @Autowired
-    private OrderDetailService orderDetailService;
     @Autowired
 	private OrderStatusService orderStatusService;
     @Autowired
