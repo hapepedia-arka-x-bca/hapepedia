@@ -11,20 +11,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import bca.Hapepedia.dto.CartForm;
+import bca.Hapepedia.dto.WishlistForm;
 import bca.Hapepedia.dto.ResponseData;
-import bca.Hapepedia.entity.Cart;
-import bca.Hapepedia.services.CartService;
+import bca.Hapepedia.entity.Wishlist;
+import bca.Hapepedia.services.WishlistService;
 import bca.Hapepedia.services.CustomerService;
 import bca.Hapepedia.services.ProductDetailService;
 
 
 
 @RestController
-@RequestMapping("/api/cart")
-public class CartApiController {
+@RequestMapping("/api/wishlist")
+public class WishlistApiController {
     @Autowired
-    CartService cartService;
+    WishlistService wishlistService;
 
     @Autowired
     CustomerService customerService;
@@ -32,13 +32,13 @@ public class CartApiController {
     @Autowired
     ProductDetailService productDetailService;
 
-    @GetMapping("/{idCustomer}")
+    @GetMapping("/show/{idCustomer}")
     public ResponseEntity<ResponseData> findByCustomer(@PathVariable("idCustomer") Long id) {
         ResponseData response = new ResponseData();
         try{
             response.setStatus(true);
-            response.getMessages().add("Cart existed");
-            response.setPayload(cartService.findAllByCustomer(customerService.findById(id)));
+            response.getMessages().add("Wishlist existed");
+            response.setPayload(wishlistService.findAllByCustomer(customerService.findById(id)));
 
             return ResponseEntity.ok(response);
         }
@@ -47,71 +47,69 @@ public class CartApiController {
         catch(Exception ex)
         {
             response.setStatus(false);
-            response.getMessages().add("Could not load carts: " + ex.getMessage());
+            response.getMessages().add("Could not load wishlists: " + ex.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
 
     @PostMapping("/add")
-    public ResponseEntity<ResponseData> addCart(@RequestBody CartForm cartForm){
+    public ResponseEntity<ResponseData> addWishlist(@RequestBody WishlistForm wishlistForm){
         ResponseData response = new ResponseData();
 		try {
-			Cart tempCart = new Cart();
-			tempCart = cartService.findByProductDetailandByCustomer(productDetailService.findById(cartForm.getProductDetailId()).get(), customerService.findById(cartForm.getCustomerId()).get()).get();
+			Wishlist tempWishlist = new Wishlist();
+			tempWishlist = wishlistService.findByProductDetailandByCustomer(productDetailService.findById(wishlistForm.getProductDetailId()).get(), customerService.findById(wishlistForm.getCustomerId()).get()).get();
 
-			if(tempCart!=null){
-				Cart newCart = new Cart();
-				newCart.setCustomer(customerService.findById(cartForm.getCustomerId()).get());
-				newCart.setProductDetail(productDetailService.findById(cartForm.getProductDetailId()).get());
-				newCart.setQuantity(cartForm.getQuantity());
+			if(tempWishlist!=null){
+				Wishlist newWishlist = new Wishlist();
+				newWishlist.setCustomer(customerService.findById(wishlistForm.getCustomerId()).get());
+				newWishlist.setProductDetail(productDetailService.findById(wishlistForm.getProductDetailId()).get());
 				response.setStatus(true);
-				response.getMessages().add("Cart saved");
-				response.setPayload(cartService.save(newCart));
+				response.getMessages().add("Wishlist saved");
+				response.setPayload(wishlistService.save(newWishlist));
 				return ResponseEntity.ok(response);
 			}
 			else{
 				response.setStatus(false);
-				response.getMessages().add("Product already in cart");
+				response.getMessages().add("Product already in wishlist");
 				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 			}
 		}catch(Exception ex) {
 			response.setStatus(false);
-			response.getMessages().add("Could not load cart: "+ ex.getMessage());
+			response.getMessages().add("Could not load wishlist: "+ ex.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 		}
     }
     
     @PostMapping("/update")
-    public ResponseEntity<ResponseData> updateCart(@RequestBody CartForm cartForm){
+    public ResponseEntity<ResponseData> updateWishlist(@RequestBody WishlistForm wishlistForm){
         ResponseData response = new ResponseData();
 		try {
-			Cart newCart = new Cart();
-			newCart.setCustomer(customerService.findById(cartForm.getCustomerId()).get());
-			newCart.setProductDetail(productDetailService.findById(cartForm.getProductDetailId()).get());
-			newCart.setQuantity(cartForm.getQuantity());
-			newCart.setId(cartForm.getId());
+			Wishlist newWishlist = new Wishlist();
+			newWishlist.setCustomer(customerService.findById(wishlistForm.getCustomerId()).get());
+			newWishlist.setProductDetail(productDetailService.findById(wishlistForm.getProductDetailId()).get());
+			newWishlist.setId(wishlistForm.getId());
 			response.setStatus(true);
-			response.getMessages().add("Cart saved");
-			response.setPayload(cartService.save(newCart));
+			response.getMessages().add("Wishlist saved");
+			response.setPayload(wishlistService.save(newWishlist));
 			return ResponseEntity.ok(response);
 		}catch(Exception ex) {
 			response.setStatus(false);
-			response.getMessages().add("Could not load cart: "+ ex.getMessage());
+			response.getMessages().add("Could not load wishlist: "+ ex.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 		}
     }
 
 	@DeleteMapping("/delete/{id}")
-    public ResponseEntity<ResponseData> deleteCart(@PathVariable("id") Long id){
+    public ResponseEntity<ResponseData> deleteWishlist(@PathVariable("id") Long id){
         ResponseData response = new ResponseData();
 		try {
 			response.setStatus(true);
-			response.getMessages().add("Cart deleted");
-			response.setPayload(cartService.delete(id));
+			response.getMessages().add("Wishlist deleted");
+			response.setPayload(wishlistService.delete(id));
 			return ResponseEntity.ok(response);
 		}catch(Exception ex) {
 			response.setStatus(false);
-			response.getMessages().add("Could not load cart: "+ ex.getMessage());
+			response.getMessages().add("Could not load wishlist: "+ ex.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 		}
     }
