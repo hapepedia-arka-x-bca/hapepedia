@@ -1,8 +1,4 @@
 package bca.Hapepedia.dto;
-
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-
 public class ProductDetailForm {
 	private Long id;
 

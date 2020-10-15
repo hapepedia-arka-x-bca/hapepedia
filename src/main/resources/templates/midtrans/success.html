@@ -10,7 +10,7 @@
         var url = window.location.href.split("?");
         var responData = url[url.length-1];
         var responCode = responData.split("status_code=")[1].split("&")[0];
-        var responIdOrder = responData.split("order_id=")[1];
+        var responIdOrder = responData.split("order_id=O")[1];
         var dataOrder;
         console.log(responCode+" "+responIdOrder);
         
@@ -28,7 +28,7 @@
             .then(response => response.json())
             .then(result => {
                 console.log("finish");
-                window.location.href="http://localhost:8081/transaction"
+                // window.location.href="http://localhost:8081/transaction"
             }).catch(err => {
                 errorStat = err.name === 'AbortError'? 1 : 2;
             });
