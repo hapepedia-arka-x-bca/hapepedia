@@ -4,32 +4,36 @@ import java.sql.Timestamp;
 
 import javax.validation.constraints.NotEmpty;
 
-import bca.Hapepedia.entity.Customer;
-import bca.Hapepedia.entity.OrderStatus;
-import bca.Hapepedia.entity.PaymentMethod;
-
 public class OrderForm {
 
     private Long id;
     
-    @NotEmpty(message="Code is required")
-	private Customer customer;
-	@NotEmpty(message="Code is required")
+    //@NotEmpty(message="Code is required")
+	private Long customer;
+	
+	//@NotEmpty(message="Code is required")
 	private Timestamp dateOrder;
-	@NotEmpty(message="Code is required")
+	
+	//@NotEmpty(message="Code is required")
 	private String deliveryAddress;
-	@NotEmpty(message="Code is required")
+	
+	//@NotEmpty(message="Code is required")
 	private Double totalPrice;
-	@NotEmpty(message="Code is required")
+	
+	//@NotEmpty(message="Code is required")
 	private Double totalWeight;
-	@NotEmpty(message="Code is required")
+	
+	//@NotEmpty(message="Code is required")
 	private Double shippingFee;
-	@NotEmpty(message="Code is required")
-	private PaymentMethod paymentMethod;
-	@NotEmpty(message="Code is required")
+	
+	//@NotEmpty(message="Code is required")
+	private Long paymentMethod;
+	
+	//@NotEmpty(message="Code is required")
 	private Double totalPayment;
-	@NotEmpty(message="Code is required")
-    private OrderStatus orderStatus;
+	
+	//@NotEmpty(message="Code is required")
+    private int orderStatus;
 
     public Long getId() {
         return id;
@@ -39,11 +43,11 @@ public class OrderForm {
         this.id = id;
     }
 
-    public Customer getCustomer() {
+    public Long getCustomer() {
         return customer;
     }
 
-    public void setCustomer(Customer customer) {
+    public void setCustomer(Long customer) {
         this.customer = customer;
     }
 
@@ -87,11 +91,11 @@ public class OrderForm {
         this.shippingFee = shippingFee;
     }
 
-    public PaymentMethod getPaymentMethod() {
+    public Long getPaymentMethod() {
         return paymentMethod;
     }
 
-    public void setPaymentMethod(PaymentMethod paymentMethod) {
+    public void setPaymentMethod(Long paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
 
@@ -103,11 +107,11 @@ public class OrderForm {
         this.totalPayment = totalPayment;
     }
 
-    public OrderStatus getOrderStatus() {
+    public int getOrderStatus() {
         return orderStatus;
     }
 
-    public void setOrderStatus(OrderStatus orderStatus) {
+    public void setOrderStatus(int orderStatus) {
         this.orderStatus = orderStatus;
     }
     

@@ -12,7 +12,7 @@
     </head>
     <body class="bg-primary">
         <div id="layoutAuthentication">
-            <div id="layoutAuthentication_content">
+            <div id="layoutAuthentication_content" style="padding-bottom: 30px;">
                 <main>
                     <div class="container">
                         <div class="row justify-content-center">
@@ -24,20 +24,38 @@
                                             <div class="form-row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label class="small mb-1" style="font-size:15px;" for="inputFirstName">First Name</label>
-                                                        <input class="form-control py-4" id="inputFirstName" type="text" placeholder="Enter first name" />
+                                                        <label class="small mb-1" style="font-size:15px;" for="inputName">Full Name</label>
+                                                        <input class="form-control py-4" id="inputName" type="text" placeholder="Enter full name" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label class="small mb-1" style="font-size:15px;" for="inputLastName">Last Name</label>
-                                                        <input class="form-control py-4" id="inputLastName" type="text" placeholder="Enter last name" />
+                                                        <label class="small mb-1" style="font-size:15px;" for="inputPhone">Phone Number</label>
+                                                        <input class="form-control py-4" id="inputPhone" type="text" placeholder="(08214315313)" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" style="font-size:15px;" for="inputBirthday">Birthday</label>
+                                                        <input class="form-control py-4" id="inputBirthday" type="date" placeholder="Enter birthday" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" style="font-size:15px;" for="inputGender">Gender</label>
+                                                        <select class="custom-select mb-3" id="inputGender">
+                                                            <option selected disabled>Gender</option>
+                                                            <option value="Male">Male</option>
+                                                            <option value="Female">Female</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="small mb-1" style="font-size:15px;" for="inputEmailAddress">Email</label>
-                                                <input class="form-control py-4" id="inputEmailAddress" type="email" aria-describedby="emailHelp" placeholder="Enter email address" />
+                                                <label class="small mb-1" style="font-size:15px;" for="inputEmail">Email</label>
+                                                <input class="form-control py-4" id="inputEmail" type="email" aria-describedby="emailHelp" placeholder="Enter email address" />
                                             </div>
                                             <div class="form-row">
                                                 <div class="col-md-6">
@@ -53,8 +71,14 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group mt-4 mb-0"><a class="btn btn-primary btn-block" href="./login">Create Account</a></div>
+                                            <div class="form-group mt-4 mb-0"><div class="btn btn-primary btn-block" onclick="registration()">Create Account</div></div>
                                         </form>
+                                        <div class="alert alert-success" role="alert" id="successAlert" style="font-size: medium; display: none;">
+                                            This is a primary alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+                                        </div>
+                                        <div class="alert alert-danger" role="alert" id="wrongAlert" style="font-size: medium; display: none;">
+                                            This is a secondary alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+                                        </div>
                                     </div>
                                     <div class="card-footer text-center">
                                         <div class="small"><a href="./login">Have an account? Go to login</a></div>
@@ -70,5 +94,70 @@
         <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script th:src="@{/admins/js/scripts.js}"></script>
+        <script>
+            function registration(){
+
+                var name = document.getElementById("inputName").value;
+                var phone = document.getElementById("inputPhone").value;
+                var birthday = document.getElementById("inputBirthday").value;
+                var gender = document.getElementById("inputGender").value;
+                var email = document.getElementById("inputEmail").value;
+                var password = document.getElementById("inputPassword").value;
+                var confirmPassword = document.getElementById("inputConfirmPassword").value;
+
+                if(password===confirmPassword){
+                    console.log(email+" "+password);
+                    fetch("http://localhost:8081/api/customer/registration",{
+                        // Adding method type 
+                        method: "POST", 
+                        
+                        // Adding body or contents to send 
+                        body: JSON.stringify({ 
+                            name : name,
+                            email : email, 
+                            password : password,
+                            gender : gender,
+                            birth_date : birthday,
+                            phone_number : phone
+                        }), 
+                            
+                        // Adding headers to the request 
+                        headers: { 
+                            "Content-type": "application/json; charset=UTF-8"
+                        } 
+                    })
+                    .then(response => response.json())
+                    .then(result => {
+                        console.log(result);
+                        if(result.status===true){
+                        document.getElementById("successAlert").innerHTML="Registration Succes";
+                        document.getElementById("wrongAlert").style.display="none";
+                        document.getElementById("successAlert").style.display="block";
+                        window.location.href = "./login";
+                        // console.log(localStorage.getItem('email'));
+                        }
+                        else{
+                        document.getElementById("wrongAlert").innerHTML=result.messages;
+                        document.getElementById("successAlert").style.display="none";
+                        document.getElementById("wrongAlert").style.display="block";
+                        
+                        // console.log(localStorage.getItem('email'));
+                        }
+
+                    }).catch(err => {
+                        errorStat = err.name === 'AbortError'? 1 : 2;
+                    });
+
+                }
+                else{
+                    document.getElementById("wrongAlert").innerHTML="Password are not same";
+                    document.getElementById("successAlert").style.display="none";
+                    document.getElementById("wrongAlert").style.display="block";
+                    
+                    // console.log(localStorage.getItem('email'));
+                }
+            
+            }
+        </script>
     </body>
 </html>

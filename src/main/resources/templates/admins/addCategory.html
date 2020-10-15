@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="admins/fragments/header::head"></head>
+
+<body class="sb-nav-fixed">
+
+    <div th:replace="admins/fragments/header::adminsHeader"></div>
+
+    <div id="layoutSidenav">
+        <div th:replace="admins/fragments/sidenav::adminsSidenav"></div>
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container my-3">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h3>Category Management</h3>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">Category</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <!-- BAGIAN INI AKAN MENG-HANDLE FORM INPUT NEW CATEGORY  -->
+                        <!-- <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">New Category</h4>
+                                </div>
+                                <div class="card-body">
+
+                                    <form role="form" id="createCategoryForm">
+                                        <div class="form-group">
+                                            <label for="name">Category Title</label>
+                                            <input type="text" id="name" class="form-control" name="name" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <button id="createCategory" type="button"
+                                                class="btn btn-primary btn-sm">Submit</button>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div> -->
+                        <!-- BAGIAN INI AKAN MENG-HANDLE FORM INPUT NEW CATEGORY  -->
+
+                        <!-- BAGIAN INI AKAN MENG-HANDLE TABLE LIST CATEGORY  -->
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Category List</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div> <a href="" class="btn btn-dark" data-toggle="modal"
+                                            data-target="#addCategoryModal">Add Category</a>
+                                    </div>
+                                    <br>
+                                    <div class="table-responsive">
+                                        <table id="dataTable" class="table table-hover table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>id</th>
+                                                    <th>Category</th>
+                                                    <th>Created At</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- /.table-responsive -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- BAGIAN INI AKAN MENG-HANDLE TABLE LIST CATEGORY  -->
+                    </div>
+                </div>
+            </main>
+            <div th:replace="admins/fragments/footer::adminsFooter"></div>
+        </div>
+    </div>
+
+    <!-- modal add new -->
+    <div class="modal fade" id="addCategoryModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Category</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- /.modal form body -->
+                    <form role="form" id="createCategoryForm">
+
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="name">Category Title</label>
+                                <input type="text" id="name" class="form-control" name="name">
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </form>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button id="createCategory" type="button" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <!-- Modal For Deleting Category -->
+    <div class="modal fade" id="deleteCategoryModal">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Delete Category</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="deleteId" name="id">
+                    <p>Are you sure want to delete this category?</p>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
+                    <button id="deleteCategory" type="button" class="btn btn-primary">Ya</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <!-- modal edit -->
+    <div class="modal fade" id="editCategoryModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Category</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- /.modal form body -->
+                    <form role="form" id="editCategoryForm">
+                        <input type="hidden" name="editId" id="editId">
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <label for="editName">Category Name</label>
+                                    <input type="text" class="form-control" id="editName" name="editName">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </form>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button id="updateCategory" type="button" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <div th:include="admins/fragments/footer::templateScript"></div>
+
+    <script>
+        var table;
+        var token = localStorage.getItem('token');
+
+        $(document).ready(function () {
+            table = $('#dataTable').DataTable({
+                "processing": false,
+                "serverSide": false,
+                ajax: {
+                    dataSrc: "payload",
+                    url: 'http://127.0.0.1:8081/api/category',
+                    type: "GET",
+                    dataType: 'json',
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Authorization", "Basic " + token);
+                    },
+                },
+                columns: [
+                    { data: 'id', title: 'ID' },
+                    { data: 'name' },
+                    {
+                        data: 'datetime',
+                        render: function (data, type, row) {
+                            return `Datetime`;
+                        },
+                    },
+                    {
+                        data: 'id',
+                        render: function (data, type, row) {
+                            return `<div class="btn-toolbar btn-toolbar-sm btn-block">
+                            <span>
+                                <a href="" class="btn btn-warning mr-2"
+                                    data-toggle="modal" data-target="#editCategoryModal" onclick="getCategoryById('` + data + `');"><i
+                                        class="fas fa-edit"></i></a>
+                            </span>
+                            <span>
+                                <a href="" class="btn btn-danger mr-2"
+                                    data-toggle="modal"
+                                    data-target="#deleteCategoryModal"
+                                    onclick="setDeleteId('` + data + `');"><i
+                                        class="fas fa-trash"></i></a>
+                            </span>
+                        </div>`;
+                        }
+                    }
+                ]
+            })
+        });
+
+        $('#createCategory').on('click', function () {
+            var name = $("#name").val();
+            var category = new Object();
+            category.name = name;
+            $.ajax({
+                url: "http://127.0.0.1:8081/api/category/save",
+                method: "POST",
+                data: JSON.stringify(category),
+                contentType: "application/json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Basic " + token);
+                },
+                success: function (response) {
+                    if (response.status == true) {
+                        $('#addCategoryModal').modal('toggle');
+                        $('#name').val(null);
+                        alert("Insert data success!");
+                        table.ajax.reload();
+                    } else {
+                        console.log('Anda Gagal Menambahkan Data. Mohon Coba Kembali!');
+                    }
+                },
+                error: function () {
+                    console.log('Anda Gagal Menambahkan Data. Mohon Cobaaaa Kembali!');
+                }
+            });
+        });
+
+        function setDeleteId(id) {
+            $('#deleteId').val(id);
+        }
+
+        $('#deleteCategory').on('click', function () {
+            var id = $('#deleteId').val();
+            $.ajax({
+                url: "http://127.0.0.1:8081/api/category/delete/" + id,
+                method: "POST",
+                contentType: "application/json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Basic " + token);
+                },
+                success: function (response) {
+                    if (response.status == true) {
+                        $('#deleteCategoryModal').modal('toggle');
+                        table.ajax.reload();
+                        alert("Hapus sukses!");
+                    } else {
+                        console.log('Anda Gagal Menambahkan Data. Mohon Coba Kembali!');
+                    }
+                },
+                error: function () {
+                    console.log('Anda Gagal Menambahkan Data. Mohon Cobassss Kembali!');
+                }
+            });
+        });
+
+        function getCategoryById(id) {
+            $.ajax({
+                url: "http://127.0.0.1:8081/api/category/get/" + id,
+                method: "GET",
+                data: { id: id },
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Basic " + token);
+                },
+                success: function (response) {
+                    $('#editId').val(null);
+                    $('#editName').val(null);
+
+                    $('#editId').val(response.payload.id);
+                    $('#editName').val(response.payload.name);
+                },
+                error: function () {
+                    console.log("Error");
+                }
+            });
+        }
+
+        $('#updateCategory').on('click', function () {
+            var id = $("#editId").val();
+            var name = $("#editName").val();
+            var category = new Object();
+            category.id = id;
+            category.name = name;
+            $.ajax({
+                url: "http://127.0.0.1:8081/api/category/save",
+                method: "POST",
+                data: JSON.stringify(category),
+                contentType: "application/json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Basic " + token);
+                },
+                success: function (response) {
+                    if (response.status == true) {
+                        $('#editCategoryModal').modal('toggle');
+                        table.ajax.reload();
+                    } else {
+                        console.log("Error1");
+                    }
+                },
+                error: function () {
+                    console.log("Error");
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

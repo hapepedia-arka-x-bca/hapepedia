@@ -89,6 +89,15 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
+
+		
+		<dependency>
+			<groupId>com.midtrans</groupId>
+			<artifactId>java-library</artifactId>
+			<version>2.1.1</version>
+		</dependency>
+		
+		
 	</dependencies>
 
 	<build>
@@ -97,7 +106,15 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-		</plugins>
+		</plugins>		
 	</build>
+
+	<repositories>
+		<repository>
+			<id>jcenter</id>
+			<name>bintray</name>
+			<url>https://jcenter.bintray.com</url>
+		</repository>
+	</repositories>
 
 </project>

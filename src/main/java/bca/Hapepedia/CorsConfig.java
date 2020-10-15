@@ -17,10 +17,10 @@ public class CorsConfig extends OncePerRequestFilter{
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		
-		response.setHeader("Access-Controll-Allow-Origin", "*");
-		response.setHeader("Access-Controll-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-		response.setHeader("Access-Controll-Allow-Headers", "Authorization, Content-Type, Cache-Control");
-		response.addHeader("Access-Controll-Expose-Headers", "xsrf-token");
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+		response.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type, Cache-Control");
+		response.addHeader("Access-Control-Expose-Headers", "xsrf-token");
 		
 		if("OPTIONS".equals(request.getMethod())) {
 			response.setStatus(HttpServletResponse.SC_OK);

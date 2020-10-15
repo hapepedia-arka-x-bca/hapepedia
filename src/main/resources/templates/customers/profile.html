@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head th:replace="customers/fragments/header::head">
+</head>
+
+<body>
+    <div th:replace="customers/fragments/header::customersHeader"></div>
+
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__links">
+                        <a href="./"><i class="fa fa-home"></i> Home</a>
+                        <span>Customer Profile</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+    <!-- Checkout Section Begin -->
+    <section class="checkout spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+
+                    <!-- Profile Image -->
+                    <div class="card card-primary card-outline mb-3">
+                        <div class="card-body box-profile">
+                            <div class="text-center">
+                                <img class="profile-user-img img-fluid img-circle"
+                                    src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100"
+                                    alt="User profile picture">
+                            </div>
+
+                            <h3 class="profile-username text-center">Nina Mcintire</h3>
+
+                            <p class="text-muted text-center">Software Engineer</p>
+
+                            <ul class="list-group list-group-unbordered mb-3">
+                                <li class="list-group-item">
+                                    <b>Followers</b> <a class="float-right">1,322</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Following</b> <a class="float-right">543</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Friends</b> <a class="float-right">13,287</a>
+                                </li>
+                            </ul>
+
+                            <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+
+                    <!-- About Me Box -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">About Me</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <strong><i class="fas fa-book mr-1"></i> Education</strong>
+
+                            <p class="text-muted">
+                                B.S. in Computer Science from the University of Tennessee at Knoxville
+                            </p>
+
+                            <hr>
+
+                            <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
+
+                            <p class="text-muted">Malibu, California</p>
+
+                            <hr>
+
+                            <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
+
+                            <p class="text-muted">
+                                <span class="tag tag-danger">UI Design</span>
+                                <span class="tag tag-success">Coding</span>
+                                <span class="tag tag-info">Javascript</span>
+                                <span class="tag tag-warning">PHP</span>
+                                <span class="tag tag-primary">Node.js</span>
+                            </p>
+
+                            <hr>
+
+                            <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
+
+                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
+                                fermentum enim neque.</p>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-9">
+                    <div class="card">
+                        <div class="card-header p-2">
+                            <ul class="nav nav-pills">
+                                <li class="nav-item"><a class="nav-link active" href="#personal-data"
+                                        data-toggle="tab">Personal Data</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#address" data-toggle="tab">Address</a>
+                                </li>
+                                <!-- <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a>
+                                </li> -->
+                            </ul>
+                        </div><!-- /.card-header -->
+                        <div class="card-body">
+                            <div class="tab-content">
+                                <div class="active tab-pane" id="personal-data">
+                                    <div id="alert-update" class="alert alert-success alert-dismissible fade show"
+                                        role="alert" style="display: none;">
+                                        <span id="alert-message"></span>
+                                    </div>
+                                    <!-- Form Personal Data -->
+                                    <form class="form" action="#" method="post" id="profileDataForm">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="name">
+                                                    Full Name
+                                                </label>
+                                                <input type="text" class="form-control" name="name" id="name"
+                                                    placeholder="Enter your name.">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="phoneNumber">
+                                                    Phone Number
+                                                </label>
+                                                <input type="text" class="form-control" name="phoneNumber"
+                                                    id="phoneNumber" placeholder="Please enter your phone number">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="birthdate">
+                                                    Birthdate
+                                                </label>
+                                                <input type="date" class="form-control" name="birthdate" id="birthdate"
+                                                    placeholder="Please enter your birth day">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="gender">Gender</label>
+                                                <select class="custom-select" id="gender">
+                                                    <option selected disabled>Gender</option>
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <label for="email">
+                                                    Email
+                                                </label>
+                                                <input type="email" class="form-control" name="email" id="email"
+                                                    placeholder="Enter your email">
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <button class="btn btn-success" type="submit" id="updateProfile">
+                                                    Update</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <!-- /.Form Personal Data -->
+                                </div>
+                                <!-- /.tab-pane -->
+                                <div class="tab-pane" id="address">
+                                    <!-- The address -->
+                                    <div>
+                                        <a href="" class="btn btn-dark" data-toggle="modal"
+                                            data-target="#addAddressModal">Add Address</a>
+                                    </div>
+                                    <br>
+                                    <div class="table-responsive">
+                                        <table id="dataTable" class="table table-hover table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Id</th>
+                                                    <th>Recipient</th>
+                                                    <th>Address Detail</th>
+                                                    <th>Postal Code</th>
+                                                    <th>City</th>
+                                                    <th>Province</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!-- /.tab-pane -->
+
+                                <!-- <div class="tab-pane" id="settings">
+                                    <form class="form-horizontal">
+                                        <div class="form-group row">
+                                            <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="inputName"
+                                                    placeholder="Name">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                                            <div class="col-sm-10">
+                                                <input type="email" class="form-control" id="inputEmail"
+                                                    placeholder="Email">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputName2" class="col-sm-2 col-form-label">Name</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="inputName2"
+                                                    placeholder="Name">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputExperience"
+                                                class="col-sm-2 col-form-label">Experience</label>
+                                            <div class="col-sm-10">
+                                                <textarea class="form-control" id="inputExperience"
+                                                    placeholder="Experience"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputSkills" class="col-sm-2 col-form-label">Skills</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="inputSkills"
+                                                    placeholder="Skills">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="offset-sm-2 col-sm-10">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox"> I agree to the <a href="#">terms and
+                                                            conditions</a>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="offset-sm-2 col-sm-10">
+                                                <button type="submit" class="btn btn-danger">Submit</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div> -->
+                                <!-- /.tab-pane -->
+                            </div>
+                            <!-- /.tab-content -->
+                        </div><!-- /.card-body -->
+                    </div>
+                    <!-- /.nav-tabs-custom -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- Checkout Section End -->
+
+    <!-- modal add new -->
+    <div class="modal fade" id="addAddressModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Address</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- /.modal form body -->
+                    <form role="form" id="addAddressForm">
+
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="receiverName">
+                                        Receiver Name
+                                    </label>
+                                    <input type="text" class="form-control" name="receiverName" id="receiverName"
+                                        placeholder="Enter receiver name.">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="postalCode">
+                                        Postal Code
+                                    </label>
+                                    <input type="text" class="form-control" name="postalCode" id="postalCode"
+                                        placeholder="Please enter your postal code">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="addressDetail">Address Detail</label>
+                                <input type="text" id="addressDetail" class="form-control" name="addressDetail">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="province_id">Provinsi Domisili</label>
+                                    <select class="form-control select2" id="province_id" name="province_id">
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="city_id">Kabupaten / Kota</label>
+                                    <select class="form-control select2" id="city_id" name="city_id" disabled>
+                                        <option value="">Pilih Kabupaten/Kota</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </form>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button id="addAddress" type="button" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <div th:replace="customers/fragments/footer::customersFooter"></div>
+
+    <!-- Js Plugins -->
+    <div th:replace="customers/fragments/footer::templateScript"></div>
+
+    <script>
+        var table;
+        var token = localStorage.getItem('token');
+
+        $(document).ready(function () {
+            getCustomerData();
+
+            table = $('#dataTable').DataTable({
+                "processing": false,
+                "serverSide": false,
+                ajax: {
+                    dataSrc: "payload",
+                    url: 'http://127.0.0.1:8081/api/address/getbyloggedin',
+                    type: "GET",
+                    dataType: 'json',
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Authorization", "Basic " + token);
+                    },
+                },
+                columns: [
+                    { data: 'id', title: 'ID' },
+                    { data: 'receiverName' },
+                    { data: 'addressDetail' },
+                    { data: 'postalCode' },
+                    { data: 'city.name' },
+                    { data: 'province.name' },
+                    {
+                        data: 'id',
+                        render: function (data, type, row) {
+                            return `<div class="btn-toolbar btn-toolbar-sm btn-block">
+                            <span>
+                                <a href="" class="btn btn-warning mr-2"
+                                    data-toggle="modal" data-target="#editCategoryModal" onclick="getCategoryById('` + data + `');"><i
+                                        class="fas fa-edit"></i></a>
+                            </span>
+                            <span>
+                                <a href="" class="btn btn-danger mr-2"
+                                    data-toggle="modal"
+                                    data-target="#deleteCategoryModal"
+                                    onclick="setDeleteId('` + data + `');"><i
+                                        class="fas fa-trash"></i></a>
+                            </span>
+                        </div>`;
+                        }
+                    }
+                ]
+            })
+        });
+
+        function getCustomerData() {
+            $.ajax({
+                url: "http://127.0.0.1:8081/api/customer/getloggedin",
+                method: "GET",
+                contentType: "application/json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Basic " + token);
+                },
+                success: function (response) {
+                    if (response.status == true) {
+                        var data = response.payload;
+                        $('#name').val(data.name);
+                        $('#email').val(data.email);
+                        $('#phoneNumber').val(data.phone_number);
+                        $('#gender').val(data.gender);
+                        var date = new Date(data.birth_date);
+                        var currentDate = date.toISOString().slice(0, 10);
+                        $('#birthdate').val(currentDate);
+                    } else {
+                        console.log('Data gagal didapatkan!');
+                    }
+                },
+                error: function () {
+                    console.log('Terjadi error');
+                }
+            });
+        }
+
+        $('#profileDataForm').on('submit', function (e) {
+            e.preventDefault(e);
+            var name = $('#name').val();
+            var email = $('#email').val();
+            var phoneNumber = $('#phoneNumber').val();
+            var gender = $('#gender').val();
+            var birthdate = $('#birthdate').val();
+            $.ajax({
+                url: "http://127.0.0.1:8081/api/customer/update",
+                method: "POST",
+                data: JSON.stringify({
+                    name: name,
+                    email: email,
+                    gender: gender,
+                    birth_date: birthdate,
+                    phone_number: phoneNumber
+                }),
+                contentType: "application/json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Basic " + token);
+                },
+                success: function (response) {
+                    if (response.status == true) {
+                        getCustomerData();
+                        document.getElementById("alert-message").innerHTML = "Your profile is successfully updated.";
+                        document.getElementById("alert-update").style.display = "block";
+                    } else {
+                        console.log("Error1");
+                    }
+                },
+                error: function () {
+                    console.log("Error2");
+                }
+            });
+        });
+
+        $.ajax({
+            url: "http://127.0.0.1:8081/api/province",
+            method: "GET",
+            contentType: "application/json",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Basic " + token);
+            },
+            success: function (response) {
+                if (response.status == true) {
+                    $('#province_id').append('<option value="">Pilih Provinsi</option>')
+                    $.each(response.payload, function (key, item) {
+                        $('#province_id').append('<option value="' + item.id + '">' + item.name + '</option>')
+                    })
+                } else {
+                    console.log("Error1");
+                }
+            },
+            error: function () {
+                console.log("Error2");
+            }
+        });
+
+        var citySelect = $('[name="city_id"]');
+
+        $('#province_id').on('change', function () {
+            var province_id = $(this).val();
+            $.ajax({
+                url: "http://127.0.0.1:8081/api/city/getbyprovince/" + province_id,
+                type: "GET",
+                beforeSend: function (xhr) {
+                    citySelect.html("<option> Loading ... </option>");
+                    xhr.setRequestHeader("Authorization", "Basic " + token);
+                },
+                success: function (response) {
+                    $('#city_id').prop('disabled', false);
+                    $('#city_id').empty()
+                    $('#city_id').append('<option value="">Pilih Kabupaten/Kota</option>')
+                    $.each(response.payload, function (key, item) {
+                        $('#city_id').append('<option value="' + item.id + '">' + item.type + " " + item.name + '</option>')
+                    })
+                }
+            });
+        })
+
+        $('#addAddress').on('click', function () {
+            var name = $("#name").val();
+            var receiverName = $("#receiverName").val();
+            var addressDetail = $("#addressDetail").val();
+            var postalCode = $("#postalCode").val();
+            var provinceId = $("#province_id").val();
+            var cityId = $("#city_id").val();
+            var address = {
+                receiverName: receiverName,
+                addressDetail: addressDetail,
+                postalCode: postalCode,
+                provinceId: provinceId,
+                cityId: cityId
+            }
+            $.ajax({
+                url: "http://127.0.0.1:8081/api/address/save",
+                method: "POST",
+                data: JSON.stringify(address),
+                contentType: "application/json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Basic " + token);
+                },
+                success: function (response) {
+                    if (response.status == true) {
+                        $('#addAddressModal').modal('toggle');
+                        $("#receiverName").val(null);
+                        $("#addressDetail").val(null);
+                        $("#postalCode").val(null);
+                        $("#province_id").val(null);
+                        $("#city_id").val(null);
+                        alert("Insert address success!");
+                        table.ajax.reload();
+                    } else {
+                        console.log('Anda Gagal Menambahkan Data. Mohon Coba Kembali!');
+                    }
+                },
+                error: function () {
+                    console.log('Anda Gagal Menambahkan Data. Mohon Cobaaaa Kembali!');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

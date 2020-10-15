@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 import bca.Hapepedia.entity.OrderStatus;
 
 public interface OrderStatusRepo extends CrudRepository<OrderStatus, Integer>{
-    
+    public OrderStatus findByOrderstatus(OrderStatus orderstatus);
 }

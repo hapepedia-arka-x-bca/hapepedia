@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Dashboard Admin</title>
+        <link th:href="@{/admins/css/styles.css}" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="sb-nav-fixed">
+        
+        <div th:replace="admins/fragments/header::adminsHeader"></div>
+
+        <div id="layoutSidenav">
+            <div th:replace="admins/fragments/sidenav::adminsSidenav"></div>
+            <div id="layoutSidenav_content">
+                <!-- Modal -->
+                <div class="modal fade bd-example-modal-lg" id="orderDetailModal" tabindex="-1" role="dialog" aria-labelledby="orderDetailModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="orderDetailModalLabel">Detail Order</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body row">
+                                <p class="col-sm-12 col-md-6"><b>Order Number : </b><span id="orderForm">1891269</span></p >
+                                <p class="col-sm-12 col-md-6"><b>Order Date : </b><span id="dateForm">2020/09/09</span></p >
+                                <p class="col-sm-12"><b>Customer Name : </b><span id="customerForm">sousd dsjhsdo</span></p >
+                                <p class="col-sm-12"><b>Detail Order : </b></p >
+                                <table class="table col-sm-12">
+                                    <thead>
+                                        <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Product Name</th>
+                                        <th scope="col">Qty</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Total Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="listProduct">
+                                                                                
+                                    </tbody>
+                                </table>
+                                <div class="col-sm-12 col-md-6">
+                                    <ul>
+                                        <li ><b>Total Product Price : </b><span id="productPriceForm">36.000</span></li >
+                                        <li ><b>Payment Method : </b><span id="bankForm">Bank Central Asia</span></li >
+                                        <!-- <li ><b>Shipping Agency : </b><span id="shippingAgencyForm">JNE</span></li > -->
+                                        <li ><b>Shipping Fee : </b><span id="shippingFeeForm">20.000</span></li >
+                                        <li ><b>Address Destination : </b><span id="destinationForm">Surabaya</span></li >
+                                        <li ><b>Total Order Price : </b><span id="totalOrderForm">56.000</span></li >
+                                    </ul>
+                                </div>
+                                
+                                <div class="col-sm-12 col-md-6">
+                                    <p class="col-sm-12"><b>Order Status : </b>
+                                        <select class="custom-select" id="statusForm">
+                                            
+                                        </select>
+                                    </p >
+                                    <p class="form-group col-sm-12">
+                                        <b>Receipt Number :</b>
+                                        <input type="text" class="form-control" id="receiptForm" placeholder="Receipt Number">
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" onclick="saveStatus()" data-dismiss="modal">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <main>
+                    <div class="container-fluid">
+                        <h1 class="mt-4">Order</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">Order List</li>
+                        </ol>
+                        
+                        <div class="mb-4">
+                            <div>
+                                <i class="fas fa-table mr-1"></i>
+                                DataTable
+                            </div>
+                            <div >
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Customer</th>
+                                                <th>Date Order</th>
+                                                <th>Price</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Customer</th>
+                                                <th>Date Order</th>
+                                                <th>Price</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody id="listData">
+                                            
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+                <div th:replace="admins/fragments/footer::adminsFooter"></div>
+            </div>
+        </div>
+        <script>
+            var orderStatusAll;
+            var orderAll;
+            var choosenData;
+            var token = localStorage.getItem('token');
+
+            function showData(){
+                fetch("http://localhost:8081/api/order",{
+                    // Adding method type 
+                    method: "GET", 
+                                    
+                    // Adding headers to the request 
+                    headers: { 
+                        "Content-type" : "application/json; charset=UTF-8",
+                        "Authorization" : "Basic "+token
+                    } 
+                })
+                .then(response => response.json())
+                .then(result => {
+                    orderAll = result.payload;
+                    var displayData = "";
+                    
+                    orderAll.forEach((element,i) => {
+                        // console.log(element.customer.name);
+                        displayData += `<tr>
+                            <td>`+element.customer.name+`</td>
+                            <td>`+element.dateOrder.split('T')[0]+`</td>
+                            <td>`+element.totalPrice+`</td>
+                            <td>`+element.orderStatus.orderstatus+`</td>
+                            <td>
+                                <span class="btn btn-primary" onclick="showModalDetail(`+i+`)" data-toggle="modal" data-target="#orderDetailModal">view <i class="fa fa-edit"></i></span>
+                                <span class="btn btn-danger">Cancel <i class="fa fa-times"></i></span>
+                            </td>
+                        </tr>`;
+                    });
+                    
+                    document.getElementById("listData").innerHTML= displayData;
+                    
+                }).catch(err => {
+                    errorStat = err.name === 'AbortError'? 1 : 2;
+                });
+            }
+
+            fetch("http://localhost:8081/api/orderStatus",{
+                // Adding method type 
+                method: "GET", 
+                                
+                // Adding headers to the request 
+                headers: { 
+                    "Content-type" : "application/json; charset=UTF-8",
+                    "Authorization" : "Basic "+token
+                } 
+            })
+            .then(response => response.json())
+            .then(result => {
+                orderStatusAll = result.payload;
+                // console.log(orderStatusAll);               
+            }).catch(err => {
+                errorStat = err.name === 'AbortError'? 1 : 2;
+            });
+
+            function showModalDetail(idOrder){
+                choosenData=idOrder;
+                // console.log(orderAll)
+                document.getElementById("orderForm").innerHTML=orderAll[idOrder].id;
+                document.getElementById("dateForm").innerHTML=orderAll[idOrder].dateOrder.split('T')[0];
+                document.getElementById("customerForm").innerHTML=orderAll[idOrder].customer.name;
+
+                document.getElementById("productPriceForm").innerHTML=orderAll[idOrder].totalPrice;
+                document.getElementById("bankForm").innerHTML=orderAll[idOrder].paymentMethod.name;
+                document.getElementById("shippingFeeForm").innerHTML=orderAll[idOrder].shippingFee;
+                document.getElementById("destinationForm").innerHTML=orderAll[idOrder].deliveryAddress;
+                document.getElementById("totalOrderForm").innerHTML=orderAll[idOrder].totalPrice;
+                
+                var statusData = "";
+                orderStatusAll.forEach((element,i) => {
+                    // console.log(element.customer.name);
+                    if(orderAll[idOrder].orderStatus.orderstatus==element.orderstatus)
+                        statusData += `<option value="`+i+`" selected>`+element.orderstatus+`</option>`;
+                    else
+                        statusData += `<option value="`+i+`">`+element.orderstatus+`</option>`;
+                });
+                document.getElementById("statusForm").innerHTML=statusData;
+            
+                
+                fetch("http://localhost:8081/api/orderDetail/show/"+orderAll[idOrder].id,{
+                    // Adding method type 
+                    method: "GET", 
+                                    
+                    // Adding headers to the request 
+                    headers: { 
+                        "Content-type" : "application/json; charset=UTF-8",
+                        "Authorization" : "Basic "+token
+                    } 
+                })
+                .then(response => response.json())
+                .then(result => {
+                    var listDetailOrder =``; 
+                    // console.log(result.payload);
+                    var dataDetailOrder = result.payload;
+                    dataDetailOrder.forEach((element,i) => {
+                        
+                        listDetailOrder += `
+                        <tr>
+                            <th scope='row'>`+(i+1)+`</th>
+                            <td>`+element.productDetail.product.name+`</td>
+                            <td>`+element.quantity+`</td>
+                            <td>`+element.productDetail.price+`</td>
+                            <td>`+(element.quantity*element.productDetail.price)+`</td>
+                        </tr>`;
+                    });    
+                    document.getElementById("listProduct").innerHTML= listDetailOrder;                         
+                }).catch(err => {
+                    errorStat = err.name === 'AbortError'? 1 : 2;
+                });
+
+
+            }
+        
+            function saveStatus(){
+                var statusId = document.getElementById("statusForm").value;
+                console.log(
+                    JSON.stringify({ 
+                        id: orderAll[choosenData].id, 
+                        customer: orderAll[choosenData].customer.id,
+                        dateOrder: orderAll[choosenData].dateOrder.split('T')[0],
+                        deliveryAddress: orderAll[choosenData].deliveryAddress,
+                        totalPrice: orderAll[choosenData].totalPrice,
+                        totalWeight: orderAll[choosenData].totalWeight,
+                        shippingFee: orderAll[choosenData].shippingFee,
+                        paymentMethod: orderAll[choosenData].paymentMethod.id,
+                        totalPayment: orderAll[choosenData].totalPayment,
+                        orderStatus: orderStatusAll[statusId].id
+                    })
+                );
+                fetch("http://localhost:8081/api/order/update",{
+                    // Adding method type 
+                    method: "POST", 
+                    body: JSON.stringify({ 
+                        id: orderAll[choosenData].id, 
+                        customer: orderAll[choosenData].customer.id,
+                        dateOrder: orderAll[choosenData].dateOrder.split('T')[0],
+                        deliveryAddress: orderAll[choosenData].deliveryAddress,
+                        totalPrice: orderAll[choosenData].totalPrice,
+                        totalWeight: orderAll[choosenData].totalWeight,
+                        shippingFee: orderAll[choosenData].shippingFee,
+                        paymentMethod: orderAll[choosenData].paymentMethod.id,
+                        totalPayment: orderAll[choosenData].totalPayment,
+                        orderStatus: orderStatusAll[statusId].id
+                    }),              
+                    // Adding headers to the request 
+                    headers: { 
+                        "Content-type" : "application/json; charset=UTF-8",
+                        "Authorization" : "Basic "+token
+                    } 
+                })
+                .then(response => response.json())
+                .then(result => {
+                    showData();   
+                }).catch(err => {
+                    errorStat = err.name === 'AbortError'? 1 : 2;
+                });
+            }
+
+            showData();
+        </script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script th:src="@{/admins/js/scripts.js}"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+        <script th:src="@{/admins/assets/demo/datatables-demo.js}"></script>
+
+        
+    </body>
+</html>

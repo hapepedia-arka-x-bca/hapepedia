@@ -60,16 +60,21 @@ public class CustomerService implements UserDetailsService{
 			return new Customer(customer, roles);
 		}
     }
+    
+    public Customer login(String email, String password) {
+		Customer customer = customerRepo.findByEmail(email);
+		
+		if(customer == null) {
+			return null;
+		}
+		
+		if(!customer.getPassword().equals(password)) {
+			return null;
+		}
+		
+		return customer;
+	}
 
-    public Customer login(String email,String password){
-        Customer customer = customerRepo.findByEmail(email);
-
-        if(customer.getPassword().equals(password))
-            return customer;
-        
-        else
-            return null;
-    }
 
 
     public boolean delete (Long id){

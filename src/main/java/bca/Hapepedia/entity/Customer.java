@@ -1,6 +1,6 @@
 package bca.Hapepedia.entity;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.Collection;
 import java.util.List;
 
@@ -36,11 +36,11 @@ public class Customer implements UserDetails {
 	@Column(length = 20)
 	private Long phone_number;
 	@Column(length = 255)
-	private String profile_picture;
+	private String profile_picture = "";
 	@Column()
 	private Date birth_date;
 	@Column(length = 1)
-	private Boolean status;
+	private Boolean status = true;
 	@Column(length = 10)
 	private String roles = "USER";
 

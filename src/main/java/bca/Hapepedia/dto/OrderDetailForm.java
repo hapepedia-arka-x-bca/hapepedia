@@ -2,8 +2,8 @@ package bca.Hapepedia.dto;
 
 public class OrderDetailForm {
     private int id;
-    private int orderId;
-    private int productId;
+    private Long orderId;
+    private Long productDetailId;
     private int quantity;
 
     public int getId() {
@@ -14,20 +14,20 @@ public class OrderDetailForm {
         this.id = id;
     }
 
-    public int getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(int orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 
-    public int getProductId() {
-        return productId;
+    public Long getProductDetailId() {
+        return productDetailId;
     }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
+    public void setProductDetailId(Long productDetailId) {
+        this.productDetailId = productDetailId;
     }
 
     public int getQuantity() {

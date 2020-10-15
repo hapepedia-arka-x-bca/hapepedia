@@ -1,27 +1,24 @@
 package bca.Hapepedia.dto;
 
 import javax.validation.constraints.NotEmpty;
-
-import bca.Hapepedia.entity.Color;
-import bca.Hapepedia.entity.Product;
-import bca.Hapepedia.entity.Varian;
+import javax.validation.constraints.NotNull;
 
 public class ProductDetailForm {
 	private Long id;
 
-	@NotEmpty(message = "Product is required.")
-	private Product product;
+	// @NotEmpty(message = "Product is required.")
+	private Long product;
 
-	@NotEmpty(message = "Product Color is required.")
-	private Color color;
+	// @NotEmpty(message = "Product Color is required.")
+	private Long color;
 
-	@NotEmpty(message = "Product Varian is required.")
-	private Varian varian;
-	
-	@NotEmpty(message = "Product Stock is required.")
+	// @NotEmpty(message = "Product Varian is required.")
+	private Integer varian;
+
+	// @NotEmpty(message = "Product Stock is required.")
 	private Long Stock;
-	
-	@NotEmpty(message = "Product Price is required.")
+
+	// @NotNull(message = "Product Price is required.")
 	private Double price;
 
 	public Long getId() {
@@ -32,27 +29,27 @@ public class ProductDetailForm {
 		this.id = id;
 	}
 
-	public Product getProduct() {
+	public Long getProduct() {
 		return product;
 	}
 
-	public void setProduct(Product product) {
+	public void setProduct(Long product) {
 		this.product = product;
 	}
 
-	public Color getColor() {
+	public Long getColor() {
 		return color;
 	}
 
-	public void setColor(Color color) {
+	public void setColor(Long color) {
 		this.color = color;
 	}
 
-	public Varian getVarian() {
+	public Integer getVarian() {
 		return varian;
 	}
 
-	public void setVarian(Varian varian) {
+	public void setVarian(Integer varian) {
 		this.varian = varian;
 	}
 
@@ -72,7 +69,4 @@ public class ProductDetailForm {
 		this.price = price;
 	}
 
-
-	
-	
 }

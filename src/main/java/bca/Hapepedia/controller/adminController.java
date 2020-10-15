@@ -4,55 +4,108 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import bca.Hapepedia.dto.CategoryForm;
+import bca.Hapepedia.dto.ProductForm;
+import bca.Hapepedia.entity.Category;
 import bca.Hapepedia.services.AdminService;
+import bca.Hapepedia.services.CategoryService;
+import bca.Hapepedia.services.ProductService;
+import bca.Hapepedia.services.BrandService;
+
 
 @Controller
 @RequestMapping("/admin")
 public class adminController {
-	   
+
 	@Autowired
 	private AdminService adminService;
+	
+	@Autowired
+	private CategoryService categoryService;
+
+	@Autowired
+	private BrandService brandService;
+
+	@Autowired
+	private ProductService productService;
 
 	@GetMapping
 	public String index(Model model) {
 		return "admins/index";
 	}
+	
+	@GetMapping("/login")
+	public String login() {
+		return "admins/login";
+	}
 
-	@RequestMapping("/detailTransaction")
+	@GetMapping("/detailTransaction")
 	public String detailTransaction(Model model) {
 		return "admins/detailTransaction";
 	}
 
-	@RequestMapping("/product")
-	public String product(Model model) {
-		return "admins/product";
-	}
-
-	@RequestMapping("/detailProduct")
+	@GetMapping("/detailProduct")
 	public String detailProduct(Model model) {
 		return "admins/detailProduct";
 	}
 
-	@RequestMapping("/addProduct")
+	@GetMapping("/addProduct")
 	public String addProduct(Model model) {
 		return "admins/detailProduct";
 	}
 
-	@RequestMapping("/listadmin")
+	@GetMapping("/listadmin")
 	public String listadmin(Model model) {
 		return "admins/admin";
 	}
 
-	@RequestMapping("/addAdmin")
+	@GetMapping("/addAdmin")
 	public String addAdmin(Model model) {
 		return "admins/addAdmin";
 	}
 
-	@RequestMapping("/setting")
+	@GetMapping("/setting")
 	public String setting(Model model) {
 		model.addAttribute("admin list", adminService);
 		return "admins/setting";
+	}
+
+	@GetMapping("/category")
+	public String category(Model model) {
+		model.addAttribute("listOfCategory", categoryService.findAll());
+		model.addAttribute("categoryForm", new CategoryForm());
+		return "admins/addCategory";
+	}
+
+	@GetMapping("/product")
+	public String product(Model model) {
+		model.addAttribute("listOfProduct", productService.findAll());
+		model.addAttribute("productForm", new ProductForm());
+		return "admins/product";
+	}
+
+	@PostMapping("/category/save")
+	public String categorySave(CategoryForm categoryForm, Model model) {
+		Category category = new Category();
+		category.setName(categoryForm.getName());
+		categoryService.save(category);
+		return "redirect:/admins/category";
+	}
+
+	@GetMapping("/order")
+	public String order(Model model) {
+		model.addAttribute("listOfCategory", categoryService.findAll());
+		model.addAttribute("categoryForm", new CategoryForm());
+		return "admins/order";
+	}
+
+	@GetMapping("/brand")
+	public String brand(Model model) {
+		model.addAttribute("listOfBrand", brandService.findAll());
+		return "admins/addBrand";
+
 	}
 }

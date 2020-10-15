@@ -1,5 +1,8 @@
 package bca.Hapepedia.services;
 
+import java.util.List;
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +18,13 @@ public class ProductDetailService {
 	@Autowired
 	private ProductDetailRepo productDetailRepo;
 
-	public ProductDetail findByProduct(Product product) {
-		return productDetailRepo.findByProduct(product);
+	public Optional<ProductDetail> findById(Long productDetailId) {
+		return productDetailRepo.findById(productDetailId);
 	}
 
+	public List<ProductDetail> findByProduct(Product product) {
+		return productDetailRepo.findByProduct(product);
+	}
 
 	public ProductDetail save(ProductDetail productDetail) {
 		return productDetailRepo.save(productDetail);

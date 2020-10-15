@@ -1,5 +1,7 @@
 package bca.Hapepedia.services;
 
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +29,14 @@ public class OrderStatusService {
     public Iterable<OrderStatus> findAll()
     {
         return orderStatusRepo.findAll();
+    }
+
+    public OrderStatus findByOrderStatus(OrderStatus orderStatus)
+    {
+        return orderStatusRepo.findByOrderstatus(orderStatus);
+    }
+
+    public Optional<OrderStatus> findById(int id){
+        return orderStatusRepo.findById(id);
     }
 }

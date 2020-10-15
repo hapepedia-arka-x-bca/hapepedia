@@ -13,10 +13,10 @@ public class CustomerForm {
 	@Size(min = 8, message="Password required 8 character")
 	private String password;
 	
-	@NotEmpty(message = "Title is required")
+	@NotEmpty(message = "Email is required")
 	private String email;
 	
-	@NotEmpty(message = "Description is required")
+	@NotEmpty(message = "Name is required")
     private String name;
     
     private String gender;
