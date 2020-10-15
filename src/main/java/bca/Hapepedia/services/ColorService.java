@@ -24,7 +24,7 @@ public class ColorService {
         return colorRepo.save(color);
     }
 
-    public boolean delete(int id)
+    public boolean delete(Long id)
     {
         colorRepo.deleteById(id);
         return true;
