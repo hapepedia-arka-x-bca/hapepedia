@@ -134,7 +134,7 @@ public class OrderApiController {
 		try {
 			Order newOrder = new Order();
 			newOrder = orderService.findById(id).get();
-			newOrder.setOrderStatus(orderStatusService.findById(1).get());
+			newOrder.setOrderStatus(orderStatusService.findById(2).get());
 
 			response.setStatus(true);
 			response.getMessages().add("Order Success");
