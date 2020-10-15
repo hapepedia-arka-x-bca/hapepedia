@@ -8,16 +8,16 @@ public class ProductForm {
 
 	@NotEmpty(message = "Product Name is required.")
 	private String name;
-	
+
 	@NotNull(message = "Brand is required.")
-	private Long brand_id;
-	
+	private Long brandId;
+
 	@NotNull(message = "Category is required.")
-	private Long id_category;
-	
+	private Long categoryId;
+
 	@NotEmpty(message = "Specification is required.")
 	private String specification;
-	
+
 	@NotNull(message = "Weight is required.")
 	private double weight;
 
@@ -37,13 +37,12 @@ public class ProductForm {
 		this.name = name;
 	}
 
-
-	public Long getId_category() {
-		return id_category;
+	public Long getCategoryId() {
+		return categoryId;
 	}
 
-	public void setId_category(Long id_category) {
-		this.id_category = id_category;
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
 	}
 
 	public String getSpecification() {
@@ -62,12 +61,12 @@ public class ProductForm {
 		this.weight = weight;
 	}
 
-	public Long getBrand_id() {
-		return brand_id;
+	public Long getBrandId() {
+		return brandId;
 	}
 
-	public void setBrand_id(Long brand_id) {
-		this.brand_id = brand_id;
+	public void setBrandId(Long brandId) {
+		this.brandId = brandId;
 	}
-	
+
 }
