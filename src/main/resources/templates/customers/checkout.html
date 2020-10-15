@@ -242,6 +242,23 @@
                 }
             });
         }
+        
+        function getPayment(id) {
+            $.ajax({
+                url: "http://localhost:8081/api/midtrans/generate/" + id,
+                method: "GET",
+                data: { id: id },
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Basic " + token);
+                },
+                success: function (response) {
+                    window.location.href = response.payload;
+                },
+                error: function () {
+                    console.log("Error");
+                }
+            });
+        }
 
         $('#checkoutButton').on('click', function () {
             var shippingFee = $("#shippingFee").val();
@@ -260,13 +277,15 @@
                 },
                 success: function (response) {
                     console.log(response);
-                    //MELAKUKAN SESUATU JIKA CHECKOUT BERHASIL
+                    getPayment(response.payload.id);
                 },
                 error: function () {
                     console.log('Anda Gagal Melakukan Checkout!');
                 }
             });
         });
+    
+        
     </script>
 </body>
 
