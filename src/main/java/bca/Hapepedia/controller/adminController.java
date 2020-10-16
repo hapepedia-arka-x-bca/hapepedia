@@ -15,14 +15,13 @@ import bca.Hapepedia.services.CategoryService;
 import bca.Hapepedia.services.ProductService;
 import bca.Hapepedia.services.BrandService;
 
-
 @Controller
 @RequestMapping("/admin")
 public class adminController {
 
 	@Autowired
 	private AdminService adminService;
-	
+
 	@Autowired
 	private CategoryService categoryService;
 
@@ -36,7 +35,7 @@ public class adminController {
 	public String index(Model model) {
 		return "admins/index";
 	}
-	
+
 	@GetMapping("/login")
 	public String login() {
 		return "admins/login";
@@ -79,12 +78,12 @@ public class adminController {
 		model.addAttribute("categoryForm", new CategoryForm());
 		return "admins/addCategory";
 	}
-	
+
 	@GetMapping("/color")
 	public String color(Model model) {
 		return "admins/addColor";
 	}
-	
+
 	@GetMapping("/varian")
 	public String varian(Model model) {
 		return "admins/addVarian";
@@ -114,7 +113,6 @@ public class adminController {
 
 	@GetMapping("/brand")
 	public String brand(Model model) {
-		model.addAttribute("listOfBrand", brandService.findAll());
 		return "admins/addBrand";
 
 	}
