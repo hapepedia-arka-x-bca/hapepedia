@@ -19,6 +19,7 @@ import bca.Hapepedia.entity.Order;
 import bca.Hapepedia.entity.OrderDetail;
 import bca.Hapepedia.entity.OrderStatus;
 import bca.Hapepedia.entity.ProductDetail;
+import bca.Hapepedia.repo.CartRepo;
 import bca.Hapepedia.repo.OrderDetailRepo;
 import bca.Hapepedia.repo.OrderRepo;
 import bca.Hapepedia.repo.OrderStatusRepo;
@@ -39,6 +40,9 @@ public class OrderService {
     
     @Autowired
     private ProductDetailRepo productDetailRepo;
+
+    @Autowired
+    private CartRepo cartRepo;
 
     public Order save(Order order) {
         return orderRepo.save(order);
@@ -113,6 +117,8 @@ public class OrderService {
 			productDetail.setStock(productDetail.getStock() - orderDetail.getQuantity());
 			productDetailRepo.save(productDetail);
 		}
+    	
+    	cartRepo.deleteAllByCustomer(customer);
     	
     	return savedOrder;
     }

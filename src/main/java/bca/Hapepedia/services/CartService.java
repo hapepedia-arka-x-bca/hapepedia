@@ -42,4 +42,9 @@ public class CartService {
 		cartRepo.deleteById(id);
 		return true;
 	}
+	
+	public boolean deletAllByCustomer(Customer customer) {
+		cartRepo.deleteAllByCustomer(customer);
+		return true;
+	}
 }
