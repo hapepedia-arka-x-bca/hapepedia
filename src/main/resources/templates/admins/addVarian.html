@@ -186,7 +186,7 @@
                 "serverSide": false,
                 ajax: {
                     dataSrc: "payload",
-                    url: 'http://127.0.0.1:8081/api/varian',
+                    url: window.location.origin + '/api/varian',
                     type: "GET",
                     dataType: 'json',
                     beforeSend: function (xhr) {
@@ -230,7 +230,7 @@
                 categoryId: categoryId
             };
             $.ajax({
-                url: window.location.origin+"/api/varian/save",
+                url: window.location.origin + "/api/varian/save",
                 method: "POST",
                 data: JSON.stringify(varian),
                 contentType: "application/json",
@@ -261,7 +261,7 @@
         $('#deleteVarian').on('click', function () {
             var id = $('#deleteId').val();
             $.ajax({
-                url: window.location.origin+"/api/varian/delete/" + id,
+                url: window.location.origin + "/api/varian/delete/" + id,
                 method: "POST",
                 contentType: "application/json",
                 beforeSend: function (xhr) {
@@ -285,7 +285,7 @@
         function getVarianById(id) {
             getAllCategory();
             $.ajax({
-                url: window.location.origin+"/api/varian/get/" + id,
+                url: window.location.origin + "/api/varian/get/" + id,
                 method: "GET",
                 data: { id: id },
                 beforeSend: function (xhr) {
@@ -315,7 +315,7 @@
                 categoryId: categoryId
             };
             $.ajax({
-                url: window.location.origin+"/api/varian/save",
+                url: window.location.origin + "/api/varian/save",
                 method: "POST",
                 data: JSON.stringify(varian),
                 contentType: "application/json",
@@ -338,7 +338,7 @@
 
         function getAllCategory() {
             $.ajax({
-                url: window.location.origin+"/api/category",
+                url: window.location.origin + "/api/category",
                 type: "GET",
                 beforeSend: function (xhr) {
                     categorySelect.html("<option> Loading ... </option>");

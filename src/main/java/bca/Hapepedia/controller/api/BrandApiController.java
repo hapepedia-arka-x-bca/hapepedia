@@ -7,16 +7,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import bca.Hapepedia.dto.BrandForm;
-import bca.Hapepedia.dto.DeleteForm;
 import bca.Hapepedia.dto.ResponseData;
 import bca.Hapepedia.entity.Brand;
 import bca.Hapepedia.services.BrandService;
@@ -32,7 +30,7 @@ public class BrandApiController {
         ResponseData response = new ResponseData();
         try {
             response.setStatus(true);
-            response.getMessages().add("Brands found");
+            response.getMessages().add("Categories found");
             response.setPayload(brandService.findAll());
             return ResponseEntity.ok(response);
         } catch (Exception ex) {
@@ -42,8 +40,8 @@ public class BrandApiController {
         }
     }
 
-    @GetMapping("/get")
-    public ResponseEntity<ResponseData> findByIdBrand(@RequestParam("id") Long id) {
+    @GetMapping("/get/{id}")
+    public ResponseEntity<ResponseData> findByIdBrand(@PathVariable("id") Long id) {
         ResponseData response = new ResponseData();
         try {
             response.setStatus(true);
@@ -57,14 +55,14 @@ public class BrandApiController {
         }
     }
 
-    @PostMapping
+    @PostMapping("/save")
     public ResponseEntity<ResponseData> saveBrand(@Valid @RequestBody BrandForm form, Errors errors) {
         ResponseData response = new ResponseData();
         if (!errors.hasErrors()) {
             Brand brand = new Brand();
             brand.setId(form.getId());
             brand.setName(form.getName());
-            response = new ResponseData();
+
             response.setStatus(true);
             response.getMessages().add("Brand saved");
             response.setPayload(brandService.save(brand));
@@ -78,21 +76,18 @@ public class BrandApiController {
         }
     }
 
-    @DeleteMapping
-    public ResponseEntity<ResponseData> deleteCategory(@Valid @RequestBody DeleteForm form, Errors errors) {
+    @PostMapping("/delete/{id}")
+    public ResponseEntity<ResponseData> deleteBrand(@PathVariable("id") Long id) {
         ResponseData response = new ResponseData();
-        if (!errors.hasErrors()) {
-            response = new ResponseData();
+        try {
             response.setStatus(true);
-            response.getMessages().add("Category deleted");
-            response.setPayload(brandService.delete(form.getId()));
+            response.getMessages().add("Brand deleted");
+            response.setPayload(brandService.delete(id));
             return ResponseEntity.ok(response);
-        } else {
+        } catch (Exception ex) {
             response.setStatus(false);
-            for (ObjectError err : errors.getAllErrors()) {
-                response.getMessages().add(err.getDefaultMessage());
-            }
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+            response.getMessages().add("Could not delete brand: " + ex.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
 }
