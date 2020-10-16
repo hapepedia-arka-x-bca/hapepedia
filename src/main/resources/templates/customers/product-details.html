@@ -135,7 +135,7 @@
         // console.log(idProduct);
 
         function showData(){
-            fetch("http://localhost:8081/api/product/show/"+idProduct,{
+            fetch(window.location.origin+"/api/product/show/"+idProduct,{
                 // Adding method type 
                 method: "GET", 
                                 
@@ -158,7 +158,7 @@
             });
 
 
-            fetch("http://localhost:8081/api/product/show/"+idProduct,{
+            fetch(window.location.origin+"/api/product/show/"+idProduct,{
                 // Adding method type 
                 method: "GET", 
                                 
@@ -179,7 +179,7 @@
                 errorStat = err.name === 'AbortError'? 1 : 2;
             });
 
-            fetch("http://localhost:8081/api/productDetail/product/"+idProduct,{
+            fetch(window.location.origin+"/api/productDetail/product/"+idProduct,{
                 // Adding method type 
                 method: "GET", 
                                 
@@ -232,7 +232,7 @@
                 var quantity = document.getElementById("quantityForm").value;
                 console.log(iduser+" "+token+" "+quantity);
                 // console.log(email+" "+password);
-                fetch("http://localhost:8081/api/cart/add", {
+                fetch(window.location.origin+"/api/cart/add", {
                     // Adding method type 
                     method: "POST",
                     headers: { 
@@ -278,7 +278,7 @@
         }
 
         function showRecomendation(id){
-            fetch("http://localhost:8081/api/product/category/"+id,{
+            fetch(window.location.origin+"/api/product/category/"+id,{
                 // Adding method type 
                 method: "GET", 
                                 

@@ -188,7 +188,7 @@
             })
 
             $.ajax({
-                url: "http://127.0.0.1:8081/api/cart/getbyloggedin",
+                url: window.location.origin+"/api/cart/getbyloggedin",
                 method: "GET",
                 contentType: "application/json",
                 beforeSend: function (xhr) {
@@ -222,7 +222,7 @@
 
         function getAddressById(id) {
             $.ajax({
-                url: "http://127.0.0.1:8081/api/address/get/" + id,
+                url: window.location.origin+"/api/address/get/" + id,
                 method: "GET",
                 data: { id: id },
                 beforeSend: function (xhr) {
@@ -245,7 +245,7 @@
         
         function getPayment(id) {
             $.ajax({
-                url: "http://localhost:8081/api/midtrans/generate/" + id,
+                url: window.location.origin+"/api/midtrans/generate/" + id,
                 method: "GET",
                 data: { id: id },
                 beforeSend: function (xhr) {
@@ -268,7 +268,7 @@
                 deliveryAddress: deliveryAddress
             }
             $.ajax({
-                url: "http://127.0.0.1:8081/api/order/checkout",
+                url: window.location.origin+"/api/order/checkout",
                 method: "POST",
                 data: JSON.stringify(address),
                 contentType: "application/json",

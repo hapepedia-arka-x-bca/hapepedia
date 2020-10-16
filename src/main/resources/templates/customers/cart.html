@@ -113,7 +113,7 @@
   
         function getCart()
         {          
-         fetch("http://localhost:8081/api/cart/"+id,{
+         fetch(window.location.origin+"/api/cart/"+id,{
                 // Adding method type 
                 method: "GET", 
                                 
