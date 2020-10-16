@@ -22,7 +22,7 @@ public class indexController {
 
 	@GetMapping
 	public String index(Model model) {
-		return "customers/index";
+		return "customers/shop";
 	}
 
 	@GetMapping("/shop")
