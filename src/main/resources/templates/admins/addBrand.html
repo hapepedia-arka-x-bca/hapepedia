@@ -26,8 +26,8 @@
                 </div>
                 <div class="container">
                     <div class="row">
-                        <!-- BAGIAN INI AKAN MENG-HANDLE FORM INPUT NEW CATEGORY  -->
-                        <div class="col-md-4">
+                        <!-- BAGIAN INI AKAN MENG-HANDLE FORM INPUT NEW BRAND  -->
+                        <!-- <div class="col-md-4">
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class="card-title">New Brand</h4>
@@ -47,44 +47,31 @@
 
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- BAGIAN INI AKAN MENG-HANDLE FORM INPUT NEW BRAND  -->
 
                         <!-- BAGIAN INI AKAN MENG-HANDLE TABLE LIST BRAND  -->
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class="card-title">Brand List</h4>
                                 </div>
                                 <div class="card-body">
+                                    <div> <a href="" class="btn btn-dark" data-toggle="modal"
+                                            data-target="#addBrandModal">Add Brand</a>
+                                    </div>
+                                    <br>
                                     <div class="table-responsive">
                                         <table id="dataTable" class="table table-hover table-bordered">
                                             <thead>
                                                 <tr>
-                                                    <th>#</th>
+                                                    <th>id</th>
                                                     <th>Brand</th>
                                                     <th>Created At</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr th:each="brand: ${listOfBrand}">
-                                                    <td th:text="${brand.id}">1</td>
-                                                    <td><strong th:text="${brand.name}">Brand</strong></td>
-                                                    <td>Date Created</td>
-                                                    <td>
-                                                        <div class="btn-group btn-group-sm">
-                                                            <a href="" class="btn btn-warning" data-toggle="modal"
-                                                                data-target="#editBrandModal"
-                                                                th:onclick="'javascript:getBrandById(' + ${brand.id} + ');'"><i
-                                                                    class="fas fa-edit"></i></a>
-                                                            <a href="" class="btn btn-danger" data-toggle="modal"
-                                                                data-target="#deleteBrandModal"
-                                                                th:onclick="'javascript:setDeleteId(' + ${brand.id} + ');'"><i
-                                                                    class="fas fa-trash"></i></a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -92,13 +79,47 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- BAGIAN INI AKAN MENG-HANDLE TABLE LIST CATEGORY  -->
+                        <!-- BAGIAN INI AKAN MENG-HANDLE TABLE LIST BRAND  -->
                     </div>
                 </div>
             </main>
             <div th:replace="admins/fragments/footer::adminsFooter"></div>
         </div>
     </div>
+
+    <!-- modal add new -->
+    <div class="modal fade" id="addBrandModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Brand</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- /.modal form body -->
+                    <form role="form" id="createBrandForm">
+
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="name">Brand Title</label>
+                                <input type="text" id="name" class="form-control" name="name">
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </form>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button id="createBrand" type="button" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
 
     <!-- Modal For Deleting Brand -->
     <div class="modal fade" id="deleteBrandModal">
@@ -164,24 +185,78 @@
     <div th:include="admins/fragments/footer::templateScript"></div>
 
     <script>
+        var table;
+        var token = localStorage.getItem('token');
+
+        $(document).ready(function () {
+            table = $('#dataTable').DataTable({
+                "processing": false,
+                "serverSide": false,
+                ajax: {
+                    dataSrc: "payload",
+                    url: window.location.origin + '/api/brand',
+                    type: "GET",
+                    dataType: 'json',
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Authorization", "Basic " + token);
+                    },
+                },
+                columns: [
+                    { data: 'id', title: 'ID' },
+                    { data: 'name' },
+                    {
+                        data: 'datetime',
+                        render: function (data, type, row) {
+                            return `Datetime`;
+                        },
+                    },
+                    {
+                        data: 'id',
+                        render: function (data, type, row) {
+                            return `<div class="btn-toolbar btn-toolbar-sm btn-block">
+                            <span>
+                                <a href="" class="btn btn-warning mr-2"
+                                    data-toggle="modal" data-target="#editBrandModal" onclick="getBrandById('` + data + `');"><i
+                                        class="fas fa-edit"></i></a>
+                            </span>
+                            <span>
+                                <a href="" class="btn btn-danger mr-2"
+                                    data-toggle="modal"
+                                    data-target="#deleteBrandModal"
+                                    onclick="setDeleteId('` + data + `');"><i
+                                        class="fas fa-trash"></i></a>
+                            </span>
+                        </div>`;
+                        }
+                    }
+                ]
+            })
+        });
+
         $('#createBrand').on('click', function () {
             var name = $("#name").val();
             var brand = new Object();
             brand.name = name;
             $.ajax({
-                url: window.location.origin+"/api/brand",
+                url: window.location.origin + "/api/brand/save",
                 method: "POST",
                 data: JSON.stringify(brand),
-                contentType: "application/json;odata=verbose",
+                contentType: "application/json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Basic " + token);
+                },
                 success: function (response) {
                     if (response.status == true) {
-                        alert("data success!");
+                        $('#addBrandModal').modal('toggle');
+                        $('#name').val(null);
+                        alert("Insert data success!");
+                        table.ajax.reload();
                     } else {
                         console.log('Anda Gagal Menambahkan Data. Mohon Coba Kembali!');
                     }
                 },
                 error: function () {
-                    console.log('Anda Gagal Menambahkan Data. Mohon Coba Kembali!');
+                    console.log('Anda Gagal Menambahkan Data. Mohon Cobaaaa Kembali!');
                 }
             });
         });
@@ -192,16 +267,17 @@
 
         $('#deleteBrand').on('click', function () {
             var id = $('#deleteId').val();
-            var brand = new Object();
-            brand.id = id;
             $.ajax({
-                url: window.location.origin+"/api/brand",
-                method: "DELETE",
-                data: JSON.stringify(brand),
+                url: window.location.origin + "/api/brand/delete/" + id,
+                method: "POST",
                 contentType: "application/json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Basic " + token);
+                },
                 success: function (response) {
                     if (response.status == true) {
                         $('#deleteBrandModal').modal('toggle');
+                        table.ajax.reload();
                         alert("Hapus sukses!");
                     } else {
                         console.log('Anda Gagal Menambahkan Data. Mohon Coba Kembali!');
@@ -215,9 +291,12 @@
 
         function getBrandById(id) {
             $.ajax({
-                url: window.location.origin+"/api/brand/get",
+                url: window.location.origin + "/api/brand/get/" + id,
                 method: "GET",
                 data: { id: id },
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Basic " + token);
+                },
                 success: function (response) {
                     $('#editId').val(null);
                     $('#editName').val(null);
@@ -238,10 +317,13 @@
             brand.id = id;
             brand.name = name;
             $.ajax({
-                url: window.location.origin+"/api/brand",
+                url: window.location.origin + "/api/brand/save",
                 method: "POST",
                 data: JSON.stringify(brand),
                 contentType: "application/json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Basic " + token);
+                },
                 success: function (response) {
                     if (response.status == true) {
                         $('#editBrandModal').modal('toggle');
