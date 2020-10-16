@@ -20,7 +20,7 @@ public class indexController {
 	private ProductDetailService productDetailService;
 	@GetMapping
 	public String index(Model model) {
-		return "customers/index";
+		return "customers/shop";
 	}
 
 	@GetMapping("/shop")
