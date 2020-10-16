@@ -188,7 +188,7 @@
             })
 
             $.ajax({
-                url: window.location.origin+"/api/cart/getbyloggedin",
+                url: window.location.origin + "/api/cart/getbyloggedin",
                 method: "GET",
                 contentType: "application/json",
                 beforeSend: function (xhr) {
@@ -200,7 +200,7 @@
                         var totalPrice = 0;
                         $.each(response.payload, function (key, item) {
                             $('#cart-list li:eq(0)').after('<li>' + item.productDetail.product.name + '<span>' + item.productDetail.price + '</span></li>');
-                            totalPrice = + item.productDetail.price * item.quantity;
+                            totalPrice += item.productDetail.price * item.quantity;
                         })
                         $('#totalPrice').html(totalPrice);
                     } else {
@@ -222,7 +222,7 @@
 
         function getAddressById(id) {
             $.ajax({
-                url: window.location.origin+"/api/address/get/" + id,
+                url: window.location.origin + "/api/address/get/" + id,
                 method: "GET",
                 data: { id: id },
                 beforeSend: function (xhr) {
@@ -242,10 +242,10 @@
                 }
             });
         }
-        
+
         function getPayment(id) {
             $.ajax({
-                url: window.location.origin+"/api/midtrans/generate/" + id,
+                url: window.location.origin + "/api/midtrans/generate/" + id,
                 method: "GET",
                 data: { id: id },
                 beforeSend: function (xhr) {
@@ -268,7 +268,7 @@
                 deliveryAddress: deliveryAddress
             }
             $.ajax({
-                url: window.location.origin+"/api/order/checkout",
+                url: window.location.origin + "/api/order/checkout",
                 method: "POST",
                 data: JSON.stringify(address),
                 contentType: "application/json",
@@ -284,8 +284,8 @@
                 }
             });
         });
-    
-        
+
+
     </script>
 </body>
 

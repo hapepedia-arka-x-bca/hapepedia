@@ -12,4 +12,6 @@ public interface CartRepo extends PagingAndSortingRepository<Cart, Long>{
 	public Iterable<Cart> findAllByCustomer(Optional<Customer> optional);
 	public Iterable<Cart> findAllByCustomer(Customer customer);
 	public Optional<Cart> findByProductDetailAndCustomer(ProductDetail productDetail, Customer customer);
+	public void deleteAllByCustomer(Customer customer);
+	
 }
