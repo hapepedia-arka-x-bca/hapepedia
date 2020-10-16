@@ -256,7 +256,7 @@
             var category = new Object();
             category.name = name;
             $.ajax({
-                url: "http://127.0.0.1:8081/api/category",
+                url: window.location.origin+"/api/category",
                 method: "POST",
                 data: JSON.stringify(category),
                 contentType: "application/json;odata=verbose",
@@ -289,7 +289,7 @@
             var category = new Object();
             category.id = id;
             $.ajax({
-                url: "http://127.0.0.1:8081/api/category",
+                url: window.location.origin+"/api/category",
                 method: "DELETE",
                 data: JSON.stringify(category),
                 contentType: "application/json",
@@ -314,7 +314,7 @@
         function getCategoryById(id)
         {
             $.ajax({
-                url: "http://127.0.0.1:8081/api/category/get",
+                url: window.location.origin+"/api/category/get",
                 method: "GET",
                 data: { id: id },
                 success: function (response)
@@ -340,7 +340,7 @@
             category.id = id;
             category.name = name;
             $.ajax({
-                url: "http://127.0.0.1:8081/api/category",
+                url: window.location.origin+"/api/category",
                 method: "POST",
                 data: JSON.stringify(category),
                 contentType: "application/json",

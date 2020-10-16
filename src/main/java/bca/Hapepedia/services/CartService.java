@@ -30,7 +30,7 @@ public class CartService {
 		return cartRepo.findById(id);
 	}
 
-	public Optional<Cart> findByProductDetailAndByCustomer (ProductDetail productDetail, Customer customer) {
+	public Optional<Cart> findByProductDetailAndCustomer (ProductDetail productDetail, Customer customer) {
 		return cartRepo.findByProductDetailAndCustomer(productDetail,customer);
 	}
 	

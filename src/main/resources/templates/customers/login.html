@@ -74,8 +74,8 @@
       var email = document.getElementById("formEmail").value;
       var password = document.getElementById("formPassword").value;
 
-      // console.log(email+" "+password);
-      fetch("http://localhost:8081/api/customer/login", {
+      console.log(window.location.origin);
+      fetch(window.location.origin+"/api/customer/login", {
         // Adding method type 
         method: "POST",
 

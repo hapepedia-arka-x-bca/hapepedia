@@ -96,7 +96,7 @@
             admin.email = email;
             admin.password = password;
             $.ajax({
-                url: "http://127.0.0.1:8081/api/admin/login",
+                url: window.location.origin+"/api/admin/login",
                 method: "POST",
                 data: JSON.stringify(admin),
                 contentType: "application/json",

@@ -169,7 +169,7 @@
             var brand = new Object();
             brand.name = name;
             $.ajax({
-                url: "http://127.0.0.1:8081/api/brand",
+                url: window.location.origin+"/api/brand",
                 method: "POST",
                 data: JSON.stringify(brand),
                 contentType: "application/json;odata=verbose",
@@ -195,7 +195,7 @@
             var brand = new Object();
             brand.id = id;
             $.ajax({
-                url: "http://127.0.0.1:8081/api/brand",
+                url: window.location.origin+"/api/brand",
                 method: "DELETE",
                 data: JSON.stringify(brand),
                 contentType: "application/json",
@@ -215,7 +215,7 @@
 
         function getBrandById(id) {
             $.ajax({
-                url: "http://127.0.0.1:8081/api/brand/get",
+                url: window.location.origin+"/api/brand/get",
                 method: "GET",
                 data: { id: id },
                 success: function (response) {
@@ -238,7 +238,7 @@
             brand.id = id;
             brand.name = name;
             $.ajax({
-                url: "http://127.0.0.1:8081/api/brand",
+                url: window.location.origin+"/api/brand",
                 method: "POST",
                 data: JSON.stringify(brand),
                 contentType: "application/json",

@@ -54,14 +54,25 @@ public class CartApiController {
 	public ResponseEntity<ResponseData> addCart(@RequestBody CartForm cartForm) {
 		ResponseData response = new ResponseData();
 		try {
-			Cart newCart = new Cart();
-			newCart.setCustomer(customerService.findById(cartForm.getCustomerId()).get());
-			newCart.setProductDetail(productDetailService.findById(cartForm.getProductDetailId()).get());
-			newCart.setQuantity(cartForm.getQuantity());
-			response.setStatus(true);
-			response.getMessages().add("Cart saved");
-			response.setPayload(cartService.save(newCart));
-			return ResponseEntity.ok(response);
+			Cart tempCart = new Cart();
+			tempCart = cartService.findByProductDetailAndCustomer(productDetailService.findById(cartForm.getProductDetailId()).get(), customerService.findById(cartForm.getCustomerId()).get()).get();
+			if(tempCart.getProductDetail() == null){
+				Cart newCart = new Cart();
+				newCart.setCustomer(customerService.findById(cartForm.getCustomerId()).get());
+				newCart.setProductDetail(productDetailService.findById(cartForm.getProductDetailId()).get());
+				newCart.setQuantity(cartForm.getQuantity());
+				response.setStatus(true);
+				response.getMessages().add("Cart saved");
+				response.setPayload(cartService.save(newCart));
+				return ResponseEntity.ok(response);
+			}
+			else{
+				tempCart.setQuantity(tempCart.getQuantity()+1);
+				response.setStatus(true);
+				response.getMessages().add("Product Added");
+				response.setPayload(cartService.save(tempCart));
+				return ResponseEntity.ok(response);
+			}
 			
 		}catch(Exception ex) {
 			response.setStatus(false);

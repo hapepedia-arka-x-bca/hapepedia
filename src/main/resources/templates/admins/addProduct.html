@@ -220,7 +220,7 @@
             };
             product.name = name;
             $.ajax({
-                url: "http://127.0.0.1:8081/api/product",
+                url: window.location.origin+"/api/product",
                 method: "POST",
                 data: JSON.stringify(product),
                 contentType: "application/json",
@@ -258,7 +258,7 @@
                         varian: varianId
                     };
                     $.ajax({
-                        url: "http://127.0.0.1:8081/api/productDetail",
+                        url: window.location.origin+"/api/productDetail",
                         method: "POST",
                         data: JSON.stringify(product),
                         contentType: "application/json",
@@ -283,7 +283,7 @@
 
         function getAllColor(id) {
             $.ajax({
-                url: "http://127.0.0.1:8081/api/color",
+                url: window.location.origin+"/api/color",
                 type: "GET",
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("Authorization", "Basic " + token);
@@ -303,7 +303,7 @@
 
         function getAllVarian(id) {
             $.ajax({
-                url: "http://127.0.0.1:8081/api/varian",
+                url: window.location.origin+"/api/varian",
                 type: "GET",
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("Authorization", "Basic " + token);
@@ -323,7 +323,7 @@
 
         function getAllBrand() {
             $.ajax({
-                url: "http://127.0.0.1:8081/api/brand",
+                url: window.location.origin+"/api/brand",
                 type: "GET",
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("Authorization", "Basic " + token);
@@ -343,7 +343,7 @@
 
         function getAllCategory(id) {
             $.ajax({
-                url: "http://127.0.0.1:8081/api/category",
+                url: window.location.origin+"/api/category",
                 type: "GET",
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("Authorization", "Basic " + token);

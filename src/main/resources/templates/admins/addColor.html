@@ -208,7 +208,7 @@
                 name: name
             };
             $.ajax({
-                url: "http://127.0.0.1:8081/api/color/save",
+                url: window.location.origin+"/api/color/save",
                 method: "POST",
                 data: JSON.stringify(color),
                 contentType: "application/json",
@@ -238,7 +238,7 @@
         $('#deleteColor').on('click', function () {
             var id = $('#deleteId').val();
             $.ajax({
-                url: "http://127.0.0.1:8081/api/color/delete/" + id,
+                url: window.location.origin+"/api/color/delete/" + id,
                 method: "POST",
                 contentType: "application/json",
                 beforeSend: function (xhr) {
@@ -261,7 +261,7 @@
 
         function getColorById(id) {
             $.ajax({
-                url: "http://127.0.0.1:8081/api/color/get/" + id,
+                url: window.location.origin+"/api/color/get/" + id,
                 method: "GET",
                 data: { id: id },
                 beforeSend: function (xhr) {
@@ -287,7 +287,7 @@
             color.id = id;
             color.name = name;
             $.ajax({
-                url: "http://127.0.0.1:8081/api/color/save",
+                url: window.location.origin+"/api/color/save",
                 method: "POST",
                 data: JSON.stringify(color),
                 contentType: "application/json",

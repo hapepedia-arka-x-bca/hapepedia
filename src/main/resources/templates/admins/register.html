@@ -107,7 +107,7 @@
 
                 if(password===confirmPassword){
                     console.log(email+" "+password);
-                    fetch("http://localhost:8081/api/customer/registration",{
+                    fetch(window.location.origin+"/api/customer/registration",{
                         // Adding method type 
                         method: "POST", 
                         
