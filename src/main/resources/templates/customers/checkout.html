@@ -160,7 +160,7 @@
                 "serverSide": false,
                 ajax: {
                     dataSrc: "payload",
-                    url: 'http://127.0.0.1:8081/api/address/getbyloggedin',
+                    url: window.location.origin + 'api/address/getbyloggedin',
                     type: "GET",
                     dataType: 'json',
                     beforeSend: function (xhr) {
