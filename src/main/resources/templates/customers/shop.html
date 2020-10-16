@@ -387,7 +387,10 @@
                         </div>
                     </div> -->
                     <div class="row">
-                        <div th:each="product: ${listOfProduct}"  class="col-lg-4 col-md-6">
+                        <div id="listRecom" class="col-lg-12 col-md-12">
+
+                        </div>
+                        <!-- <div th:each="product: ${listOfProduct}"  class="col-lg-4 col-md-6">
                             <div class="product__item sale">
                                 <div class="product__item__pic set-bg">
                                     <img th:src="@{'/img/shop/' + ${product.image.file}}" alt="" style="width: 100%;">
@@ -402,15 +405,15 @@
                                     <div th:text="'Rp' + ${#numbers.formatInteger(product.price, 3, 'POINT')}" class="product__price"></div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-12 text-center">
+                        </div> -->
+                        <!-- <div class="col-lg-12 text-center">
                             <div class="pagination__option">
                                 <a href="#">1</a>
                                 <a href="#">2</a>
                                 <a href="#">3</a>
                                 <a href="#"><i class="fa fa-angle-right"></i></a>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -431,6 +434,46 @@
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/jquery.nicescroll.min.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        fetch(window.location.origin+"/api/productDetail/",{
+            // Adding method type 
+            method: "GET", 
+                            
+            // Adding headers to the request 
+            headers: { 
+                "Content-type" : "application/json; charset=UTF-8",
+                // "Authorization" : "Basic "+token
+            } 
+        })
+        .then(response => response.json())
+        .then(result => {
+            // console.log(result.payload);
+            var recomData = result.payload;
+            var recomField="";
+            console.log(recomData)
+            for(var i =0; i< recomData.length; i++){
+                recomField = `
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="product__item">
+                            <div class="product__item__pic set-bg" style="background : url('img/shop/`+recomData[i].image.file+`')">
+                                <ul class="product__hover">
+                                    
+                                </ul>
+                            </div>
+                            <div class="product__item__text">
+                                <h6><a href="./product-details?`+recomData[i].id+`">`+recomData[i].product.name+`</a></h6>
+                                <div class="product__price" style="color:red">`+recomData[i].price+`</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            };
+
+            document.getElementById("listRecom").innerHTML=recomField;
+        }).catch(err => {
+            errorStat = err.name === 'AbortError'? 1 : 2;
+        });
+    </script>
 </body>
 
 </html>

@@ -42,7 +42,26 @@ public class ProductDetailApiController {
     @Autowired
     private ProductImageService productImageService;
     
+    @GetMapping()
+    public ResponseEntity<ResponseData> findAllItem()
+    {
+        ResponseData response = new ResponseData();
+        try
+        {
+            response.setStatus(true);
+            response.getMessages().add("Product Details found");
+            response.setPayload(productDetailService.showAll());
 
+            return ResponseEntity.ok(response);
+        }
+
+        catch(Exception ex)
+        {
+            response.setStatus(false);
+            response.getMessages().add("Could not load product Details: " + ex.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
+    }
     
 
     @GetMapping("/show/{id}")

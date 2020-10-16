@@ -10,6 +10,6 @@ import bca.Hapepedia.entity.ProductDetail;
 
 public interface ProductDetailRepo extends PagingAndSortingRepository<ProductDetail, Long>{
     public List<ProductDetail> findByProduct(Product product);
-
+    public Iterable<ProductDetail> findAll();
     public Optional<ProductDetail> findById(Long id);
 }
