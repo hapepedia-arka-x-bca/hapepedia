@@ -6,7 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Where;
 
 @Entity
 @Table(name = "tb_product_detail")
@@ -18,6 +21,10 @@ public class ProductDetail {
 
 	@ManyToOne
 	private Product product;
+
+	@ManyToOne
+	@Where(clause = "main = 1")
+	private ProductImage image;
 
 	@ManyToOne
 	private Color color;
@@ -45,6 +52,14 @@ public class ProductDetail {
 
 	public void setProduct(Product product) {
 		this.product = product;
+	}
+
+	public ProductImage getImage() {
+		return image;
+	}
+
+	public void setImage(ProductImage image) {
+		this.image = image;
 	}
 
 	public Color getColor() {

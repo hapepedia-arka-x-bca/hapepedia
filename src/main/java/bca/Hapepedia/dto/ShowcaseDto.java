@@ -79,4 +79,12 @@ public class ShowcaseDto {
         this.productImg = productImg;
     }
 
+    public ShowcaseDto(long productId, String productName, String productPrice, String productImg) {
+        this.productId = productId;
+        this.productName = productName;
+        this.productPrice = productPrice;
+        this.productImg = productImg;
+    }
+
+
 }

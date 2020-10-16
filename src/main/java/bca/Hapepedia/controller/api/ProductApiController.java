@@ -21,6 +21,7 @@ import bca.Hapepedia.dto.ResponseData;
 import bca.Hapepedia.entity.Product;
 import bca.Hapepedia.services.BrandService;
 import bca.Hapepedia.services.CategoryService;
+import bca.Hapepedia.services.ProductDetailService;
 import bca.Hapepedia.services.ProductImageService;
 import bca.Hapepedia.services.ProductService;
 
@@ -39,6 +40,9 @@ public class ProductApiController {
     @Autowired
     private ProductImageService productImageService;
 
+    @Autowired
+    private ProductDetailService detService;
+
     @GetMapping
     public ResponseEntity<ResponseData> findAll()
     {
@@ -47,8 +51,7 @@ public class ProductApiController {
         {
             response.setStatus(true);
             response.getMessages().add("Products found");
-
-            response.setPayload(productImageService.findByMainTrue());
+            response.setPayload(detService.showAll());
 
             return ResponseEntity.ok(response);
         }

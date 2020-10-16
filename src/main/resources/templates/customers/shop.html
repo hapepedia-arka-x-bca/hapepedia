@@ -390,16 +390,16 @@
                         <div th:each="product: ${listOfProduct}"  class="col-lg-4 col-md-6">
                             <div class="product__item sale">
                                 <div class="product__item__pic set-bg">
-                                    <img th:src="@{'/img/shop/' + ${product.file}}" alt="" style="width: 100%;">
+                                    <img th:src="@{'/img/shop/' + ${product.image.file}}" alt="" style="width: 100%;">
                                     <ul class="product__hover">
-                                        <li><a th:href="@{'/img/shop/' + ${product.file}}" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                        <li><a th:href="@{'/img/shop/' + ${product.image.file}}" class="image-popup"><span class="arrow_expand"></span></a></li>
                                         <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                                         <li><a href="#"><span class="icon_bag_alt"></span></a></li>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
                                     <h6><a th:text="${product.product.name}" th:href="@{'product-details?'+${product.product.id}}"></a></h6>
-                                    <div class="product__price">$ 49.0 <span>$ 59.0</span></div>
+                                    <div th:text="'Rp' + ${#numbers.formatInteger(product.price, 3, 'POINT')}" class="product__price"></div>
                                 </div>
                             </div>
                         </div>

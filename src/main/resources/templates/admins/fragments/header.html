@@ -17,7 +17,7 @@
     <script>
         var token = localStorage.getItem('token');
         var roles = localStorage.getItem('roles');
-        if (token === null) {
+        if (token === null || roles !== 'ADMIN') {
             window.location.href = "../admin/login";
         }
     </script>

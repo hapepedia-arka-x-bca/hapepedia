@@ -38,4 +38,9 @@ public class ProductDetailService {
 		productDetailRepo.deleteById(id);
 		return true;
 	}
+
+	public Iterable<ProductDetail> showAll()
+	{
+		return productDetailRepo.findAll();
+	}
 }

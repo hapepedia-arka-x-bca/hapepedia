@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
+import bca.Hapepedia.services.ProductDetailService;
 import bca.Hapepedia.services.ProductImageService;
 
 
@@ -17,9 +17,7 @@ import bca.Hapepedia.services.ProductImageService;
 public class indexController {
 
 	@Autowired
-	private ProductImageService productImageService;
-
-
+	private ProductDetailService productDetailService;
 	@GetMapping
 	public String index(Model model) {
 		return "customers/index";
@@ -27,7 +25,7 @@ public class indexController {
 
 	@GetMapping("/shop")
 	public String shop(Model model) {
-		model.addAttribute("listOfProduct", productImageService.findByMainTrue());
+		model.addAttribute("listOfProduct", productDetailService.showAll());
 		return "customers/shop";
 	}
 
