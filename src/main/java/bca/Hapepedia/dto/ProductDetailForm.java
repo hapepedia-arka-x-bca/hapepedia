@@ -15,6 +15,8 @@ public class ProductDetailForm {
 	// @NotEmpty(message = "Product Stock is required.")
 	private Long stock;
 
+	private Long productImage;
+
 	// @NotNull(message = "Product Price is required.")
 	private Double price;
 
@@ -64,6 +66,14 @@ public class ProductDetailForm {
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+
+	public Long getImage() {
+		return productImage;
+	}
+
+	public void setImage(Long productImage) {
+		this.productImage = productImage;
 	}
 
 }

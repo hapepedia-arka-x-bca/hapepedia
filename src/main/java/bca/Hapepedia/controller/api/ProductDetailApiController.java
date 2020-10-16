@@ -20,6 +20,7 @@ import bca.Hapepedia.dto.ResponseData;
 import bca.Hapepedia.entity.ProductDetail;
 import bca.Hapepedia.services.ColorService;
 import bca.Hapepedia.services.ProductDetailService;
+import bca.Hapepedia.services.ProductImageService;
 import bca.Hapepedia.services.ProductService;
 import bca.Hapepedia.services.VarianService;
 
@@ -37,6 +38,9 @@ public class ProductDetailApiController {
     
     @Autowired
     private VarianService varianService;
+
+    @Autowired
+    private ProductImageService productImageService;
     
 
     
@@ -96,6 +100,7 @@ public class ProductDetailApiController {
             productDetail.setVarian(varianService.findById(productDetailForm.getVarian()).get());
             productDetail.setStock(productDetailForm.getStock());
             productDetail.setPrice(productDetailForm.getPrice());
+            productDetail.setImage(productImageService.findById(productDetailForm.getImage()).get());
 
             response = new ResponseData();
 			response.setStatus(true);
