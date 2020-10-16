@@ -20,8 +20,6 @@ public class ProductDetailForm {
 	@NotEmpty(message = "Product Price is required.")
 	private Double price;
 
-	private Long image_id;
-
 	public Long getId() {
 		return id;
 	}
@@ -73,12 +71,4 @@ public class ProductDetailForm {
 
 	
 	
-	public Long getImage_id() {
-		return image_id;
-	}
-
-	public void setImage_id(Long image_id) {
-		this.image_id = image_id;
-	}
-
 }
