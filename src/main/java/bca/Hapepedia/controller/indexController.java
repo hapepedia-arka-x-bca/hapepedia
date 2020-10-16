@@ -20,6 +20,7 @@ public class indexController {
 	private ProductDetailService productDetailService;
 	@GetMapping
 	public String index(Model model) {
+		model.addAttribute("listOfProduct", productDetailService.showAll());
 		return "customers/shop";
 	}
 
