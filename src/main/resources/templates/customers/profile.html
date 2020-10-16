@@ -354,7 +354,7 @@
                 "serverSide": false,
                 ajax: {
                     dataSrc: "payload",
-                    url: window.location.origin + '/api/address/getbyloggedin',
+                    url: 'http://127.0.0.1:8081/api/address/getbyloggedin',
                     type: "GET",
                     dataType: 'json',
                     beforeSend: function (xhr) {
@@ -393,7 +393,7 @@
 
         function getCustomerData() {
             $.ajax({
-                url: window.location.origin + "/api/customer/getloggedin",
+                url: window.location.origin+"/api/customer/getloggedin",
                 method: "GET",
                 contentType: "application/json",
                 beforeSend: function (xhr) {
@@ -427,7 +427,7 @@
             var gender = $('#gender').val();
             var birthdate = $('#birthdate').val();
             $.ajax({
-                url: window.location.origin + "/api/customer/update",
+                url: window.location.origin+"/api/customer/update",
                 method: "POST",
                 data: JSON.stringify({
                     name: name,
@@ -456,7 +456,7 @@
         });
 
         $.ajax({
-            url: window.location.origin + "/api/province",
+            url: window.location.origin+"/api/province",
             method: "GET",
             contentType: "application/json",
             beforeSend: function (xhr) {
@@ -482,7 +482,7 @@
         $('#province_id').on('change', function () {
             var province_id = $(this).val();
             $.ajax({
-                url: window.location.origin + "/api/city/getbyprovince/" + province_id,
+                url: window.location.origin+"/api/city/getbyprovince/" + province_id,
                 type: "GET",
                 beforeSend: function (xhr) {
                     citySelect.html("<option> Loading ... </option>");
@@ -514,7 +514,7 @@
                 cityId: cityId
             }
             $.ajax({
-                url: window.location.origin + "/api/address/save",
+                url: window.location.origin+"/api/address/save",
                 method: "POST",
                 data: JSON.stringify(address),
                 contentType: "application/json",

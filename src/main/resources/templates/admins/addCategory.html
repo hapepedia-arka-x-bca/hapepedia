@@ -194,7 +194,7 @@
                 "serverSide": false,
                 ajax: {
                     dataSrc: "payload",
-                    url: window.location.origin + '/api/category',
+                    url: 'http://127.0.0.1:8081/api/category',
                     type: "GET",
                     dataType: 'json',
                     beforeSend: function (xhr) {
@@ -238,7 +238,7 @@
             var category = new Object();
             category.name = name;
             $.ajax({
-                url: window.location.origin + "/api/category/save",
+                url: window.location.origin+"/api/category/save",
                 method: "POST",
                 data: JSON.stringify(category),
                 contentType: "application/json",
@@ -268,7 +268,7 @@
         $('#deleteCategory').on('click', function () {
             var id = $('#deleteId').val();
             $.ajax({
-                url: window.location.origin + "/api/category/delete/" + id,
+                url: window.location.origin+"/api/category/delete/" + id,
                 method: "POST",
                 contentType: "application/json",
                 beforeSend: function (xhr) {
@@ -291,7 +291,7 @@
 
         function getCategoryById(id) {
             $.ajax({
-                url: window.location.origin + "/api/category/get/" + id,
+                url: window.location.origin+"/api/category/get/" + id,
                 method: "GET",
                 data: { id: id },
                 beforeSend: function (xhr) {
@@ -317,7 +317,7 @@
             category.id = id;
             category.name = name;
             $.ajax({
-                url: window.location.origin + "/api/category/save",
+                url: window.location.origin+"/api/category/save",
                 method: "POST",
                 data: JSON.stringify(category),
                 contentType: "application/json",
