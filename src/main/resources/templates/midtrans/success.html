@@ -15,7 +15,7 @@
         console.log(responCode+" "+responIdOrder);
         
         if(parseInt(responCode) == 200){
-            fetch("http://localhost:8081/api/order/paymentSuccess/"+responIdOrder,{
+            fetch(window.location.origin+"/api/order/paymentSuccess/"+responIdOrder,{
                 // Adding method type 
                 method: "GET", 
                                 
@@ -28,7 +28,7 @@
             .then(response => response.json())
             .then(result => {
                 console.log("finish");
-                window.location.href="http://localhost:8081/transaction"
+                window.location.href=window.location.origin+"/transaction"
             }).catch(err => {
                 errorStat = err.name === 'AbortError'? 1 : 2;
             });
